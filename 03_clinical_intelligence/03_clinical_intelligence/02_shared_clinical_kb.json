@@ -1,0 +1,335 @@
+{
+  "schema_version": "1.0",
+  "knowledge_version": "1.0",
+  "architecture_version": "4.1",
+  "status": "engineering_draft_not_clinically_validated",
+  "execution_contract": {
+    "selection": "structured deterministic predicates; lists above are reviewed label concepts, not executable regex or guaranteed code mappings; map verified code/label to canonical concept before use",
+    "unknown": "conditional or unknown, never false by default",
+    "precedence": "07 safety > 03 score > 04 baseline and 05 interpretation; 06 quality qualifies evidence but cannot clear safety",
+    "rule_ids": "stable IDs; references in outputs include rule version and evidence IDs",
+    "no_llm_required": true,
+    "no_ground_truth_runtime": true
+  },
+  "sources": {
+    "RCP-NEWS2": {
+      "title": "RCP NEWS2 observation chart, Dec 2022",
+      "url": "https://www.rcp.ac.uk/media/eczf5mvm/news2-chart-3_news-observation-chart_2022_0_0.pdf"
+    },
+    "PS03-V4.1": {
+      "title": "Hackathon PS03 requirements and frozen V4.1 architecture",
+      "type": "project specification"
+    },
+    "V4.1": {
+      "title": "Frozen V4.1 architecture",
+      "type": "project design"
+    }
+  },
+  "rules": [
+    {
+      "rule_id": "NEWS2_COMPONENT_V1",
+      "version": "1.0",
+      "domain": "scoring",
+      "kind": "published_component_reference",
+      "applicability": {
+        "adult": true,
+        "quality": "valid",
+        "fresh": true
+      },
+      "action": "Use component bands in 03_news2_scoring.md; score only eligible measurements.",
+      "limitations": "Not full NEWS2; do not map subtotal to RCP escalation thresholds.",
+      "source_refs": [
+        "RCP-NEWS2"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "OXYGEN_SCALE2_V1",
+      "version": "1.0",
+      "domain": "oxygenation",
+      "kind": "published_component_reference",
+      "applicability": {
+        "documented_hypercapnic_failure": true,
+        "valid_clinician_authorization": true,
+        "target": [
+          88,
+          92
+        ]
+      },
+      "action": "Apply Scale 2 bands; oxygen status required for scores above target.",
+      "limitations": "COPD alone not sufficient; unknown oxygen status is not room air.",
+      "source_refs": [
+        "RCP-NEWS2"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "BASELINE_ELIGIBILITY_V1",
+      "version": "1.0",
+      "domain": "baseline",
+      "kind": "engineering_policy",
+      "applicability": {
+        "quality": "valid",
+        "stable": true,
+        "no_active_concern": true
+      },
+      "action": "Use prior eligible samples only; compare before updating; freeze on concern.",
+      "limitations": "No historical or simulator value is an established baseline.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "HR_DEVIATION_V1",
+      "version": "1.0",
+      "domain": "cardiovascular",
+      "kind": "engineering_policy",
+      "applicability": {
+        "baseline": "established",
+        "vital": "hr"
+      },
+      "action": "Evaluate absolute baseline deviation and trend; apply 04 and 05.",
+      "limitations": "Activity and medications can influence HR; no diagnosis.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "RR_DEVIATION_V1",
+      "version": "1.0",
+      "domain": "respiratory",
+      "kind": "engineering_policy",
+      "applicability": {
+        "baseline": "established",
+        "vital": "rr"
+      },
+      "action": "Evaluate sustained RR increase or decrease and oxygenation evidence.",
+      "limitations": "RR zero may be genuine or artifact; verify urgently.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "SPO2_DEVIATION_V1",
+      "version": "1.0",
+      "domain": "oxygenation",
+      "kind": "engineering_policy",
+      "applicability": {
+        "baseline": "established",
+        "vital": "spo2"
+      },
+      "action": "Evaluate downward deviation and trend with quality and applicable scale.",
+      "limitations": "Normal HR/RR cannot rule out hypoxemia.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "TEMP_DEVIATION_V1",
+      "version": "1.0",
+      "domain": "thermal",
+      "kind": "engineering_policy",
+      "applicability": {
+        "baseline": "established",
+        "vital": "temp"
+      },
+      "action": "Evaluate sustained thermal deviation and HR trend.",
+      "limitations": "Fever alone does not establish infection.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "RESPIRATORY_HISTORY_V1",
+      "version": "1.0",
+      "domain": "respiratory",
+      "kind": "engineering_policy",
+      "applicability": {
+        "documented_history_any": [
+          "pneumonia",
+          "acute respiratory failure",
+          "asthma",
+          "emphysema",
+          "COVID-19"
+        ]
+      },
+      "action": "Use respiratory and oxygenation evidence together; contextual concern rule in 05.",
+      "limitations": "History not evidence of active disease; no automatic Scale 2.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "CARDIAC_HISTORY_V1",
+      "version": "1.0",
+      "domain": "cardiovascular",
+      "kind": "engineering_policy",
+      "applicability": {
+        "documented_history_any": [
+          "heart failure",
+          "myocardial infarction",
+          "ischemic heart disease",
+          "coronary bypass"
+        ]
+      },
+      "action": "Use HR, RR and SpO2 evidence; consider cardiac recovery context.",
+      "limitations": "No diagnosis of heart failure exacerbation or ischemia from vitals alone.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "BETA_BLOCKER_HISTORY_V1",
+      "version": "1.0",
+      "domain": "medication",
+      "kind": "clinical_heuristic",
+      "applicability": {
+        "historical_prescription_class": "beta_blocker"
+      },
+      "action": "Add conditional possible blunted HR response note; if current use verified, apply contextual interpretation in 05.",
+      "limitations": "Do not infer current use, adherence or reduce NEWS2 score.",
+      "source_refs": [
+        "V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "INFECTION_HISTORY_V1",
+      "version": "1.0",
+      "domain": "thermal",
+      "kind": "engineering_policy",
+      "applicability": {
+        "documented_history_any": [
+          "pneumonia",
+          "sepsis",
+          "infection"
+        ]
+      },
+      "action": "Evaluate temperature and cardiorespiratory trends together.",
+      "limitations": "No diagnosis of recurrent infection or sepsis.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "PROCEDURE_CONTEXT_V1",
+      "version": "1.0",
+      "domain": "recovery",
+      "kind": "engineering_policy",
+      "applicability": {
+        "verified_procedure": true
+      },
+      "action": "Retrieve approved restrictions and recovery plan if documented.",
+      "limitations": "Encounter reason is not proof of surgery; no inferred restrictions.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "CARDIORESP_COUPLING_V1",
+      "version": "1.0",
+      "domain": "physiology",
+      "kind": "modeling_hypothesis",
+      "applicability": {
+        "signals": [
+          "hr",
+          "rr",
+          "spo2"
+        ]
+      },
+      "action": "Consider concurrent oxygenation decline and HR/RR change as supportive evidence; pass evidence reference to manifest.",
+      "limitations": "Association not causation; equation coefficients not finalized.",
+      "source_refs": [
+        "V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "THERMAL_CARDIO_COUPLING_V1",
+      "version": "1.0",
+      "domain": "physiology",
+      "kind": "modeling_hypothesis",
+      "applicability": {
+        "signals": [
+          "temp",
+          "hr"
+        ]
+      },
+      "action": "Consider simultaneous temperature and HR increase; pass evidence reference.",
+      "limitations": "Relationship may be modified by other factors; no fixed coefficient.",
+      "source_refs": [
+        "V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "PROBE_REMOVAL_V1",
+      "version": "1.0",
+      "domain": "quality",
+      "kind": "engineering_policy",
+      "applicability": {
+        "pattern": "spo2_zero_or_missing_and_hr_flatline"
+      },
+      "action": "Apply 06 joint artifact detector; technical alert; assess remaining reliable signals.",
+      "limitations": "Pattern alone not proof of artifact; preserve unresolved safety concern.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "MISSING_DATA_V1",
+      "version": "1.0",
+      "domain": "quality",
+      "kind": "engineering_policy",
+      "applicability": {
+        "pattern": "missing_stale_or_interrupted"
+      },
+      "action": "Mark unavailable, never score as zero; use 06 monitoring policy.",
+      "limitations": "Missingness not recovery.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "SAFETY_FLOOR_V1",
+      "version": "1.0",
+      "domain": "safety",
+      "kind": "engineering_policy",
+      "applicability": {
+        "path": "every_observation"
+      },
+      "action": "Apply 07 safety priority before any model output.",
+      "limitations": "Prototype escalation policy requires clinical approval.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    },
+    {
+      "rule_id": "RECOVERY_AUTHORIZATION_V1",
+      "version": "1.0",
+      "domain": "recovery",
+      "kind": "engineering_policy",
+      "applicability": {
+        "approved_care_plan": true
+      },
+      "action": "Only present authorized plan and reminders; unresolved concerns block autonomous progression.",
+      "limitations": "No medication or exercise changes without clinician authorization.",
+      "source_refs": [
+        "PS03-V4.1"
+      ],
+      "review_status": "engineering_draft_clinician_review_required"
+    }
+  ]
+}

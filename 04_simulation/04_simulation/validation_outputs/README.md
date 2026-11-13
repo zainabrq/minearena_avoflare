@@ -1,0 +1,2 @@
+# Validation evidence
+`upload_archive_inventory.json` is an actual archive inspection, including CRC-verified readable files and unreadable entries. `bidmc_numeric_verification.json` is an actual independent CSV structural check. `tool_self_test.json` documents validator checks on a tiny synthetic fixture (not Abhi's data). Keep MATLAB master reports, integrated CSVs/plots and API/FHIR evidence from actual execution in a separate run subfolder. No report here asserts successful MATLAB execution, clinical validation, trained model or live API.

@@ -1,0 +1,204 @@
+{
+ "run_at": "2026-11-13 08:59:29",
+ "duration_s": 99,
+ "summary": {
+  "PASS": 31,
+  "FAIL": 0,
+  "CONFIG REQUIRED": 1
+ },
+ "scorecard": "72/72",
+ "requirements": [
+  {
+   "id": "R01",
+   "requirement": "10 patients x 15 days of wearable data (10 pps device, 1 Hz gateway)",
+   "result": "PASS",
+   "evidence": "10 patients, 1296000 s each"
+  },
+  {
+   "id": "R02",
+   "requirement": "Medical rules: PS03 spec fixtures (NEWS2 bands, Scale 2, baseline, artifacts, alert lifecycle)",
+   "result": "PASS",
+   "evidence": "NOT_EXECUTED: ['CTX-01', 'CTX-03', 'CTX-05', 'CTX-06', 'ART-04', 'ART-05', 'ALERT-05', 'ALERT-06', 'INT-REPLAY-ISOLATION']"
+  },
+  {
+   "id": "R03",
+   "requirement": "Continuous risk score decides by threshold (ML-1, raises to Review only)",
+   "result": "PASS",
+   "evidence": "threshold 0.9, 359.0 s vs 769.0 s"
+  },
+  {
+   "id": "R04",
+   "requirement": "Accurate: all deteriorations detected before severe, fewer false alerts than NEWS2",
+   "result": "PASS",
+   "evidence": "9/9, min lead 341.0 s, false/pt-day 9.127 vs 142.02"
+  },
+  {
+   "id": "R05",
+   "requirement": "Evidence-based metrics with confidence intervals",
+   "result": "PASS",
+   "evidence": "AUROC 0.9613 [0.9034, 0.9917]"
+  },
+  {
+   "id": "R06",
+   "requirement": "Digital twin trained and forecasting 5/15/30 min on held-out patients",
+   "result": "PASS",
+   "evidence": "['P008', 'P009', 'P010']"
+  },
+  {
+   "id": "R07",
+   "requirement": "Twin uncertainty calibrated (RR band >= 90% coverage)",
+   "result": "PASS",
+   "evidence": "held-out calibrated coverage [0.979, 0.982, 0.977]"
+  },
+  {
+   "id": "R08",
+   "requirement": "Blood pressure and HRV with scores and tests",
+   "result": "PASS",
+   "evidence": "PASS 27  FAIL 0; 9/9, 0.19 false/pt-day"
+  },
+  {
+   "id": "R09",
+   "requirement": "SBP score false flags below 1 per patient-day",
+   "result": "PASS",
+   "evidence": "4/9 events, 0.18 false/pt-day"
+  },
+  {
+   "id": "R10",
+   "requirement": "Urgent alert goes first to the patient's own doctor",
+   "result": "PASS",
+   "evidence": "P003 -> DR2 (Dr. S. Menon)"
+  },
+  {
+   "id": "R11",
+   "requirement": "Different patients route to different doctors (not one fixed doctor)",
+   "result": "PASS",
+   "evidence": "4 distinct primary doctors"
+  },
+  {
+   "id": "R12",
+   "requirement": "Doctor unavailable -> nurse",
+   "result": "PASS",
+   "evidence": "-> NR3"
+  },
+  {
+   "id": "R13",
+   "requirement": "Nurse unavailable -> substitute doctor",
+   "result": "PASS",
+   "evidence": "-> DR4"
+  },
+  {
+   "id": "R14",
+   "requirement": "Substitute unavailable -> management office",
+   "result": "PASS",
+   "evidence": "-> MG1"
+  },
+  {
+   "id": "R15",
+   "requirement": "No acknowledgement: escalates through the whole chain, then reminds management",
+   "result": "PASS",
+   "evidence": "['doctor', 'nurse', 'substitute_doctor', 'management']"
+  },
+  {
+   "id": "R16",
+   "requirement": "Different information to doctor, nurse, substitute and management",
+   "result": "PASS",
+   "evidence": "4 distinct messages, 3 distinct guidance lists"
+  },
+  {
+   "id": "R17",
+   "requirement": "Phone/watch notifications carry criticality only",
+   "result": "PASS",
+   "evidence": "URGENT: Patient P003 needs attention. Open Avoflare when available."
+  },
+  {
+   "id": "R18",
+   "requirement": "Phone/smartwatch push delivery configured",
+   "result": "CONFIG REQUIRED",
+   "evidence": "NTFY_URL is not set: in-app inbox + browser notifications only; set NTFY_URL to deliver to phones/watches"
+  },
+  {
+   "id": "R19",
+   "requirement": "Alarm sounds for every unacknowledged Urgent alert, for all clinical staff, until acknowledged",
+   "result": "PASS",
+   "evidence": "urgentAll() + 600 ms alarm loop"
+  },
+  {
+   "id": "R20",
+   "requirement": "All supplied dashboard assets used (logo, avatars, watch stills and videos, login video)",
+   "result": "PASS",
+   "evidence": "referenced 8/8, served 8/8"
+  },
+  {
+   "id": "R21",
+   "requirement": "Clinical decision support disclaimer present",
+   "result": "PASS",
+   "evidence": "shell footer + login"
+  },
+  {
+   "id": "R22",
+   "requirement": "Platform suite (FHIR, gateway security, roles, patient app, twin, BIDMC isolation, Doctor Ava, timeline, notifications)",
+   "result": "PASS",
+   "evidence": "56/56"
+  },
+  {
+   "id": "R23",
+   "requirement": "Nurse can propose a medication (pending until a doctor decides)",
+   "result": "PASS",
+   "evidence": "200"
+  },
+  {
+   "id": "R24",
+   "requirement": "Nurse cannot approve medication",
+   "result": "PASS",
+   "evidence": "403"
+  },
+  {
+   "id": "R25",
+   "requirement": "Doctor decision requires a note",
+   "result": "PASS",
+   "evidence": "400"
+  },
+  {
+   "id": "R26",
+   "requirement": "Doctor approves; second decision on the same request is refused",
+   "result": "PASS",
+   "evidence": "200 then 409"
+  },
+  {
+   "id": "R27",
+   "requirement": "Approved medication appears in the patient's app",
+   "result": "PASS",
+   "evidence": "2 approved items"
+  },
+  {
+   "id": "R28",
+   "requirement": "Doctor shift: start shift puts the doctor on duty",
+   "result": "PASS",
+   "evidence": "since your last shift ended"
+  },
+  {
+   "id": "R29",
+   "requirement": "Shift view lists only the doctor's own patients with what happened (alerts, events, symptoms, medication)",
+   "result": "PASS",
+   "evidence": "['P001', 'P002', 'P006', 'P008', 'P009', 'P010']"
+  },
+  {
+   "id": "R30",
+   "requirement": "Doctor signs off each patient review; cannot review another doctor's patient",
+   "result": "PASS",
+   "evidence": "own 200, other 403"
+  },
+  {
+   "id": "R31",
+   "requirement": "Ending the shift takes the doctor off duty (escalations skip them)",
+   "result": "PASS",
+   "evidence": "available False"
+  },
+  {
+   "id": "R32",
+   "requirement": "Acknowledge and resolve are separate; resolve needs a doctor and a reason",
+   "result": "PASS",
+   "evidence": "nurse 403, empty reason rejected"
+  }
+ ]
+}

@@ -1,0 +1,1303 @@
+{
+  "schema_version": "1.0",
+  "architecture_version": "4.1",
+  "status": "expected_outputs_not_executed",
+  "instructions": "Logical fixtures, not production API payloads. Expand into actual Pydantic contracts and timestamped trajectories; assert specified outputs only; all omitted valid vitals use HR80 RR16 SpO2 97 Temp36.8 unless test explicitly says unavailable. Default fresh valid source observations, adult context, no prior alert, no established baseline unless specified. For artifact/alert cases use actual raw timestamped samples, not simulator labels in runtime. Fixture labels are offline expectations. No test is clinical validation.",
+  "synthetic_context_fixtures": {
+    "P002-H": {
+      "base_patient_id": "P002",
+      "variant_id": "P002-H",
+      "session_scope": "test_only",
+      "source_is_synthetic": true,
+      "hypothetical_overlay": true,
+      "documented_hypercapnic_failure": true,
+      "scale_2_authorized": true,
+      "authorization_ref": "TEST-AUTH-P002-H",
+      "authorization_valid_from_source_s": 0,
+      "authorization_valid_until_source_s": 3600,
+      "target": [
+        88,
+        92
+      ],
+      "supplemental_oxygen": "off",
+      "clinical_provenance": "hypothetical simulated qualified clinician authorization, not original Synthea fact",
+      "never_modify_original": true
+    }
+  },
+  "cases": [
+    {
+      "id": "SCORE-hr-40",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "hr",
+        "value": 40,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 3
+      }
+    },
+    {
+      "id": "SCORE-hr-41",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "hr",
+        "value": 41,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "SCORE-hr-50",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "hr",
+        "value": 50,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "SCORE-hr-51",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "hr",
+        "value": 51,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 0
+      }
+    },
+    {
+      "id": "SCORE-hr-90",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "hr",
+        "value": 90,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 0
+      }
+    },
+    {
+      "id": "SCORE-hr-91",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "hr",
+        "value": 91,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "SCORE-hr-110",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "hr",
+        "value": 110,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "SCORE-hr-111",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "hr",
+        "value": 111,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 2
+      }
+    },
+    {
+      "id": "SCORE-hr-130",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "hr",
+        "value": 130,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 2
+      }
+    },
+    {
+      "id": "SCORE-hr-131",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "hr",
+        "value": 131,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 3
+      }
+    },
+    {
+      "id": "SCORE-rr-8",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "rr",
+        "value": 8,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 3
+      }
+    },
+    {
+      "id": "SCORE-rr-9",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "rr",
+        "value": 9,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "SCORE-rr-11",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "rr",
+        "value": 11,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "SCORE-rr-12",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "rr",
+        "value": 12,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 0
+      }
+    },
+    {
+      "id": "SCORE-rr-20",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "rr",
+        "value": 20,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 0
+      }
+    },
+    {
+      "id": "SCORE-rr-21",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "rr",
+        "value": 21,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 2
+      }
+    },
+    {
+      "id": "SCORE-rr-24",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "rr",
+        "value": 24,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 2
+      }
+    },
+    {
+      "id": "SCORE-rr-25",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "rr",
+        "value": 25,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 3
+      }
+    },
+    {
+      "id": "SCORE-spo2-91",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "spo2",
+        "value": 91,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 3
+      }
+    },
+    {
+      "id": "SCORE-spo2-92",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "spo2",
+        "value": 92,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 2
+      }
+    },
+    {
+      "id": "SCORE-spo2-93",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "spo2",
+        "value": 93,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 2
+      }
+    },
+    {
+      "id": "SCORE-spo2-94",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "spo2",
+        "value": 94,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "SCORE-spo2-95",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "spo2",
+        "value": 95,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "SCORE-spo2-96",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "spo2",
+        "value": 96,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 0
+      }
+    },
+    {
+      "id": "SCORE-temp-35",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "temp",
+        "value": 35,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 3
+      }
+    },
+    {
+      "id": "SCORE-temp-35.1",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "temp",
+        "value": 35.1,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "SCORE-temp-36",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "temp",
+        "value": 36,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "SCORE-temp-36.1",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "temp",
+        "value": 36.1,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 0
+      }
+    },
+    {
+      "id": "SCORE-temp-38",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "temp",
+        "value": 38,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 0
+      }
+    },
+    {
+      "id": "SCORE-temp-38.1",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "temp",
+        "value": 38.1,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "SCORE-temp-39",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "temp",
+        "value": 39,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "SCORE-temp-39.1",
+      "description": "Published component boundary",
+      "input": {
+        "vital": "temp",
+        "value": 39.1,
+        "quality": "valid",
+        "scale": 1,
+        "fresh": true
+      },
+      "expected": {
+        "component_score": 2
+      }
+    },
+    {
+      "id": "S2-83-off",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 83,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "off"
+      },
+      "expected": {
+        "component_score": 3
+      }
+    },
+    {
+      "id": "S2-84-off",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 84,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "off"
+      },
+      "expected": {
+        "component_score": 2
+      }
+    },
+    {
+      "id": "S2-85-off",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 85,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "off"
+      },
+      "expected": {
+        "component_score": 2
+      }
+    },
+    {
+      "id": "S2-86-off",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 86,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "off"
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "S2-87-off",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 87,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "off"
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "S2-88-off",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 88,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "off"
+      },
+      "expected": {
+        "component_score": 0
+      }
+    },
+    {
+      "id": "S2-92-off",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 92,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "off"
+      },
+      "expected": {
+        "component_score": 0
+      }
+    },
+    {
+      "id": "S2-93-off",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 93,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "off"
+      },
+      "expected": {
+        "component_score": 0
+      }
+    },
+    {
+      "id": "S2-93-on",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 93,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "on"
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "S2-94-on",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 94,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "on"
+      },
+      "expected": {
+        "component_score": 1
+      }
+    },
+    {
+      "id": "S2-95-on",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 95,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "on"
+      },
+      "expected": {
+        "component_score": 2
+      }
+    },
+    {
+      "id": "S2-96-on",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 96,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "on"
+      },
+      "expected": {
+        "component_score": 2
+      }
+    },
+    {
+      "id": "S2-97-on",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 97,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "on"
+      },
+      "expected": {
+        "component_score": 3
+      }
+    },
+    {
+      "id": "S2-96-unknown",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 96,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "unknown"
+      },
+      "expected": {
+        "component_score": null
+      }
+    },
+    {
+      "id": "S2-91-unknown",
+      "description": "Authorized synthetic Scale 2",
+      "input": {
+        "fixture": "P002-H",
+        "vital": "spo2",
+        "value": 91,
+        "quality": "valid",
+        "fresh": true,
+        "supplemental_oxygen": "unknown"
+      },
+      "expected": {
+        "component_score": 0
+      }
+    },
+    {
+      "id": "S2-NO-AUTH",
+      "description": "COPD/emphysema alone not authorization",
+      "input": {
+        "patient": "P002",
+        "spo2": 91,
+        "scale2_authorized": false
+      },
+      "expected": {
+        "scale": 1,
+        "component_score": 3
+      }
+    },
+    {
+      "id": "S2-EXPIRED",
+      "description": "Authorization expired",
+      "input": {
+        "fixture": "P002-H",
+        "spo2": 91,
+        "authorization_valid": false
+      },
+      "expected": {
+        "scale": 1,
+        "component_score": 3,
+        "context_warning": true
+      }
+    },
+    {
+      "id": "SUM-01",
+      "description": "Four available components",
+      "input": {
+        "values": {
+          "hr": 108,
+          "rr": 26,
+          "spo2": 92,
+          "temp": 38.1
+        },
+        "quality": "valid",
+        "scale": 1
+      },
+      "expected": {
+        "component_scores": {
+          "hr": 1,
+          "rr": 3,
+          "spo2": 2,
+          "temp": 1
+        },
+        "subtotal": 7,
+        "maximum_available": 12,
+        "full_news2_score": null,
+        "priority": "Urgent"
+      }
+    },
+    {
+      "id": "SUM-02",
+      "description": "Missing temperature",
+      "input": {
+        "values": {
+          "hr": 80,
+          "rr": 16,
+          "spo2": 97,
+          "temp": null
+        },
+        "quality": "valid_except_missing"
+      },
+      "expected": {
+        "subtotal": 0,
+        "maximum_available": 9,
+        "status": "partial",
+        "priority": "Insufficient assessment"
+      }
+    },
+    {
+      "id": "SUM-03",
+      "description": "All missing",
+      "input": {
+        "values": {
+          "hr": null,
+          "rr": null,
+          "spo2": null,
+          "temp": null
+        }
+      },
+      "expected": {
+        "subtotal": null,
+        "maximum_available": 0,
+        "status": "unavailable",
+        "priority": "Insufficient assessment"
+      }
+    },
+    {
+      "id": "ROUND-01",
+      "description": "Decimal half-up",
+      "input": {
+        "vital": "hr",
+        "value": 90.5,
+        "quality": "valid"
+      },
+      "expected": {
+        "scored_value": 91,
+        "component_score": 1
+      }
+    },
+    {
+      "id": "STALE-01",
+      "description": "Stale value not scored",
+      "input": {
+        "vital": "spo2",
+        "value": 97,
+        "age_s": 16
+      },
+      "expected": {
+        "component_score": null
+      }
+    },
+    {
+      "id": "ZERO-RR",
+      "description": "Zero RR suspect",
+      "input": {
+        "vital": "rr",
+        "value": 0,
+        "quality": "suspect"
+      },
+      "expected": {
+        "component_score": null,
+        "priority": "Urgent",
+        "action": "Verify"
+      }
+    },
+    {
+      "id": "BASE-01",
+      "description": "Stable calibration",
+      "input": {
+        "rate_hz": 1,
+        "duration_s": 900,
+        "values": {
+          "hr": 65,
+          "rr": 16,
+          "spo2": 97,
+          "temp": 36.8
+        },
+        "coverage": 1,
+        "eligible": true
+      },
+      "expected": {
+        "baseline_status": "established",
+        "hr_baseline": 65
+      }
+    },
+    {
+      "id": "BASE-02",
+      "description": "Insufficient calibration",
+      "input": {
+        "duration_s": 899,
+        "eligible": true
+      },
+      "expected": {
+        "baseline_status": "calibrating"
+      }
+    },
+    {
+      "id": "BASE-03",
+      "description": "Prior reference not overwritten by drift",
+      "input": {
+        "prior_baseline": 65,
+        "robust_scale": 1,
+        "hr": 87,
+        "valid_abnormal_seconds": 20,
+        "coverage": 1,
+        "relevant_cardiac_history": true
+      },
+      "expected": {
+        "candidate": true,
+        "baseline_frozen": true,
+        "baseline": 65,
+        "priority": "Review"
+      }
+    },
+    {
+      "id": "BASE-04",
+      "description": "Gap breaks calibration",
+      "input": {
+        "duration_s": 900,
+        "gap_s": 5,
+        "rate_hz": 1
+      },
+      "expected": {
+        "baseline_status_not": "established"
+      }
+    },
+    {
+      "id": "CTX-01",
+      "description": "History not current use",
+      "input": {
+        "patient": "P002",
+        "beta_blocker_prescription_history": true,
+        "current_use": "unknown"
+      },
+      "expected": {
+        "conditional_note": true,
+        "score_discount": false
+      }
+    },
+    {
+      "id": "CTX-02",
+      "description": "No inferred surgery",
+      "input": {
+        "patient": "P007",
+        "encounter_reason": "appendicitis",
+        "verified_procedure": false
+      },
+      "expected": {
+        "postoperative_context": false
+      }
+    },
+    {
+      "id": "CTX-03",
+      "description": "BIDMC separate identity",
+      "input": {
+        "source_namespace": "bidmc",
+        "record": "13"
+      },
+      "expected": {
+        "synthea_context_attached": false,
+        "temperature_available": false
+      }
+    },
+    {
+      "id": "CTX-04",
+      "description": "Unknown discharge",
+      "input": {
+        "patient": "P001",
+        "disposition": null
+      },
+      "expected": {
+        "disposition_status": "unknown"
+      }
+    },
+    {
+      "id": "CTX-05",
+      "description": "Wrong FHIR patient mapping",
+      "input": {
+        "patient": "P001",
+        "fhir_patient_id": "wrong"
+      },
+      "expected": {
+        "reject": true,
+        "no_state_mutation": true
+      }
+    },
+    {
+      "id": "CTX-06",
+      "description": "Future evidence",
+      "input": {
+        "clinical_cutoff": "2021-01-01",
+        "fact_available_at": "2021-02-01",
+        "authorized_update": false
+      },
+      "expected": {
+        "exclude_fact": true
+      }
+    },
+    {
+      "id": "ART-01",
+      "description": "Joint probe removal",
+      "input": {
+        "duration_s": 10,
+        "rate_hz": 1,
+        "observed_hr": 84,
+        "hr_flatline": true,
+        "spo2": null,
+        "trusted_device_fault": true,
+        "rr": 16,
+        "temp": 36.8
+      },
+      "expected": {
+        "technical_alert": true,
+        "hr_score": null,
+        "spo2_score": null,
+        "new_definitive_clinical_alert": false
+      }
+    },
+    {
+      "id": "ART-02",
+      "description": "Genuine deterioration during probe failure",
+      "input": {
+        "same_fault_as": "ART-01",
+        "rr": 32,
+        "rr_quality": "valid"
+      },
+      "expected": {
+        "technical_alert": true,
+        "priority": "Urgent",
+        "trigger": "SAFE-1"
+      }
+    },
+    {
+      "id": "ART-03",
+      "description": "Motion spike only suspect, cannot dismiss",
+      "input": {
+        "spo2_before": 97,
+        "spo2_after": 76,
+        "elapsed_s": 1,
+        "motion_flag": true,
+        "confirmed_artifact": false
+      },
+      "expected": {
+        "quality": "suspect",
+        "priority": "Urgent",
+        "action": "Verify"
+      }
+    },
+    {
+      "id": "ART-04",
+      "description": "Confirmed motion fault without clinical evidence",
+      "input": {
+        "spo2": 76,
+        "confirmed_artifact": true,
+        "other_reliable_vitals_normal": true
+      },
+      "expected": {
+        "technical_alert": true,
+        "new_definitive_clinical_alert": false
+      }
+    },
+    {
+      "id": "ART-05",
+      "description": "Flatline alone not proof",
+      "input": {
+        "vital": "spo2",
+        "value": 98,
+        "duration_s": 15,
+        "no_other_fault_evidence": true
+      },
+      "expected": {
+        "confirmed_artifact": false
+      }
+    },
+    {
+      "id": "ALERT-01",
+      "description": "Critical normal critical",
+      "input": {
+        "scale": 1,
+        "quality": "valid",
+        "spo2_sequence": [
+          87,
+          97,
+          86
+        ],
+        "timestamps_s": [
+          10,
+          20,
+          30
+        ]
+      },
+      "expected": {
+        "first_priority": "Urgent",
+        "active_episode_count": 1,
+        "resolved": false,
+        "recovery_timer_reset": true
+      }
+    },
+    {
+      "id": "ALERT-02",
+      "description": "Missing not recovery",
+      "input": {
+        "active_priority": "Urgent",
+        "subsequent_missing_s": 60
+      },
+      "expected": {
+        "active_priority": "Urgent",
+        "resolved": false
+      }
+    },
+    {
+      "id": "ALERT-03",
+      "description": "Acknowledgement not closure",
+      "input": {
+        "active_priority": "Urgent",
+        "clinician_acknowledge": true
+      },
+      "expected": {
+        "acknowledged": true,
+        "resolved": false
+      }
+    },
+    {
+      "id": "ALERT-04",
+      "description": "Normal data does not clear urgent",
+      "input": {
+        "active_priority": "Urgent",
+        "stable_valid_s": 60,
+        "clinician_resolution": false
+      },
+      "expected": {
+        "recovery_eligible": true,
+        "resolved": false
+      }
+    },
+    {
+      "id": "ALERT-05",
+      "description": "Stale model cannot downgrade",
+      "input": {
+        "active_priority": "Urgent",
+        "forecast_state_version": 2,
+        "current_state_version": 3,
+        "forecast": "recovery"
+      },
+      "expected": {
+        "discard_forecast": true,
+        "active_priority": "Urgent"
+      }
+    },
+    {
+      "id": "ALERT-06",
+      "description": "Experimental forecast alone",
+      "input": {
+        "current_vitals_normal": true,
+        "forecast_status": "experimental",
+        "forecast": "deterioration"
+      },
+      "expected": {
+        "priority": "Watch",
+        "forecast_independent_escalation": false
+      }
+    },
+    {
+      "id": "ALERT-07",
+      "description": "HAPI failure does not block safety",
+      "input": {
+        "spo2": 87,
+        "quality": "valid",
+        "scale": 1,
+        "hapi_available": false
+      },
+      "expected": {
+        "priority": "Urgent",
+        "persistence_retry": true
+      }
+    },
+    {
+      "id": "ALERT-08",
+      "description": "Duplicate event",
+      "input": {
+        "event_id": "E1",
+        "already_processed": true
+      },
+      "expected": {
+        "new_episode": false,
+        "state_update": false
+      }
+    },
+    {
+      "id": "ALERT-09",
+      "description": "Context affects persistent deviation",
+      "input": {
+        "hr": 87,
+        "baseline_hr": 65,
+        "robust_scale": 1,
+        "abnormal_duration_s": 20,
+        "coverage": 1,
+        "other_vitals_normal": true,
+        "documented_cardiac_history": true
+      },
+      "expected": {
+        "priority": "Review"
+      }
+    },
+    {
+      "id": "ALERT-10",
+      "description": "Same deviation without relevant context",
+      "input": {
+        "hr": 87,
+        "baseline_hr": 65,
+        "robust_scale": 1,
+        "abnormal_duration_s": 20,
+        "coverage": 1,
+        "other_vitals_normal": true,
+        "documented_cardiac_history": false
+      },
+      "expected": {
+        "priority": "Watch"
+      }
+    },
+    {
+      "id": "EVAL-01",
+      "description": "Lead time and patient-days example only",
+      "input": {
+        "severe_s": 1800,
+        "proposed_alert_s": 720,
+        "fixed_alert_s": 1440,
+        "total_monitored_s": 216000,
+        "episodes": 5
+      },
+      "expected": {
+        "proposed_lead_s": 1080,
+        "fixed_lead_s": 360,
+        "improvement_s": 720,
+        "patient_days": 2.5,
+        "alerts_per_patient_day": 2
+      }
+    },
+    {
+      "id": "INT-SCORE-SUM-MAX",
+      "description": "V1.1 integration acceptance; logical fixture",
+      "input": {
+        "scores": [
+          2,
+          2,
+          2,
+          1
+        ]
+      },
+      "expected": {
+        "observed_subtotal": 7,
+        "maximum_component_score": 2
+      }
+    },
+    {
+      "id": "INT-SCORE-NO-ELIGIBLE",
+      "description": "V1.1 integration acceptance; logical fixture",
+      "input": {
+        "scores": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expected": {
+        "observed_subtotal": null,
+        "maximum_component_score": null
+      }
+    },
+    {
+      "id": "INT-SCORE-PARTIAL",
+      "description": "V1.1 integration acceptance; logical fixture",
+      "input": {
+        "scores": [
+          1,
+          null,
+          2,
+          null
+        ]
+      },
+      "expected": {
+        "observed_subtotal": 3,
+        "maximum_component_score": 2,
+        "scored_count": 2
+      }
+    },
+    {
+      "id": "INT-AGE-NO-OVERRIDE",
+      "description": "V1.1 integration acceptance; logical fixture",
+      "input": {
+        "same_evidence": true,
+        "ages": [
+          27,
+          62
+        ]
+      },
+      "expected": {
+        "no_automatic_age_escalation": true
+      }
+    },
+    {
+      "id": "INT-OVERLOAD-FLOOR",
+      "description": "V1.1 integration acceptance; logical fixture",
+      "input": {
+        "clinical_priority": "Urgent",
+        "p2_overloaded": true
+      },
+      "expected": {
+        "clinical_priority": "Urgent",
+        "safety_floor_preserved": true
+      }
+    },
+    {
+      "id": "INT-REPLAY-ISOLATION",
+      "description": "V1.1 integration acceptance; logical fixture",
+      "input": {
+        "source": "bidmc",
+        "critical_reliable": true
+      },
+      "expected": {
+        "isolated_safety_assessment": true,
+        "live_notification": false
+      }
+    },
+    {
+      "id": "INT-ACK-NOT-RESOLVE",
+      "description": "V1.1 integration acceptance; logical fixture",
+      "input": {
+        "urgent_open": true,
+        "client_received": true,
+        "clinician_acknowledged": true
+      },
+      "expected": {
+        "resolved": false
+      }
+    }
+  ]
+}

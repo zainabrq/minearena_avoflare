@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Avoflare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono&display=swap">
+<link rel="stylesheet" href="/static/ui.css">
+<style>
+.login{display:grid;grid-template-columns:45fr 55fr;min-height:100vh}
+.login .form{padding:56px clamp(24px,5vw,80px);display:grid;align-content:center;gap:28px;max-width:600px;width:100%;justify-self:center}
+.login .hero{position:sticky;top:0;height:100vh;padding:40px;display:flex;align-items:center;justify-content:center}
+.login .hero .frame{width:100%;height:100%;max-height:calc(100vh - 80px);border-radius:28px;overflow:hidden;background:#fff;box-shadow:var(--shadow-lift)}
+.login .hero video{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transform:scale(1.2);transform-origin:50% 0}.login .hero img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:900px){.login{grid-template-columns:1fr}.login .hero{display:none}}
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
+nav.side{padding:32px 20px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh;background:#fff;box-shadow:1px 0 0 var(--rule)}
+nav.side img{width:168px;height:auto;margin:0 8px 32px}
+nav.side a{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:var(--r-control);text-decoration:none;color:var(--text);font-weight:600;font-size:16px}
+nav.side a:hover{background:#f6f9f7}nav.side a.on{background:var(--selected);color:var(--green);font-weight:800}
+nav.side .count{background:var(--urgent);color:#fff;border-radius:99px;font-size:13px;padding:1px 9px;font-weight:700}
+nav.side .foot{margin-top:auto;display:grid;gap:12px;font-size:15px}
+nav.side .footnote{font-size:14px;padding-top:14px;border-top:1px solid var(--rule)}
+main{padding:40px 48px 64px;max-width:1640px;min-width:0;display:grid;gap:var(--section);align-content:start}
+@media(max-width:1100px){main{padding:32px 32px 56px}}
+@media(max-width:1024px){.shell{grid-template-columns:1fr}nav.side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;padding:12px 16px}nav.side img{width:110px;margin:0 12px 0 0}nav.side .foot{margin:0;grid-auto-flow:column;align-items:center}nav.side .footnote{display:none}main{padding:24px 16px 48px;gap:32px}}
+.section{display:grid;gap:var(--gap);min-width:0}
+.pagehead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.pagehead .t{display:grid;gap:8px}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));padding:0;gap:0;overflow:hidden}
+.strip div{padding:22px 26px;border-right:1px solid var(--rule)}.strip div:last-child{border-right:0}
+.strip b{display:block;font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:4px}
+.g2{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gap);align-items:start}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap)}
+@media(max-width:1250px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:1100px){.g2{grid-template-columns:1fr!important}}@media(max-width:620px){.g4{grid-template-columns:1fr}}
+.vital .big{font-size:clamp(44px,3.6vw,54px);font-weight:700;letter-spacing:-.045em;line-height:1}
+.vital .unit{font-size:18px;font-weight:600;margin-left:6px;letter-spacing:0}
+.vital dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:15px}.vital dt{font-weight:700}.vital dd{margin:0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;padding:6px;background:#fff;box-shadow:var(--shadow);border-radius:16px;width:fit-content;max-width:100%}
+.tabs a{padding:10px 18px;text-decoration:none;color:var(--text);border-radius:11px;font-weight:600}
+.tabs a.on{background:var(--green);color:#fff;font-weight:700}
+.idhead{display:flex;gap:22px;align-items:center;flex-wrap:wrap}.idhead img,.idhead .initials{width:84px;height:84px;border-radius:50%;object-fit:cover;box-shadow:var(--shadow)}
+.initials{background:var(--selected);color:var(--green);display:grid;place-items:center;font-weight:800}
+.idhead .meta{display:grid;gap:6px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px 24px}.kv div{display:grid;gap:2px}.kv b{font-size:14px}
+.block{border-left:3px solid var(--selected);padding-left:16px;display:grid;gap:4px}
+svg text{font:13px var(--font);fill:#000}
+.chartbox{overflow-x:auto}
+pre.json{font:13px/1.5 var(--mono);background:var(--quiet);border-radius:14px;padding:16px;max-height:460px;overflow:auto;white-space:pre-wrap;word-break:break-word;margin:0}
+.toast{position:fixed;right:24px;bottom:24px;background:#0f1a15;color:#fff;padding:14px 18px;border-radius:14px;max-width:400px;z-index:9;box-shadow:var(--shadow-lift)}
+.banner{background:#fdecea;border-radius:16px;padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;box-shadow:var(--shadow)}
+.banner b{color:var(--urgent)}
+.sound{background:#fff6e0;border-radius:16px;padding:12px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.disc{font-size:14px;padding:0 48px 32px}
+.seg{display:inline-flex;gap:4px;padding:4px;background:var(--quiet);border-radius:12px;flex-wrap:wrap}.seg button{min-height:38px;padding:0 14px}
+/* Doctor Ava */
+.ava{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;align-items:center}
+@media(max-width:560px){.ava{grid-template-columns:1fr;justify-items:center}}
+.ava-stage{width:150px;height:170px;border-radius:24px;background:radial-gradient(circle at 50% 30%,#fff 0,#f1f6f3 70%);box-shadow:inset 0 0 0 1px var(--rule);overflow:hidden;position:relative}
+.ava-stage::after{content:"";position:absolute;left:30px;right:30px;bottom:6px;height:10px;border-radius:50%;background:rgba(23,75,56,.12);filter:blur(4px)}
+.ava svg{width:100%;height:100%;display:block}
+.ava .body{animation:idle 5s ease-in-out infinite;transform-origin:50% 90%}
+.ava .eyes{animation:blink 5.5s infinite;transform-origin:50% 44%;transform-box:fill-box}
+.ava .head{transform-origin:50% 60%;transform-box:fill-box}
+.ava.speaking .head{animation:nod 2.4s ease-in-out infinite}
+@keyframes idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes blink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.08)}}
+@keyframes nod{0%,100%{transform:rotate(0)}30%{transform:rotate(-1.6deg)}70%{transform:rotate(1.2deg)}}
+.ava .transcript{background:var(--quiet);border-radius:14px;padding:14px 16px;max-height:220px;overflow:auto;font-size:16px;line-height:1.6}
+.ava .transcript mark{background:var(--selected);color:#000;border-radius:4px}
+/* spatial twin */
+.stage{position:relative;height:420px;perspective:1000px;border-radius:20px;background:radial-gradient(120% 90% at 50% 10%,#fff 0,#f5f8f6 60%,#eef3f0 100%);overflow:hidden}
+.floor{position:absolute;left:6%;right:6%;bottom:30px;height:64%;transform:rotateX(70deg);transform-origin:bottom;border-radius:50%;background:radial-gradient(closest-side,rgba(23,75,56,.12),rgba(23,75,56,.04) 70%,transparent)}
+.stage svg.links{position:absolute;inset:0;width:100%;height:100%}
+.orb{position:absolute;transform:translate(-50%,-50%);border:0;padding:0;border-radius:50%;cursor:pointer;display:grid;place-content:center;text-align:center;transition:transform .2s ease,box-shadow .2s ease;min-height:0;font-weight:700;color:#000;gap:0}
+.orb.core{width:170px;height:170px;background:radial-gradient(circle at 34% 28%,#eef5f0 0,#bcd3c3 40%,#7fa58c 100%);box-shadow:inset -12px -16px 30px rgba(23,75,56,.25),0 34px 30px -16px rgba(23,75,56,.45)}
+.orb.sat{width:112px;height:112px;background:radial-gradient(circle at 34% 28%,#fff 0,#f3f5f3 45%,#d4dcd6 100%);box-shadow:inset -6px -10px 18px rgba(0,0,0,.08),0 22px 22px -12px rgba(0,0,0,.28)}
+.orb.core:hover,.orb.sat:hover{background-color:transparent;filter:brightness(1.02)}
+.orb.on{transform:translate(-50%,-57%) scale(1.07);box-shadow:inset -6px -10px 18px rgba(0,0,0,.08),0 36px 28px -12px rgba(23,75,56,.45),0 0 0 3px var(--green)}
+.orb.flag{box-shadow:inset -6px -10px 18px rgba(0,0,0,.08),0 22px 22px -12px rgba(0,0,0,.28),0 0 0 3px var(--review)}
+.orb span{display:block;font-size:12.5px;font-weight:650;color:#000}.orb b{font-size:22px;letter-spacing:-.02em}.orb.core b{font-size:18px;color:var(--green)}
+.branches{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--gap)}
+.branch.orig{box-shadow:var(--shadow),0 0 0 2px var(--green)}
+.tl{list-style:none;margin:0;padding:0;display:grid}
+.tl li{display:grid;grid-template-columns:150px 120px 1fr;gap:16px;padding:14px 4px;border-bottom:1px solid var(--rule);align-items:baseline}
+.tl li:last-child{border-bottom:0}.tl .k{font-weight:700}
+@media(max-width:700px){.tl li{grid-template-columns:1fr}}
+.inbox .item{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:18px 4px;border-bottom:1px solid var(--rule)}
+.inbox .item:last-child{border-bottom:0}.inbox .item.unread .t{font-weight:800}
+.dot{width:12px;height:12px;border-radius:50%;background:#c3ccc6}.dot.p3{background:var(--urgent)}.dot.p2{background:var(--review)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const V=['hr','rr','spo2','temp'],N={hr:'Heart rate',rr:'Respiratory rate',spo2:'SpO2',temp:'Temperature'},U={hr:'bpm',rr:'/min',spo2:'%',temp:'°C'};
+const PL=['No current concern','Watch','Review','Urgent'],RN={doctor:'Doctor',nurse:'Nurse',substitute_doctor:'Substitute doctor',management:'Management',operator:'Evaluation operator'};
+const DISC='Clinical decision support only. Not a medical diagnosis system.';
+const DEV={attached_confirmed:['watch_attached','Simulated wearable attached'],removed_confirmed:['watch_removed','Simulated wearable removed (device reported sensor off)'],
+ suspected_artifact:[null,'Possible sensor artifact. Verify the sensor.'],interrupted:[null,'Connection interrupted. No readings for more than 30 seconds.'],unknown:[null,'Attachment unknown. No current readings.']};
+let NT=null,ME=null,OV=null,ws=null,route=location.hash||'#/overview',audio=null,soundOn=true,beepAt=0,cache={},range=900,tvital='hr';
+let reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;try{reduce=reduce||localStorage.getItem('av_reduce')=='1'}catch(e){}
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=(v,x)=>x==null?'Unavailable':v=='temp'?(+x).toFixed(1):Math.round(x);
+const pri=(p,l)=>`<span class="pri p${p||0}">${l||PL[p||0]}</span>`;
+const plabel=p=>pri(p.priority,p.insufficient&&p.priority<2?'Insufficient assessment':null);
+const ago=s=>s==null?'none':s<60?`${s} s ago`:`${Math.round(s/60)} min ago`;
+const stime=iso=>iso?iso.replace('T',' ').slice(5,19):'';
+async function api(u,b,method){const r=await fetch(u,{method:method||(b?'POST':'GET'),headers:b?{'Content-Type':'application/json'}:{},body:b?JSON.stringify(b):undefined});
+ const j=await r.json().catch(()=>({}));if(r.status==401&&!u.includes('login')){ME=null;render();}if(!r.ok)throw new Error(j.detail||('Request failed ('+r.status+')'));return j}
+function toast(m){const t=document.createElement('div');t.className='toast';t.setAttribute('role','status');t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),4500)}
+window.onhashchange=()=>{const old=route;route=location.hash;const op=(old.match(/patient\/(P\d+)/)||[])[1],np=(route.match(/patient\/(P\d+)/)||[])[1];if(op!==np)Ava.reset(np);render()};
+document.documentElement.classList.toggle('reduce',reduce);
+
+/* ---------- login ---------- */
+async function loginView(){const cfg=await api('/api/config').catch(()=>({}));
+ $('#root').innerHTML=`<div class="login"><section class="form"><img src="/assets/images/logo.png" alt="Avoflare" style="width:190px;height:auto">
+ <div class="stack" style="gap:10px"><h1>Sign in to Avoflare</h1><p>Post-discharge monitoring for your care team.</p></div>
+ <form id="lf" class="stack" style="gap:18px"><label for="uid">User ID<input id="uid" autocomplete="username" required></label>
+ <label for="pw">Password<input id="pw" type="password" autocomplete="current-password" required></label>
+ <p id="lerr" class="err" role="alert"></p><button type="submit" id="lbtn">Sign in</button></form>
+ ${cfg.demo_login?`<div class="quiet stack"><b>Development environment: demo accounts enabled (AVOFLARE_DEMO_LOGIN)</b><div class="row">${cfg.demo_accounts.filter(a=>a.role!='patient').map(a=>`<button class="secondary" data-demo="${a.uid}">${esc(a.name)} · ${RN[a.role]||a.role}</button>`).join('')}</div><p>Patients use the <a href="/patient">patient application</a>.</p></div>`:'<p>Credentials are issued by your administrator. Patients use the <a href="/patient">patient application</a>.</p>'}
+ <p>${DISC}</p></section>
+ <section class="hero" aria-hidden="true"><div class="frame">${reduce?'<img src="/assets/images/watch_attached.png" alt="">':'<video src="/assets/videos/login_hero.mp4" poster="/assets/images/watch_attached.png" muted autoplay loop playsinline preload="metadata"></video>'}</div></section></div>`;
+ $('#lf').onsubmit=async e=>{e.preventDefault();const b=$('#lbtn');b.disabled=true;b.textContent='Signing in…';try{ME=await api('/api/login',{uid:$('#uid').value.trim(),password:$('#pw').value});start()}catch(x){$('#lerr').textContent=x.message;b.disabled=false;b.textContent='Sign in'}};
+ document.querySelectorAll('[data-demo]').forEach(b=>b.onclick=async()=>{ME=await api('/api/login',{uid:b.dataset.demo,demo:true});start()})}
+function start(){if(ME.role=='patient'){location.href='/patient';return}audio=new(window.AudioContext||window.webkitAudioContext)();audio.resume().catch(()=>{});pollNT();
+ document.addEventListener('pointerdown',()=>{if(audio&&audio.state!='running')audio.resume().then(()=>render(true))},{once:true});
+ if(ME.role=='operator'&&!route.startsWith('#/eval')&&!route.startsWith('#/fhir'))location.hash='#/eval';if(!location.hash&&ME.role!='operator'&&ME.role!='management')location.hash='#/shift';connect();render()}
+async function connect(){if(ME.role=='operator')return;if(ws)try{ws.onclose=null;ws.close()}catch(e){}
+ let url=(location.protocol=='https:'?'wss://':'ws://')+location.host+'/ws';
+ try{const [c,t]=await Promise.all([api('/api/config'),api('/api/ws-token')]);url=(c.ws_url||url)+'?token='+encodeURIComponent(t.token)}catch(e){setTimeout(()=>ME&&connect(),3000);return}
+ ws=new WebSocket(url);
+ ws.onmessage=e=>{const m=JSON.parse(e.data);if(m.type=='overview'){OV=m;onTick()}};ws.onclose=()=>setTimeout(()=>ME&&connect(),2000)}
+
+/* ---------- shell ---------- */
+function shell(body,active){const n=[['#/shift','My shift',['doctor','nurse']],['#/overview','Overview',['doctor','nurse','management']],['#/patients','Patients',['doctor','nurse','management']],
+ ['#/alerts','Clinical alerts',['doctor','nurse','management']],['#/notifications','Notifications',['doctor','nurse','management']],
+ ['#/eval','Evaluation',['operator','doctor','management']],['#/fhir','FHIR records',['operator','doctor','nurse','management']],['#/settings','Settings',['operator','doctor','nurse','management']]].filter(x=>x[2].includes(ME.role));
+ const u=urgentAll(),mine=u.filter(a=>a.current_person==ME.uid);
+ return`<div class="shell"><nav class="side" aria-label="Main"><img src="/assets/images/logo.png" alt="Avoflare">
+ ${n.map(x=>`<a href="${x[0]}" class="${active==x[0]?'on':''}" ${active==x[0]?'aria-current="page"':''}><span>${x[1]}</span>${x[0]=='#/alerts'&&OV&&OV.alerts.length?`<span class="count" aria-label="${OV.alerts.length} open">${OV.alerts.length}</span>`:''}${x[0]=='#/notifications'&&NT&&NT.unread?`<span class="count" aria-label="${NT.unread} unread">${NT.unread}</span>`:''}</a>`).join('')}
+ <div class="foot"><div><b>${esc(ME.name)}</b><br>${RN[ME.role]||ME.role}</div><button class="secondary" id="out">Sign out</button>
+ <p class="footnote">Clinical decision support only. Simulated patients and readings.</p></div></nav>
+ <div><main>${audio&&audio.state!='running'&&ME.role!='operator'?`<div class="sound" role="alert"><b>Alarm sound is blocked by the browser.</b><button id="unlock">Enable alarm sound</button></div>`:''}
+ ${u.length?`<div class="banner" role="alert"><b>Urgent, not yet acknowledged: ${u.map(a=>`<a href="#/patient/${a.pid}/monitoring">${a.pid}</a>`).join(', ')}</b>${mine.length?`<span>${mine.length} assigned to you.</span>`:''}<button class="secondary" id="silence">Silence alarm 60 s</button></div>`:''}
+ ${body}</main><p class="disc">${DISC}</p></div></div>`}
+function wire(){const o=$('#out');if(o)o.onclick=async()=>{Ava.stop();await api('/api/logout',{});ME=null;ws&&ws.close();render()}}
+
+/* ---------- alarms + notifications ---------- */
+function urgentAll(){return OV?OV.alerts.filter(a=>a.highest==3&&!a.acknowledged):[]}
+function tone(f,type,len,vol){if(!audio||audio.state!='running')return;const g=audio.createGain();g.gain.value=vol;g.connect(audio.destination);
+ f.forEach((x,i)=>{const o=audio.createOscillator();o.type=type;o.frequency.value=x;o.connect(g);o.start(audio.currentTime+i*(len+.08));o.stop(audio.currentTime+i*(len+.08)+len)})}
+function alarm(){if(!soundOn||Date.now()<(cache.silence||0))return;const u=urgentAll(),mine=u.filter(a=>a.current_person==ME.uid);
+ if(mine.length&&Date.now()-beepAt>1200){beepAt=Date.now();tone([988,740,988,740],'square',.18,.22)}
+ else if(u.length&&Date.now()-beepAt>2500){beepAt=Date.now();tone([880,660],'square',.2,.12)}
+ OV.alerts.filter(a=>a.highest==2&&!a.acknowledged&&a.current_person==ME.uid).forEach(a=>{if(!cache['rv'+a.pid+a.id]){cache['rv'+a.pid+a.id]=1;tone([523,659],'sine',.18,.12)}})}
+setInterval(()=>{if(ME&&OV&&ME.role!='operator')alarm()},600);
+function pollNT(){if(!ME||!['doctor','nurse','management'].includes(ME.role))return;api('/api/notifications').then(n=>{const was=NT&&NT.unread;NT=n;if(was!==n.unread)render(true)}).catch(()=>{})}
+setInterval(pollNT,3000);
+function onTick(){OV.alerts.filter(a=>a.current_person==ME.uid&&!a.acknowledged).forEach(a=>{const k='n'+a.pid+a.id+a.log.length;if(!cache[k]){cache[k]=1;api(`/api/alerts/${a.pid}/receipt`,{}).catch(()=>{});
+  if(navigator.vibrate)navigator.vibrate([400,150,400]);if('Notification'in window&&Notification.permission=='granted')new Notification(`${a.highest==3?'URGENT':'REVIEW'} ${a.pid}`,{body:'Needs attention. Open Avoflare when available.',tag:a.pid,requireInteraction:a.highest==3})}});
+ const pm=route.match(/patient\/(P\d+)/);if(pm)Ava.check(OV.patients.find(p=>p.pid==pm[1]));
+ if(document.activeElement&&document.activeElement.closest('form,details[open],.ava'))return;render(true)}
+
+/* ---------- Doctor Ava: presentation over the backend summary, never a clinical source ---------- */
+const Ava={pid:null,data:null,speaking:false,paused:false,req:0,lastKey:null,show:false,
+ reset(pid){this.stop();this.pid=pid||null;this.data=null;this.lastKey=null;this.show=false;this.req++;if(pid)this.load(pid)},
+ load(pid){const id=++this.req;api(`/api/patients/${pid}/summary`).then(d=>{if(id!==this.req||d.identity.subject!==this.pid)return;this.data=d;this.paint()}).catch(e=>{if(id===this.req){this.data={error:e.message};this.paint()}})},
+ check(p){if(!p||p.pid!==this.pid)return;const key=`${p.priority}|${p.alert?p.alert.id+p.alert.highest+(p.alert.acknowledged?'a':''):''}`;
+  if(this.lastKey===null){this.lastKey=key;return}if(key!==this.lastKey){this.lastKey=key;if(!this.speaking)this.load(this.pid)}},
+ voice(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));return vs.find(v=>/female|zira|aria|jenny|samantha|susan|hazel|libby|sonia/i.test(v.name))||vs[0]||null},
+ speak(){if(!this.data||!this.data.text)return;if(!('speechSynthesis'in window)){this.show=true;this.paint();return}speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(this.data.text),v=this.voice();if(v)u.voice=v;u.rate=.98;u.pitch=1.05;const pid=this.pid;
+  u.onstart=()=>{if(pid!==this.pid)return speechSynthesis.cancel();this.speaking=true;this.paused=false;this.paint()};
+  u.onboundary=e=>{if(e.name&&e.name!='word')return;this.mouth(e.charIndex)};
+  u.onend=u.onerror=()=>{if(pid!==this.pid)return;this.speaking=false;this.paused=false;this.mouthTo(0);this.paint()};speechSynthesis.speak(u)},
+ mouth(ci){this.mouthTo(1);clearTimeout(this._m);this._m=setTimeout(()=>this.mouthTo(.25),140);const t=$('#avatext');if(t&&this.data){const s=this.data.text,e=s.indexOf(' ',ci+1),end=e<0?s.length:e;t.innerHTML=esc(s.slice(0,ci))+'<mark>'+esc(s.slice(ci,end))+'</mark>'+esc(s.slice(end))}},
+ mouthTo(k){const m=document.querySelector('.ava .mouth');if(m)m.setAttribute('transform',`translate(75 99) scale(1 ${(0.35+k*1.2).toFixed(2)}) translate(-75 -99)`)},
+ pause(){if(this.paused){speechSynthesis.resume();this.paused=false}else{speechSynthesis.pause();this.paused=true}this.paint()},
+ stop(){if('speechSynthesis'in window)speechSynthesis.cancel();this.speaking=false;this.paused=false},
+ svg(){return`<svg viewBox="0 0 150 170" role="img" aria-label="Doctor Ava"><g class="body">
+ <path d="M28 170 C30 136 48 124 75 122 C102 124 120 136 122 170 Z" fill="#fff" stroke="#dfe5e1"/>
+ <path d="M64 124 L75 146 L86 124" fill="#e7efe9" stroke="#b9cfc0"/><path d="M75 146 L75 170" stroke="#dfe5e1"/>
+ <path d="M58 128 C52 146 60 156 70 156" fill="none" stroke="#174B38" stroke-width="2.2" stroke-linecap="round"/><circle cx="71" cy="156" r="3.2" fill="#174B38"/>
+ <rect x="91" y="140" width="16" height="9" rx="2" fill="#e7efe9"/>
+ <g class="head"><rect x="68" y="104" width="14" height="20" rx="6" fill="#e9bfa3"/>
+ <path d="M40 72 C38 38 112 38 110 72 L112 112 C100 104 98 92 98 84 L52 84 C52 92 50 104 38 112 Z" fill="#3b2a22"/>
+ <ellipse cx="75" cy="78" rx="27" ry="31" fill="#f1cdb2"/>
+ <path d="M48 66 C56 46 96 44 103 66 C92 56 66 54 48 66 Z" fill="#3b2a22"/>
+ <g class="eyes"><ellipse cx="65" cy="78" rx="3.1" ry="3.4" fill="#1d1d1d"/><ellipse cx="85" cy="78" rx="3.1" ry="3.4" fill="#1d1d1d"/></g>
+ <path d="M60 71 Q65 68 70 71 M80 71 Q85 68 90 71" stroke="#3b2a22" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+ <path d="M75 82 Q73 90 76 91" stroke="#d7a988" stroke-width="1.4" fill="none"/>
+ <ellipse class="mouth" cx="75" cy="99" rx="7" ry="2.6" fill="#a8574c" transform="translate(75 99) scale(1 .35) translate(-75 -99)"/>
+ <ellipse cx="60" cy="90" rx="5" ry="3" fill="#f2b8a2" opacity=".45"/><ellipse cx="90" cy="90" rx="5" ry="3" fill="#f2b8a2" opacity=".45"/></g></g></svg>`},
+ html(){const d=this.data,sup='speechSynthesis'in window;
+  return`<section class="panel lift ava ${this.speaking&&!this.paused?'speaking':''}" aria-label="Doctor Ava patient summary"><div class="ava-stage">${this.svg()}</div>
+  <div class="stack" style="gap:14px"><div class="row between"><h3>Doctor Ava</h3><span class="mono">${d&&d.assessment_version?`assessment v${d.assessment_version} · ${stime(d.assessment_time)}`:''}</span></div>
+  <p>${!d?'Loading the current assessment…':d.error?esc(d.error):this.speaking?(this.paused?'Paused.':'Speaking the current assessment for '+esc(d.identity.subject)+'.'):'Spoken summary of the latest assessment, built from the clinical engine output. Not a diagnosis.'}</p>
+  <div class="row"><button id="ava-play" ${!d||d.error?'disabled':''}>${this.speaking?'Restart summary':'Listen to summary'}</button>
+  <button class="secondary" id="ava-pause" ${this.speaking?'':'disabled'}>${this.paused?'Resume':'Pause'}</button><button class="secondary" id="ava-stop" ${this.speaking?'':'disabled'}>Stop</button>
+  <button class="secondary" id="ava-tr" aria-expanded="${this.show}">${this.show?'Hide transcript':'Read transcript'}</button></div>
+  ${sup?'':'<p class="err">Speech is not available in this browser. The transcript is shown instead.</p>'}
+  ${(this.show||!sup)&&d&&d.text?`<div class="transcript" id="avatext">${esc(d.text)}</div>`:''}</div></section>`},
+ paint(){const el=document.querySelector('.ava');if(!el)return;const w=document.createElement('div');w.innerHTML=this.html();el.replaceWith(w.firstElementChild);this.bind()},
+ bind(){const b=(i,f)=>{const e=$('#'+i);if(e)e.onclick=f};b('ava-play',()=>this.speak());b('ava-pause',()=>this.pause());b('ava-stop',()=>{this.stop();this.mouthTo(0);this.paint()});b('ava-tr',()=>{this.show=!this.show;this.paint()})}};
+
+/* ---------- charts ---------- */
+function chart(data,o={}){const W=o.w||760,H=o.h||170,P=40,vals=data.filter(x=>x!=null).concat(o.extra||[]);if(!vals.length)return'<p>No recent measurements.</p>';
+ let lo=Math.min(...vals),hi=Math.max(...vals);if(o.base!=null){lo=Math.min(lo,o.base);hi=Math.max(hi,o.base)}const pad=(hi-lo)*.15||1;lo-=pad;hi+=pad;
+ const n=o.total||data.length,X=i=>P+i/(n-1||1)*(W-P-10),Y=v=>H-22-(v-lo)/(hi-lo)*(H-34);let d='',m=false;
+ data.forEach((v,i)=>{if(v==null){m=false;return}d+=(m?'L':'M')+X(i).toFixed(1)+' '+Y(v).toFixed(1);m=true});
+ const ticks=[lo+pad,(lo+hi)/2,hi-pad].map(t=>`<line x1="${P}" x2="${W-10}" y1="${Y(t)}" y2="${Y(t)}" stroke="#E5E7E5"/><text x="2" y="${Y(t)+4}">${t.toFixed(o.dec??0)}</text>`).join('');
+ let fc='';if(o.fc){const s=data.length-1,fm=o.fc.mean,fs=o.fc.sd,pts=fm.map((v,i)=>[X(s+1+i),Y(v)]);
+  fc=`<path d="M${pts.map((p,i)=>p[0]+' '+Y(fm[i]+2*fs[i])).join(' L')} L${pts.map((p,i)=>p[0]+' '+Y(fm[i]-2*fs[i])).reverse().join(' L')} Z" fill="#E7EFE9"><title>±2 SD ensemble band</title></path>
+  <path d="M${pts.map(p=>p.join(' ')).join(' L')}" fill="none" stroke="#174B38" stroke-width="2.2" stroke-dasharray="7 5"/>
+  <line x1="${X(s)}" x2="${X(s)}" y1="8" y2="${H-22}" stroke="#000" stroke-dasharray="2 3"/><text x="${X(s)+5}" y="16">forecast origin</text>`}
+ return`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(o.label||'trend')}">${ticks}
+ ${o.base!=null?`<line x1="${P}" x2="${W-10}" y1="${Y(o.base)}" y2="${Y(o.base)}" stroke="#6b756f" stroke-dasharray="4 4"/><text x="${W-70}" y="${Y(o.base)-5}">baseline</text>`:''}
+ ${fc}<path d="${d}" fill="none" stroke="#000" stroke-width="1.7"/><text x="${P}" y="${H-5}">${o.xl||''}</text></svg>`}
+
+/* ---------- overview + patients ---------- */
+const avatarSm=p=>p.gender=='female'||p.gender=='male'?`<img src="/assets/images/patient_avatar_${p.gender}.png" alt="" style="width:44px;height:44px;border-radius:50%;object-fit:cover">`:`<span class="initials" style="width:44px;height:44px">${p.pid}</span>`;
+function prow(p){return`<tr tabindex="0" data-go="#/patient/${p.pid}/monitoring"><td><div class="row" style="gap:14px;flex-wrap:nowrap">${avatarSm(p)}<div><b>${p.pid}</b> · ${p.age} ${p.gender[0].toUpperCase()}<br><span>${esc(p.context)}</span></div></div></td>
+ ${V.map(v=>`<td><b style="font-size:18px">${p.vitals?fmt(v,p.vitals[v].value):'Unavailable'}</b>${p.vitals&&p.vitals[v].quality!='valid'?`<br><span>${p.vitals[v].quality}</span>`:''}</td>`).join('')}
+ <td>${plabel(p)}${p.alert&&p.alert.highest>p.priority?`<br><span class="pri p${p.alert.highest}" style="font-size:14px">${PL[p.alert.highest]} alert unresolved</span>`:''}</td>
+ <td>${p.monitoring}</td><td class="mono">${p.device.last_packet!=null?ago(p.t-p.device.last_packet):'none'}</td><td>${p.source}</td></tr>`}
+const sortP=a=>a.slice().sort((x,y)=>((y.alert&&y.alert.highest==3)-(x.alert&&x.alert.highest==3))||(y.priority-x.priority)||x.pid.localeCompare(y.pid));
+const THEAD='<thead><tr><th>Patient</th><th>HR bpm</th><th>RR /min</th><th>SpO2 %</th><th>Temp °C</th><th>Priority</th><th>Monitoring</th><th>Last observation</th><th>Source</th></tr></thead>';
+function overview(){if(!OV||!OV.patients.length)return shell('<p>Connecting to live monitoring. On a cold start the server needs a minute to load patient data.</p>','#/overview');const c=k=>OV.patients.filter(k).length;
+ const need=sortP(OV.patients.filter(p=>p.priority>=1||p.alert||p.monitoring!='receiving'));
+ return shell(`<section class="section"><div class="pagehead"><div class="t"><h1>Overview</h1><p>${OV.patients.length} patients monitored live · source time ${stime(OV.patients[0].source_time)}</p></div><a class="btn secondary" href="#/patients">All patients</a></div>
+ <div class="strip panel" aria-label="Current priorities"><div><b>${OV.patients.length}</b>Monitored</div><div><b>${c(p=>p.priority==3)}</b>Urgent</div><div><b>${c(p=>p.priority==2)}</b>Review</div><div><b>${c(p=>p.priority==1)}</b>Watch</div>
+ <div><b>${c(p=>p.monitoring!='receiving')}</b>Degraded or interrupted</div><div><b>${OV.alerts.length}</b>Open alerts</div></div>
+ <p>Priority counts are mutually exclusive current assessments. Monitoring and alert counts can overlap with them.</p></section>
+ <section class="section"><h2>Needs attention</h2><div class="panel"><div class="tablewrap"><table>${THEAD}<tbody>${need.map(prow).join('')||'<tr><td colspan="9">No patient currently has a concern, open alert or monitoring problem.</td></tr>'}</tbody></table></div></div></section>`,'#/overview')}
+function patients(){if(!OV)return shell('<p>Connecting…</p>','#/patients');const q=(cache.q||'').toLowerCase(),fp=cache.fp||'all',fs=cache.fs||'all';
+ const rows=sortP(OV.patients.filter(p=>(!q||(p.pid+' '+p.context).toLowerCase().includes(q))&&(fp=='all'||p.priority==fp)&&(fs=='all'||p.source==fs)));
+ return shell(`<section class="section"><div class="pagehead"><div class="t"><h1>Patients</h1><p>${rows.length} of ${OV.patients.length} shown, urgent first.</p></div>
+ <div class="row" style="align-items:end"><label for="q">Search<input id="q" placeholder="Patient ID or context" value="${esc(cache.q||'')}" style="width:240px"></label>
+ <label for="fp">Priority<select id="fp" style="width:auto"><option value="all">All</option>${[3,2,1,0].map(p=>`<option value="${p}" ${fp==p?'selected':''}>${PL[p]}</option>`).join('')}</select></label>
+ <label for="fs">Source<select id="fs" style="width:auto"><option value="all">All</option>${[...new Set(OV.patients.map(p=>p.source))].map(s=>`<option ${fs==s?'selected':''}>${s}</option>`).join('')}</select></label></div></div>
+ <div class="panel"><div class="tablewrap"><table>${THEAD}<tbody>${rows.map(prow).join('')||'<tr><td colspan="9">No patients match these filters.</td></tr>'}</tbody></table></div></div></section>`,'#/patients')}
+
+/* ---------- patient workspace ---------- */
+const avatar=p=>p.gender=='female'||p.gender=='male'?`<img src="/assets/images/patient_avatar_${p.gender}.png" alt="">`:`<div class="initials">${p.pid}</div>`;
+function tabs(p,tab){return`<nav class="tabs" aria-label="Patient sections">${[['monitoring','Monitoring'],['profile','Profile'],['twin','Digital twin'],['intelligence','Intelligence'],['care','Care plan'],['history','History']].map(t=>`<a href="#/patient/${p.pid}/${t[0]}" class="${tab==t[0]?'on':''}">${t[1]}</a>`).join('')}</nav>`}
+function identity(p){return`<section class="panel"><div class="idhead">${avatar(p)}<div class="meta"><h1>${p.pid}</h1><p>${p.age} years at discharge · ${p.gender} · documented history: ${esc(p.context)}</p></div></div>
+ <div class="kv"><div><b>Current assessment</b>${plabel(p)}</div><div><b>Unresolved alert</b>${p.alert?pri(p.alert.highest)+' '+p.alert.state:'None'}</div>
+ <div><b>Source</b>${p.source}</div><div><b>Session</b><span class="mono">${p.session}</span></div><div><b>Source time</b><span class="mono">${stime(p.source_time)}</span></div><div><b>Monitoring</b>${p.monitoring}</div></div></section>`}
+function vitalPanel(p,v,series){const e=p.vitals?p.vitals[v]:{};const q=e.quality=='valid'?'Reliable':e.quality=='missing'?'Missing':e.quality?'Suspect, excluded from scoring':'Unknown';
+ return`<section class="panel vital" aria-label="${N[v]}"><div class="row between"><h3>${N[v]}</h3>${e.score!=null?`<span>score ${e.score}</span>`:''}</div>
+ <div>${e.value!=null?`<span class="big">${fmt(v,e.value)}</span><span class="unit">${U[v]}</span>`:'<span class="big" style="font-size:30px">Unavailable</span>'}</div>
+ <dl><dt>Baseline</dt><dd>${e.baseline!=null?fmt(v,e.baseline)+' '+U[v]+` (${e.baseline_status})`:'Being established'}</dd>
+ <dt>Change</dt><dd>${e.delta!=null?`${e.delta>0?'+':''}${(+e.delta).toFixed(1)}${v=='spo2'?' points':' '+U[v]}`+(e.persistent?', persistent':''):'Not available'}</dd>
+ <dt>Signal</dt><dd>${q}${e.fresh?'':' · stale'}</dd></dl>
+ ${chart((series[v]||[]).slice(-300),{label:N[v]+' last 5 minutes',h:80,w:340,base:e.baseline,dec:v=='temp'?1:0})}</section>`}
+function devicePanel(p){const s=p.device.state,[asset,txt]=DEV[s]||DEV.unknown,vid=asset&&!reduce;
+ const media=asset?(vid?`<video data-state="${s}" src="/assets/videos/${asset}.mp4" poster="/assets/images/${asset}.png" muted autoplay loop playsinline preload="metadata" aria-label="${txt}"></video>`:`<img src="/assets/images/${asset}.png" alt="${txt}">`):
+  `<div class="stack" style="justify-items:center;text-align:center;padding:24px"><b>${txt}</b><span>No device image is shown because attachment is not confirmed.</span></div>`;
+ return`<section class="panel lift"><div class="row between"><h3>Wearable</h3><span>${s.replace(/_/g,' ')}</span></div><div class="media" id="devmedia" data-state="${s}">${media}</div>
+ <p><b>${txt}</b></p><p>Last packet ${p.device.last_packet!=null?ago(p.t-p.device.last_packet):'none'} · connection ${p.monitoring}. Media state is presentation only and never used for scoring.</p></section>`}
+function newsPanel(p){const sc=p.score||{components:{}};return`<section class="panel"><h3>Partial NEWS2-style subtotal</h3>
+ <table><thead><tr><th>Component</th><th>Value</th><th>Score</th></tr></thead><tbody>${V.map(v=>`<tr><td>${N[v]}</td><td>${p.vitals?fmt(v,p.vitals[v].value):'Unavailable'}</td><td>${sc.components[v]??'Not scored'}</td></tr>`).join('')}</tbody></table>
+ <p><b>${sc.observed_subtotal??'Unavailable'}${sc.observed_subtotal!=null?' of '+sc.maximum_available_subtotal:''}</b> from ${sc.scored_count??0} of 4 components${sc.status!='complete_four'?' (incomplete)':''} · highest single component ${sc.maximum_component_score??'unavailable'}.</p>
+ <p>SpO2 Scale 1 (no Scale 2 authorisation). This is not a full NEWS2 score and full NEWS2 thresholds are not applied.</p></section>`}
+function alertBlock(a){if(!a)return'<p>No unresolved alert.</p>';const tr=a.trigger||{};
+ return`<div class="stack"><div class="row between"><div>${pri(a.highest)} <b>${a.category}</b> · ${a.state}</div><span class="mono">${a.id}</span></div>
+ <div class="block"><b>Triggering reading</b><span>${V.filter(v=>tr.values&&tr.values[v]!=null).map(v=>`${N[v]} ${fmt(v,tr.values[v])} ${U[v]}`).join(', ')||'Not recorded'}</span><span class="mono">source t ${tr.source_t??''}</span></div>
+ <div class="block"><b>Applied rule</b><span>${(tr.rules||a.evidence||[]).map(esc).join('<br>')}</span><span class="mono">avoflare-policy-1.1</span></div>
+ <div class="block"><b>Relevant patient fact</b><span>${esc(a.fact)}</span></div>
+ <p>Currently with ${a.current_person&&OV?esc(OV.staff[a.current_person].name):'nobody'} for ${a.waiting_s} s. ${a.acknowledged?'Acknowledged by '+esc(a.acknowledged)+'.':'Not acknowledged.'}</p>
+ <p>Delivery${(a.deliveries||[]).length>4?` (latest 4 of ${a.deliveries.length})`:''}: ${(a.deliveries||[]).slice(-4).map(d=>`${RN[d.role]} sent ${new Date(d.sent*1000).toLocaleTimeString()}${d.received?', received':''}`).join(' · ')||'none'}</p>
+ <div class="row"><button data-ack="${a.pid}" ${a.acknowledged?'disabled':''}>${a.acknowledged?'Acknowledged':'Acknowledge'}</button>${ME.role=='doctor'?`<button class="secondary" data-resolve="${a.pid}">Resolve</button>`:'<span>Only a doctor can resolve.</span>'}</div>
+ <form class="stack" id="rf-${a.pid}" hidden><label for="reason-${a.pid}">Resolution reason (required)<textarea id="reason-${a.pid}" rows="2" required></textarea></label>
+ <p>Accepted only when current evidence is no longer Review or Urgent.</p><div class="row"><button type="submit">Confirm resolution</button><button type="button" class="secondary" data-cancel="${a.pid}">Cancel</button></div><p class="err" role="alert"></p></form>
+ <details><summary>Alert lifecycle and notifications</summary><div>${a.log.map(l=>`${new Date(l.at*1000).toLocaleTimeString()} ${esc(l.event)}${l.to?' to '+esc(l.to):''}`).join('<br>')}</div></details></div>`}
+function monitoring(p,s){const series=(s&&s.series)||{},e=p.vitals||{};
+ const findings=V.filter(v=>e[v]&&(e[v].persistent||(e[v].score||0)>=1||e[v].quality!='valid'));
+ return`<section class="section g2" style="align-items:stretch">${identity(p)}${Ava.html()}</section>
+ <section class="section"><h2>Vital signs</h2><div class="g4">${V.map(v=>vitalPanel(p,v,series)).join('')}</div>
+ ${p.bp_hrv?`<div class="panel tint"><div class="row" style="gap:48px;align-items:flex-start"><div><b>Blood pressure</b><p style="font-size:28px;font-weight:700">${p.bp_hrv.sbp??'Unavailable'}${p.bp_hrv.sbp?'/'+p.bp_hrv.dbp+' mmHg':''}</p><p>SBP score ${p.bp_hrv.sbp_score??'unavailable'} · shock index ${p.bp_hrv.shock_index??'unavailable'}</p></div>
+ <div><b>Heart rate variability</b><p style="font-size:28px;font-weight:700">${p.bp_hrv.rmssd??'Unavailable'}${p.bp_hrv.rmssd?' ms RMSSD':''}</p><p>Baseline ${p.bp_hrv.rmssd_baseline?p.bp_hrv.rmssd_baseline.toFixed(0)+' ms':'unavailable'} · score ${p.bp_hrv.hrv_score??'unavailable'}</p></div>
+ <p style="flex:1;min-width:240px">Watch reading every 5 minutes, ${Math.round(p.bp_hrv.age_s/60)} min old. Monitoring only, not used for alerts.</p></div></div>`:''}</section>
+ <section class="section g2"><section class="panel"><div class="row between"><h3>Trend</h3><div class="row"><div class="seg" role="group" aria-label="Vital">${V.map(v=>`<button class="${tvital==v?'':'secondary'}" data-tv="${v}">${N[v].split(' ')[0]}</button>`).join('')}</div>
+ <div class="seg" role="group" aria-label="Range">${[[300,'5 min'],[900,'15 min'],[1800,'30 min']].map(r=>`<button class="${range==r[0]?'':'secondary'}" data-range="${r[0]}">${r[1]}</button>`).join('')}</div></div></div>
+ <div class="chartbox">${chart((series[tvital]||[]).slice(-range),{label:N[tvital]+' trend',base:e[tvital]&&e[tvital].baseline,dec:tvital=='temp'?1:0,h:260,xl:`${N[tvital]} (${U[tvital]}), last ${range/60} min of source time; gaps are missing data`})}</div></section>
+ <div class="stack" style="gap:var(--gap)">${devicePanel(p)}${newsPanel(p)}</div></section>
+ <section class="section g2"><div class="stack" style="gap:var(--gap)"><section class="panel tint"><h3>Clinical explanation</h3><p>Assessment: ${plabel(p)}</p><p>${(p.rules||[]).map(esc).join('<br>')}</p>
+ <p><b>Recommended action:</b> ${p.priority>=3?'Immediate clinical assessment.':p.priority==2?'Clinical review.':p.insufficient?'Review original readings and verify the sensor.':'Continue monitoring.'}</p>
+ <p>Risk model score ${p.risk==null?'unavailable':(+p.risk).toFixed(2)} (evaluated on synthetic data; can raise to Review only, never lowers a priority).</p></section>
+ <section class="panel"><h3>Expert findings</h3>${findings.length?`<div class="tablewrap"><table><thead><tr><th>Domain</th><th>Value</th><th>Score</th><th>Change</th><th>Trend /min</th><th>Signal</th></tr></thead><tbody>${findings.map(v=>`<tr><td>${N[v]}</td><td>${fmt(v,e[v].value)}</td><td>${e[v].score??'—'}</td><td>${e[v].delta!=null?(+e[v].delta).toFixed(1):'—'}${e[v].persistent?' persistent':''}</td><td>${e[v].slope60!=null?(+e[v].slope60).toFixed(2):'—'}</td><td>${e[v].quality}</td></tr>`).join('')}</tbody></table></div>`:'<p>No physiological expert currently reports a concern or a quality problem.</p>'}
+ <a href="#/patient/${p.pid}/intelligence">All expert evidence</a></section></div>
+ <section class="panel lift"><h3>Active alert</h3>${alertBlock(p.alert)}</section></section>`}
+function patientView(pid,tab){cache.lastp=pid;const p=OV&&OV.patients.find(x=>x.pid==pid);if(!p)return shell('<p>Loading patient…</p>','#/patients');
+ if(Ava.pid!==pid)Ava.reset(pid);else if(!Ava.data&&Ava.req===0)Ava.load(pid);
+ if(tab=='monitoring'){if(!cache['s_'+pid]||Date.now()-(cache['st_'+pid]||0)>4000){cache['st_'+pid]=Date.now();api('/api/patients/'+pid).then(s=>{cache['s_'+pid]=s;if(route.includes(pid+'/monitoring'))render(true)})}
+  return shell(`${tabs(p,tab)}${monitoring(p,cache['s_'+pid])}`,'#/patients')}
+ const key=tab+'_'+pid,ep=tab=='history'?'timeline':tab;
+ if(!cache[key]||(Date.now()-(cache['t_'+key]||0)>5000&&!cache.busy)){cache['t_'+key]=Date.now();
+  Promise.all([api(`/api/patients/${pid}/${ep}`),tab=='history'?api(`/api/patients/${pid}/history`):null]).then(([d,h])=>{if(h)d.hist=h;cache[key]=d;render(true)}).catch(e=>{cache[key]={error:e.message};render(true)})}
+ const d=cache[key];return shell(`${tabs(p,tab)}<section class="section g2" style="align-items:stretch">${identity(p)}${Ava.html()}</section>${!d?'<p>Loading…</p>':d.error?`<p class="err">${esc(d.error)}</p>`:{profile,twin:twinView,intelligence:intel,care:careView,history:hist}[tab](d,p)}`,'#/patients')}
+function profile(d){const sec=(t,b)=>`<section class="panel"><h3>${t}</h3>${b}</section>`;
+ return`<section class="section">${sec('Selected encounter and discharge',`<p>Encounter <span class="mono">${esc(d.encounter.id)}</span> · ${esc((d.encounter.start||'').slice(0,10))} to ${esc((d.encounter.end||'').slice(0,10))}</p><p>Discharge disposition: Unknown · Clinical cutoff <span class="mono">${esc(d.clinical_cutoff)}</span> · FHIR <span class="mono">Patient/${esc(d.fhir_patient_id)}</span></p>`)}
+ ${sec('Documented conditions',`<div class="tablewrap"><table><thead><tr><th>Condition</th><th>Status</th><th>Recorded</th></tr></thead><tbody>${d.conditions.map(c=>`<tr><td class="wrap">${esc(c.label)}</td><td>${esc(c.temporal_status)}</td><td class="mono">${esc((c.recorded||'').slice(0,10))}</td></tr>`).join('')}</tbody></table></div>`)}
+ ${sec('Medication history',`<p>Prescription history is not proof of current use.</p><div class="tablewrap"><table><thead><tr><th>Medication</th><th>Current use</th><th>Authored</th></tr></thead><tbody>${d.medications.map(m=>`<tr><td class="wrap">${esc(m.label)}</td><td>${esc(m.discharge_use||'Unknown')}</td><td class="mono">${esc((m.authored||'').slice(0,10))}</td></tr>`).join('')||'<tr><td>Not documented</td></tr>'}</tbody></table></div>`)}
+ <div class="g2">${sec('Procedures',`<p>${d.procedures.map(x=>esc(x.label)).join('<br>')||'Not documented'}</p><p>Procedures are not taken as confirmed postoperative status.</p>`)}
+ ${sec('Allergies, oxygen and care plan',`<p>Allergies: ${esc(typeof d.allergies=='string'?d.allergies:JSON.stringify(d.allergies))}</p><p>${d.oxygen.authorization}</p><p>${d.care_plan?`Approved care plan v${d.care_plan.version}, phase ${esc(d.care_plan.phase)}`:'No approved care plan.'}</p>`)}</div>
+ ${sec('Limitations',`<p>${d.limitations.map(esc).join('<br>')}</p>`)}</section>`}
+
+/* ---------- digital twin ---------- */
+function twinView(d,p){const f=d.forecast||{},sel=cache.tnode||'manifest',fc=f.status=='experimental',mode=fc?(cache.tmode||'forecast'):'observed';
+ const pos={hr:[20,25],rr:[80,25],spo2:[20,77],temp:[80,77]},ms=d.manifest||{observed_state:{},baseline_state:{}},ex=p.vitals||{};
+ const rel=(ms.physiological_relationships||[]).filter(r=>r.status!='unknown');
+ const stage=`<div class="stage" role="group" aria-label="Spatial twin. Central manifest and four vital nodes."><div class="floor"></div>
+ <svg class="links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${V.map(v=>`<line x1="50" y1="50" x2="${pos[v][0]}" y2="${pos[v][1]}" stroke="#c6d0c9" stroke-width=".45"/>`).join('')}</svg>
+ <button class="orb core ${sel=='manifest'?'on':''}" data-node="manifest" style="left:50%;top:51%" aria-pressed="${sel=='manifest'}"><span>Manifest</span><b>v${ms.state_version??'—'}</b><span>${f.status||'no model'}</span></button>
+ ${V.map(v=>{const o=ms.observed_state[v]||{};return`<button class="orb sat ${sel==v?'on':''} ${(o.score||0)>=2||(ex[v]&&ex[v].persistent)?'flag':''}" data-node="${v}" style="left:${pos[v][0]}%;top:${pos[v][1]}%" aria-pressed="${sel==v}"><span>${N[v].split(' ')[0]}</span><b>${o.value!=null?fmt(v,o.value):'—'}</b><span>${U[v]}</span></button>`}).join('')}</div>`;
+ let detail;if(sel=='manifest')detail=`<h3>Manifest inspector</h3><p>Structured textual state. Identity is opaque; patient history stays in the context service.</p><pre class="json">${esc(JSON.stringify(d.manifest,null,1))}</pre>`;
+ else{const o=ms.observed_state[sel]||{},b=ms.baseline_state[sel]||{},x=ex[sel]||{};
+  detail=`<h3>${N[sel]}</h3><table><tbody><tr><td>Observed</td><td>${fmt(sel,o.value)} ${o.value!=null?U[sel]:''} · ${o.quality||'unknown'}</td></tr>
+  <tr><td>Baseline</td><td>${b.value!=null?fmt(sel,b.value)+' '+U[sel]:'not established'} · ${b.status||''}${b.frozen?', frozen':''}</td></tr>
+  <tr><td>Deviation</td><td>${x.delta!=null?(+x.delta).toFixed(1):'unavailable'}${x.z!=null?` (z ${(+x.z).toFixed(1)})`:''}${x.persistent?', persistent':''}</td></tr>
+  <tr><td>Expert finding</td><td>component score ${o.score??'not scored'}${x.slope60!=null?`, trend ${(+x.slope60).toFixed(2)} /min`:''}</td></tr>
+  <tr><td>Evidence reference</td><td class="mono">expert/${sel}/${ms.state_version??''}</td></tr>
+  ${fc&&f.trajectory[sel].available?['5min','15min','30min'].map(h=>`<tr><td>Forecast ${h}${h=='30min'?' (experimental)':''}</td><td>${fmt(sel,f.horizons[h][sel].mean)} ± ${(2*f.horizons[h][sel].sd).toFixed(sel=='temp'?2:1)} ${U[sel]}</td></tr>`).join(''):`<tr><td>Forecast</td><td>${esc(f.reason||'not available for this vital')}</td></tr>`}
+  <tr><td>Time constant</td><td>${d.params?Math.round(d.params.tau_s[sel])+' s (learned, provisional)':'model not loaded'}</td></tr></tbody></table>`}
+ const R=d.report;
+ return`<section class="section g2" style="align-items:stretch"><section class="panel lift"><div class="row between"><h3>Spatial state</h3><span>Select a node</span></div>${stage}
+ <p>The central object stands for the textual manifest. It visualises computed state and is not an anatomical model.${rel.length?' Supported relationships: '+rel.map(r=>esc(r.text)).join('; ')+'.':''}</p></section><section class="panel">${detail}</section></section>
+ <section class="section"><div class="pagehead"><div class="t"><h2>Observed and forecast</h2><p>Status <b>${f.status||'unavailable'}</b>${f.reason?': '+esc(f.reason):''}${fc?` · origin source t ${f.source_t} · equation set <span class="mono">${f.equation_set}</span>`:''}. Forecasts are experimental and cannot change priority.</p></div>
+ ${fc?`<div class="seg" role="group" aria-label="Mode">${['observed','forecast'].map(m=>`<button class="${mode==m?'':'secondary'}" data-tmode="${m}">${m=='observed'?'Observed':'Forecast'}</button>`).join('')}</div>`:''}</div>
+ <div class="g2" style="grid-template-columns:repeat(2,minmax(0,1fr))">${V.map(v=>{const obs=(d.observed[v]||[]).slice(-600),show=mode=='forecast'&&f.trajectory[v].available;
+  return`<section class="panel"><h3>${N[v]} (${U[v]})</h3><p>${show?'Solid: observed. Dashed: forecast. Shaded: ±2 SD ensemble band.':'Observed readings.'}</p><div class="chartbox">${chart(obs,{label:N[v]+' twin',total:show?obs.length+120:obs.length,fc:show?f.trajectory[v]:null,extra:show?f.trajectory[v].mean:[],base:ms.baseline_state[v]&&ms.baseline_state[v].value,dec:v=='temp'?1:0,xl:show?'10 min observed, 30 min forecast':'last 10 min'})}</div></section>`}).join('')}</div></section>
+ <section class="section"><div class="pagehead"><div class="t"><h2>Evidence sensitivity</h2><p>Each branch copies the current manifest and reruns the same twin. Patient state, alerts and records are not changed. Branches are not treatment effects.</p></div><button id="cf" ${d.params?'':'disabled title="Twin model unavailable"'}>Run isolated branches</button></div>
+ <div class="branches">${cfHtml(cache['cf_'+p.pid])}</div></section>
+ <section class="section"><h2>Twin model</h2><section class="panel">${d.params?`<p>Learned time constants: ${V.map(v=>N[v]+' '+Math.round(d.params.tau_s[v])+' s').join(', ')}. Heart-rate coupling to temperature ${d.params.alpha_hr_temp}, to activity ${d.params.alpha_hr_activity}. Status: provisional pending equation approval.</p>`:'<p>Twin model not trained. Observed state is still shown.</p>'}
+ <p>Encoder: ${d.encoder.filled} of ${d.encoder.slots} registry slots filled from current evidence; the rest are masked as unavailable.</p>
+ ${R?`<div class="tablewrap"><table><thead><tr><th>Held-out patient</th><th>Horizon</th>${V.map(v=>`<th>${N[v]} twin / no-change error</th>`).join('')}</tr></thead><tbody>${Object.entries(R.results).filter(([k,r])=>r.all).flatMap(([k,r])=>Object.keys(r.all).map(h=>`<tr><td>${k}</td><td>${h}</td>${V.map(v=>`<td>${r.all[h].mae_twin[v]} / ${r.all[h].mae_persistence[v]}</td>`).join('')}</tr>`)).join('')}</tbody></table></div>`:''}</section></section>`}
+function cfHtml(c){if(!c)return'<p>Not run yet.</p>';return Object.entries(c.branches).map(([k,b])=>`<section class="panel branch ${k=='A_original'?'orig':''}"><h3>${k.replace(/_/g,' ')}</h3><p>${b.status}${b.reason?': '+esc(b.reason):''}</p>
+ ${b.horizons?`<p>15 min: ${V.filter(v=>b.horizons['15min'][v]).map(v=>`${N[v].split(' ')[0]} ${fmt(v,b.horizons['15min'][v].mean)}`).join(', ')}</p>`:''}${b.divergence_15min?`<p>Difference from original: ${V.map(v=>`${N[v].split(' ')[0]} ${b.divergence_15min[v]>0?'+':''}${b.divergence_15min[v]}`).join(', ')}</p>`:''}</section>`).join('')}
+
+/* ---------- intelligence ---------- */
+function intel(d){const e=d.experts,c=d.context;
+ return`<section class="section"><section class="panel"><h3>Patient context expert</h3><p>Documented history: ${Object.entries(c.history).map(([k,b])=>`${k} ${b?'documented':'not documented'}`).join(', ')}. Beta blocker in prescription history: ${c.beta_blocker_history?'yes, current use unknown':'no'}.</p><p>${c.limitations.map(esc).join(' · ')}</p></section>
+ <section class="panel"><h3>Physiological experts</h3>${e?`<div class="tablewrap"><table><thead><tr><th>Domain</th><th>Observed</th><th>Component score</th><th>Baseline change</th><th>Trend /min</th><th>Abnormal s in 30 s</th><th>Concern</th><th>Reliability</th><th>Context</th></tr></thead><tbody>
+ ${V.map(v=>{const x=e[v];return`<tr><td>${N[v]}</td><td>${fmt(v,x.value)}</td><td>${x.score??'Not scored'}</td><td>${x.delta!=null?(+x.delta).toFixed(1):'—'}</td><td>${x.slope60!=null?(+x.slope60).toFixed(2):'—'}</td><td>${x.cand_seconds}</td><td>${['none','mild','moderate','high'][x.concern]??'unknown'}</td><td>${x.quality}${x.fresh?'':', stale'}</td><td class="wrap">${x.exertional_context?'Recent device-reported activity':''}</td></tr>`}).join('')}</tbody></table></div>
+ <p><b>Applied rules:</b> ${d.rules.map(esc).join(' · ')}</p><p>Concern and reliability are reported separately. No combined trust percentage is computed.</p>`:'<p>Not evaluated yet.</p>'}</section>
+ <section class="panel"><h3>Trustworthy intelligence</h3><table><tbody><tr><td>Signal quality</td><td>${d.trust.quality?V.map(v=>N[v]+' '+d.trust.quality[v]).join(', '):'unavailable'}</td></tr><tr><td>Context completeness</td><td>${esc(d.trust.context_completeness)}</td></tr>
+ <tr><td>Baseline</td><td>${V.map(v=>N[v]+' '+d.trust.baseline[v]).join(', ')}</td></tr><tr><td>Twin status</td><td>${esc(d.trust.model_uncertainty)}</td></tr><tr><td>Distribution distance</td><td>${d.trust.ood??'unavailable'}</td></tr><tr><td>Abstention</td><td>${esc(d.trust.abstention||'none')}</td></tr></tbody></table></section></section>`}
+
+/* ---------- care plan ---------- */
+function careView(d){const pl=d.plan,e6=d.expert6,e7=d.expert7;
+ return`<section class="section g2"><div class="stack" style="gap:var(--gap)"><section class="panel"><h3>Approved care plan</h3>${pl?`<p>Phase ${esc(pl.phase)} · ${pl.duration_days} days · version ${pl.version} approved by ${esc(pl.approved_by)}</p>
+ <table><thead><tr><th>Task</th><th>Time</th><th>Today</th></tr></thead><tbody>${pl.tasks.map(t=>`<tr><td class="wrap">${esc(t.title)}<br><span>${esc(t.instructions)}</span></td><td>${esc(t.time)}</td><td>${d.done_today[t.id]?'Done (patient reported)':'Not done'}</td></tr>`).join('')}</tbody></table>
+ <p>Approved medications: ${pl.medications.map(m=>esc(m.label+' '+m.schedule)).join('; ')||'none listed'}</p>`:'<p>No approved care plan yet.</p>'}
+ ${ME.role=='doctor'?`<details><summary>${pl?'Replace':'Create'} care plan</summary><form id="cpf" class="stack"><label for="cp_phase">Recovery phase<input id="cp_phase" required value="${esc(pl?pl.phase:'Early recovery')}"></label>
+ <label for="cp_days">Duration (days)<input id="cp_days" type="number" min="1" value="${pl?pl.duration_days:14}"></label>
+ <label for="cp_tasks">Tasks, one per line: title | time | instructions<textarea id="cp_tasks" rows="4" required>${pl?pl.tasks.map(t=>[t.title,t.time,t.instructions].join(' | ')).join('\n'):''}</textarea></label>
+ <label for="cp_meds">Approved current medications, one per line: name and strength | schedule<textarea id="cp_meds" rows="3">${pl?pl.medications.map(m=>m.label+' | '+m.schedule).join('\n'):''}</textarea></label>
+ <button type="submit">Approve care plan</button><p class="err" role="alert"></p></form></details>`:''}</section>
+ <section class="panel"><h3>${e7.expert}</h3><p>Day ${e7.day_since_discharge} of monitoring. Overnight heart-rate change against earlier days: ${e7.overnight_hr_change_vs_prior_days??'not enough days'}.</p>
+ <table><thead><tr><th>Day</th><th>Active minutes</th><th>Overnight HR</th></tr></thead><tbody>${e7.daily.map(r=>`<tr><td>${r.day}</td><td>${r.active_minutes}</td><td>${r.overnight_hr??'Unavailable'}</td></tr>`).join('')}</tbody></table><p>${esc(e7.limits)}</p></section></div>
+ <div class="stack" style="gap:var(--gap)"><section class="panel"><h3>${e6.expert}</h3>${e6.items.map(i=>`<div class="quiet stack"><b>${esc(i.text)}</b><span>Evidence: ${esc(i.evidence)}</span><span>${esc(i.status)}</span>
+ ${ME.role=='doctor'&&i.status.startsWith('pending')?`<div class="row"><button data-rev="${i.id}" data-dec="approved">Approve for action</button><button class="secondary" data-rev="${i.id}" data-dec="dismissed">Dismiss</button></div>`:''}</div>`).join('')||'<p>No review items.</p>'}<p>${esc(e6.limits)}</p></section>
+ <section class="panel"><h3>Patient-reported symptoms</h3>${d.symptoms.slice(-5).reverse().map(s=>`<p>${new Date(s.at*1000).toLocaleString()}: ${s.symptoms.join(', ')}${s.severity?' ('+s.severity+')':''}</p>`).join('')||'<p>No reports.</p>'}</section>
+ <section class="panel"><h3>Medication requests</h3><p>Proposed by a doctor or nurse. Only a doctor can approve or reject, with a note. Approved items become the patient's current medicines.</p>
+ ${(d.medreqs||[]).map(m=>medreqHtml(m)).join('')||'<p>No medication requests.</p>'}
+ <details><summary>Propose a medication</summary><form id="mrf" class="stack"><label for="mr_l">Medication and strength<input id="mr_l" required></label>
+ <label for="mr_s">Dose and schedule<input id="mr_s" required placeholder="As written by the prescriber"></label><label for="mr_r">Reason<textarea id="mr_r" rows="2" required></textarea></label>
+ <button type="submit">Submit for doctor approval</button><p class="err" role="alert"></p></form></details></section></div></section>`}
+
+function medreqHtml(m){return`<div class="quiet stack" style="gap:6px"><div class="row between"><b>${esc(m.label)}</b><span>${m.status}</span></div><span>${esc(m.schedule)} · reason: ${esc(m.reason)}</span>
+ <span>Proposed by ${esc((OV&&OV.staff[m.proposed_by]||{}).name||m.proposed_by)} (${m.role}), ${new Date(m.at*1000).toLocaleString()}</span>
+ ${m.status!='pending'?`<span>${m.status} by ${esc((OV&&OV.staff[m.decided_by]||{}).name||m.decided_by)}: ${esc(m.note)}</span>`:ME.role=='doctor'?`<form class="row" data-mrd="${m.id}" style="align-items:end"><label for="mrn${m.id}" style="flex:1;min-width:180px">Decision note<input id="mrn${m.id}" required></label>
+ <button type="submit" data-dec="approved">Approve</button><button type="submit" class="secondary" data-dec="rejected">Reject</button></form>`:'<span>Awaiting doctor decision.</span>'}</div>`}
+
+/* ---------- my shift ---------- */
+function shiftView(){if(!cache.sh||Date.now()-(cache.tsh||0)>5000){cache.tsh=Date.now();api('/api/shift').then(d=>{cache.sh=d;render(true)}).catch(e=>{cache.sh={error:e.message};render(true)})}
+ const d=cache.sh;if(!d)return shell('<h1>My shift</h1><p>Loading…</p>','#/shift');if(d.error)return shell(`<p class="err">${esc(d.error)}</p>`,'#/shift');
+ const on=!!d.shift,done=d.patients.filter(p=>p.reviewed).length;
+ return shell(`<section class="section"><div class="pagehead"><div class="t"><h1>My shift</h1><p>${on?`Shift started ${new Date(d.shift.start*1000).toLocaleString()}. You are on duty and receive escalations.`:'No shift open. Start your shift to go on duty and review your patients.'}</p>
+ <p>What happened to your ${d.patients.length} patients ${d.since_label} (from ${new Date(d.since*1000).toLocaleString()}). ${on?`${done} of ${d.patients.length} reviewed.`:''}</p></div>
+ ${on?'<button class="secondary" id="shend">End shift</button>':'<button id="shstart">Start shift</button>'}</div>
+ ${d.patients.map(p=>`<section class="panel"><div class="row between"><div class="row" style="gap:14px">${avatarSm(p)}<div><h3><a href="#/patient/${p.pid}/monitoring">${p.pid}</a></h3><span>${p.age} ${p.gender[0].toUpperCase()} · you are the ${RN[p.role].toLowerCase()}</span></div></div>
+ <div class="row">${pri(p.priority)}${p.open_alert?` · open ${pri(p.open_alert.highest)} alert, ${p.open_alert.acknowledged?'acknowledged':'not acknowledged'}`:''}</div></div>
+ <div class="g2" style="grid-template-columns:repeat(3,minmax(0,1fr))"><div class="stack" style="gap:6px"><b>Alerts in this period</b>${p.alerts.map(e=>`<span>${stime(e.time)} ${esc(e.text)}</span>`).join('')||'<span>None</span>'}
+ ${p.reviews.length?`<b>Actions</b>${p.reviews.slice(-4).map(e=>`<span>${esc(e.text)}</span>`).join('')}`:''}</div>
+ <div class="stack" style="gap:6px"><b>Key events (${p.event_count} recorded)</b>${p.key_events.map(e=>`<span>${stime(e.time)} ${e.kind}: ${esc(e.text)}</span>`).join('')||'<span>None</span>'}</div>
+ <div class="stack" style="gap:6px"><b>Patient and care plan</b><span>Notifications sent to you: ${p.notifications.length}</span><span>Symptom reports: ${p.symptoms.map(x=>x.symptoms.join(', ')).join('; ')||'none'}</span>
+ <span>Care-plan tasks done today: ${p.tasks_done_today}</span><span>Medication decisions in period: ${p.medreqs_decided.map(m=>m.label+' '+m.status).join('; ')||'none'}</span></div></div>
+ ${p.medreqs_pending.length?`<div class="stack"><b>Medication requests awaiting a doctor</b>${p.medreqs_pending.map(m=>medreqHtml(m)).join('')}</div>`:''}
+ <div class="row">${p.reviewed?`<span><b>Reviewed</b> ${new Date(p.reviewed.at*1000).toLocaleTimeString()}${p.reviewed.note?': '+esc(p.reviewed.note):''}</span>`:on?`<form class="row" data-shr="${p.pid}" style="align-items:end;flex:1"><label for="shn${p.pid}" style="flex:1;min-width:220px">Review note (optional)<input id="shn${p.pid}"></label><button type="submit">Mark reviewed</button></form>`:'<span>Start your shift to sign off reviews.</span>'}</div></section>`).join('')}</section>`,'#/shift')}
+
+/* ---------- history + timeline ---------- */
+function hist(d){const kinds=['all','assessment','alert','review','baseline','physiology','quality','device','forecast'],k=cache.tk||'all',ev=d.events.filter(e=>k=='all'||e.kind==k),h=d.hist;
+ return`<section class="section"><div class="pagehead"><div class="t"><h2>Event timeline</h2><p>Recorded live from engine output in source time, newest first. Current source time ${stime(d.source_time)}.</p></div>
+ <label for="tk">Event type<select id="tk" style="width:auto">${kinds.map(x=>`<option ${k==x?'selected':''}>${x}</option>`).join('')}</select></label></div>
+ <section class="panel"><ul class="tl">${ev.slice(0,120).map(e=>`<li><span class="mono">${stime(e.time)}</span><span class="k">${e.kind}</span><span>${esc(e.text)}</span></li>`).join('')||'<li><span>No events of this type since the session started.</span></li>'}</ul></section></section>
+ ${h?`<section class="section g2"><section class="panel"><h3>FHIR observations (latest 40)</h3><div class="tablewrap"><table><thead><tr><th>LOINC</th><th>Effective</th><th>Value</th><th>Status</th></tr></thead><tbody>
+ ${h.observations.entry.map(x=>{const r=x.resource;return`<tr><td class="mono">${r.code.coding[0].code}</td><td class="mono">${r.effectiveDateTime}</td><td>${r.valueQuantity?r.valueQuantity.value+' '+r.valueQuantity.unit:'data absent'}</td><td>${x.response.status}</td></tr>`}).join('')}</tbody></table></div></section>
+ <div class="stack" style="gap:var(--gap)"><section class="panel"><h3>Manifest versions</h3><p class="mono">${h.manifests.slice(-8).map(m=>`${m.id} ${m.hash}`).join('<br>')}</p></section>
+ <section class="panel"><h3>Audit trail</h3><p class="mono">${h.audit.slice(0,15).map(a=>`${new Date(a.at*1000).toLocaleTimeString()} ${esc(a.actor)} ${esc(a.action)} ${esc(a.outcome)}`).join('<br>')}</p></section></div></section>`:''}`}
+
+/* ---------- alerts ---------- */
+function alerts(){if(!OV)return shell('<p>Connecting…</p>','#/alerts');const sel=cache.asel,a=OV.alerts.slice().sort((x,y)=>y.highest-x.highest||x.first_t-y.first_t);
+ return shell(`<section class="section"><div class="pagehead"><div class="t"><h1>Clinical alerts</h1><p>${a.length} open. Acknowledging does not resolve an alert.</p></div></div>
+ <div class="g2"><div class="stack" style="gap:var(--gap)">${[['clinical','Clinical queue'],['verification','Technical and verification queue']].map(([c,t])=>`<section class="panel"><h3>${t}</h3>
+ <div class="tablewrap"><table><thead><tr><th>Patient</th><th>Finding</th><th>Priority</th><th>Lifecycle</th><th>With</th></tr></thead><tbody>
+ ${a.filter(x=>x.category==c).map(x=>`<tr tabindex="0" data-asel="${x.pid}" class="${sel==x.pid?'sel':''}"><td><b>${x.pid}</b></td><td class="wrap">${esc((x.evidence||[])[0]||'')}</td><td>${pri(x.highest)}</td><td>${x.state}${x.acknowledged?', acknowledged':''}</td><td>${x.current_person?esc(OV.staff[x.current_person].name):'—'}</td></tr>`).join('')||'<tr><td colspan="5">No open alerts in this queue.</td></tr>'}</tbody></table></div></section>`).join('')}</div>
+ <section class="panel lift"><h3>Alert evidence</h3>${sel&&a.find(x=>x.pid==sel)?alertBlock(a.find(x=>x.pid==sel)):'<p>Select an alert to see its evidence.</p>'}</section></div></section>`,'#/alerts')}
+
+/* ---------- notifications ---------- */
+const crit=p=>p==3?'URGENT':p==2?'REVIEW':'WATCH',tme=t=>new Date(t*1000).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+function phoneScreen(role,items){const now=new Date();return`<div class="device-col"><h3>${RN[role]}</h3><div class="phone"><div class="screen">
+ <div class="clock">${now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div><div class="date">${now.toLocaleDateString([],{weekday:'long',day:'numeric',month:'long'})}</div>
+ ${items.slice(0,5).map(n=>`<div class="notif"><div class="app"><b>Avoflare</b><span>${tme(n.at)}</span></div><b class="${n.priority==3?'u':'r'}">${crit(n.priority)}</b> · Patient ${n.pid}<br>Needs attention. Open Avoflare when available.</div>`).join('')||'<div class="notif">No notifications yet.</div>'}
+ </div></div>${items[0]?`<div class="watch" aria-label="Smartwatch"><div class="face"><span>Avoflare</span><b class="${items[0].priority==3?'u':'r'}">${crit(items[0].priority)}</b><span>Patient ${items[0].pid}</span><span>${tme(items[0].at)}</span></div></div>`:''}</div>`}
+function notifView(){if(!cache.team||Date.now()-(cache.tteam||0)>4000){cache.tteam=Date.now();api('/api/notifications/team').then(t=>{cache.team=t;render(true)}).catch(()=>{})}
+ const mine=NT?NT.items:[],T=cache.team,byRole=r=>T?T.items.filter(n=>n.role==r||(r=='doctor'&&n.role=='substitute_doctor')):[];
+ return shell(`<section class="section"><div class="pagehead"><div class="t"><h1>Notifications</h1><p>Messages carry only the patient and the criticality. Clinical detail stays in Avoflare for when you have time.</p></div></div>
+ <div class="g2"><section class="panel inbox"><div class="row between"><h3>My inbox</h3><span>${NT?NT.unread:0} unread</span></div><div>
+ ${mine.map(n=>`<div class="item ${n.read_at?'':'unread'}"><span class="dot p${n.priority}" aria-hidden="true"></span><div><span class="t">${crit(n.priority)} · Patient ${n.pid}</span><br><span>${new Date(n.at*1000).toLocaleString()} · ${n.category} · as ${RN[n.role]}${n.read_at?' · handled':''}</span></div>
+ <div class="row"><a class="btn secondary" href="#/patient/${n.pid}/monitoring" data-read="${n.id}">Open patient</a>${n.read_at?'':`<button class="secondary" data-read="${n.id}">Mark handled</button>`}</div></div>`).join('')||'<p>Nothing for you yet. Notifications appear when an alert for one of your patients is routed to you.</p>'}</div></section>
+ <section class="panel"><h3>Delivery summary</h3>${T?`<div class="tablewrap"><table><tbody>${['doctor','nurse','substitute_doctor','management'].map(r=>{const it=T.items.filter(n=>n.role==r);return`<tr><td>${RN[r]}</td><td>${it.length} sent</td><td>${it.filter(n=>!n.read_at).length} open</td></tr>`}).join('')}</tbody></table></div>
+ <p>The escalation chain moves on when the current person does not acknowledge within the timeout. Push content is criticality only.</p>`:'<p>Loading…</p>'}</section></div></section>
+ <section class="section"><div class="stack" style="gap:8px"><h2>What each person received</h2><p>Phone lock screen and paired smartwatch, as delivered by the alerting agent.</p></div>
+ <div class="device-row">${['doctor','nurse','management'].map(r=>phoneScreen(r,byRole(r))).join('')}</div></section>`,'#/notifications')}
+
+/* ---------- evaluation, FHIR, settings ---------- */
+function evalView(){if(!cache.ev||Date.now()-(cache.tev||0)>15000){cache.tev=Date.now();Promise.all([api('/api/eval/summary'),api('/api/eval/health').catch(()=>null),ME.role=='operator'?api('/api/eval/bidmc'):Promise.resolve({records:[]})]).then(([s,h,b])=>{cache.ev={s,h,b};render(true)}).catch(e=>{cache.ev={error:e.message};render(true)})}
+ const E=cache.ev;if(!E)return shell('<h1>Evaluation</h1><p>Loading…</p>','#/eval');if(E.error)return shell(`<p class="err">${esc(E.error)}</p>`,'#/eval');
+ const r=E.s.report,m=E.s.metrics,tw=E.s.twin,sys={fixed_news2_comparator:'Fixed NEWS2 comparator',proposed_rules_only:'Avoflare rules',proposed_rules_plus_ml:'Avoflare rules + risk model'},op=ME.role=='operator';
+ return shell(`<section class="section"><div class="pagehead"><div class="t"><h1>Evaluation</h1><p>Measured on synthetic data (10 patients × 15 days). Not clinical validation.</p></div></div>
+ ${op?`<div class="g2"><section class="panel"><h3>Replay setup</h3><form id="rpf" class="stack"><label for="rsrc">Source<select id="rsrc"><option value="sim">Virtual wearable (simulated cohort)</option><option value="bidmc">BIDMC real recording</option></select></label>
+ <label for="rpat">Cohort patient<select id="rpat">${['P001','P002','P003','P004','P005','P006','P007','P008','P009','P010'].map(p=>`<option>${p}</option>`).join('')}</select></label>
+ <label for="rrec">BIDMC record<select id="rrec">${E.b.records.map(x=>`<option>${x}</option>`).join('')}</select></label>
+ <p>Each run is an isolated session through the same engine. Replay alerts are never delivered to staff. BIDMC has no temperature, no Synthea context and no wearable attachment evidence. Pause and speed controls are not implemented; runs complete in one pass.</p><button type="submit">Start isolated replay</button><p class="err" role="alert"></p></form></section>
+ <section class="panel"><h3>Replay result</h3><div>${rpHtml(cache.rp)}</div></section></div>`:''}
+ <section class="panel"><h3>Comparative results</h3><div class="tablewrap"><table><thead><tr><th>System</th><th>Detected</th><th>Missed</th><th>Median lead before severe</th><th>Median delay</th><th>False clinical / patient-day</th><th>Verification / patient-day</th></tr></thead><tbody>
+ ${Object.entries(sys).map(([k,n])=>`<tr><td>${n}</td><td>${r[k].detected}/${r[k].events}</td><td>${r[k].events-r[k].detected}</td><td>${(r[k].median_lead_before_severe_s/60).toFixed(1)} min</td><td>${r[k].median_detection_delay_s} s</td><td>${r[k].false_clinical_per_patient_day}</td><td>${r[k].verification_per_patient_day}</td></tr>`).join('')}</tbody></table></div>
+ ${m?`<div class="tablewrap"><table><thead><tr><th>Window classifier</th><th>Sensitivity [95% CI]</th><th>Specificity [95% CI]</th><th>PPV [95% CI]</th><th>F1</th></tr></thead><tbody>${Object.entries(m.classifiers).map(([k,c])=>`<tr><td>${k}</td><td>${c.sensitivity} [${c.sensitivity_ci.join('–')}]</td><td>${c.specificity} [${c.specificity_ci.join('–')}]</td><td>${c.ppv} [${c.ppv_ci.join('–')}]</td><td>${c.f1}</td></tr>`).join('')}</tbody></table></div><p>Risk model AUROC ${m.risk_model.auroc} [${m.risk_model.auroc_ci.join('–')}], AUPRC ${m.risk_model.auprc}.</p>`:''}
+ ${tw?`<p>Digital twin, held-out patients, 15 min heart-rate error: ${Object.entries(tw.results).filter(([k,x])=>x.all).map(([k,x])=>`${k} ${x.all['15min'].mae_twin.hr} vs no-change ${x.all['15min'].mae_persistence.hr} bpm`).join('; ')}.</p>`:''}</section>
+ ${E.h?`<section class="panel"><h3>System health and security (measured)</h3><div class="kv"><div><b>Tick latency (n ${E.h.tick_latency_ms.n})</b>p50 ${E.h.tick_latency_ms.p50} · p95 ${E.h.tick_latency_ms.p95} · p99 ${E.h.tick_latency_ms.p99} ms</div>
+ <div><b>Persistence</b>${esc(E.h.persistence.target)}, circuit ${E.h.persistence.circuit}</div><div><b>Outbox</b>${E.h.persistence.pending} pending · ${E.h.persistence.persisted} persisted</div>
+ <div><b>FHIR validity</b>${E.h.fhir_compliance.valid}/${E.h.fhir_compliance.checked} recent resources</div><div><b>WebSocket clients</b>${E.h.websocket_clients}</div></div><p>${esc(E.h.tick_latency_ms.note)}.</p>
+ ${op?`<div class="row"><button id="sec">Run predefined security tests</button></div><div>${secHtml(cache.sec)}</div>`:''}
+ <details><summary>Recent audit events</summary><p class="mono">${E.h.audit_recent.map(a=>`${new Date(a.at*1000).toLocaleTimeString()} ${esc(a.actor)} ${esc(a.action)} ${esc(a.target)} ${esc(a.outcome)}`).join('<br>')}</p></details></section>`:''}</section>`,'#/eval')}
+function rpHtml(x){if(!x)return'<p>Not run.</p>';const n=x.timeline.length,W=640,H=120,X=i=>48+i/(n-1||1)*(W-58),Y=(p,o)=>98-p*24+o,line=k=>'M'+x.timeline.map((t,i)=>X(i)+' '+Y(t[k],k=='comparator'?3:0)).join(' L');
+ return`<p>Run <span class="mono">${x.id}</span> · ${x.source}${x.record?' record '+x.record:' '+x.patient} · ${x.seconds} source seconds · live notification: no</p>
+ <p>Episodes: Avoflare ${x.episodes.avoflare}, fixed NEWS2 ${x.episodes.fixed_news2}. First alert at source second: Avoflare ${x.first_alert_s.avoflare??'none'}, fixed NEWS2 ${x.first_alert_s.fixed_news2??'none'}. RR zero samples preserved: ${x.rr_zero_samples_preserved}.</p>
+ <svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Priority timeline">${[0,1,2,3].map(p=>`<text x="0" y="${Y(p,4)}">${['None','Watch','Review','Urgent'][p]}</text><line x1="48" x2="${W}" y1="${Y(p,0)}" y2="${Y(p,0)}" stroke="#E5E7E5"/>`).join('')}
+ <path d="${line('comparator')}" fill="none" stroke="#6b756f" stroke-dasharray="4 3"/><path d="${line('proposed')}" fill="none" stroke="#174B38" stroke-width="2"/></svg><p>Solid green: Avoflare. Dashed grey: fixed NEWS2.</p>`}
+function secHtml(s){if(!s)return'';return`<p><b>${s.passed} of ${s.total} cases behaved as expected.</b></p><div class="tablewrap"><table><thead><tr><th>Case</th><th>Expected</th><th>Observed</th><th>Result</th><th>Records written</th><th>Entered clinical processing</th><th>Trace</th></tr></thead><tbody>
+ ${s.cases.map(c=>`<tr><td class="wrap">${esc(c.case)}</td><td>${c.expected}</td><td>${c.observed}</td><td>${c.pass?'Pass':'Fail'}</td><td>${c.records_written}</td><td>No</td><td class="mono">${c.trace}</td></tr>`).join('')}</tbody></table></div>`}
+function fhirView(){const pts=['P001','P002','P003','P004','P005','P006','P007','P008','P009','P010'];
+ return shell(`<section class="section"><div class="pagehead"><div class="t"><h1>FHIR records</h1><p>Observations accepted through the device gateway and stored in the record store. Read-only.</p></div></div>
+ <section class="panel"><form id="fhf" class="row" style="align-items:end"><label for="fp_">Patient<select id="fp_">${pts.map(p=>`<option ${cache.fhp==p?'selected':''}>${p}</option>`).join('')}</select></label>
+ <label for="fc_">LOINC<select id="fc_"><option value="">All</option><option value="8867-4">8867-4 Heart rate</option><option value="9279-1">9279-1 Respiratory rate</option><option value="2708-6">2708-6 SpO2</option><option value="8310-5">8310-5 Temperature</option></select></label><button type="submit">Search</button></form>
+ ${cache.fh?`<p>${cache.fh.total} resources returned.</p><div class="tablewrap"><table><thead><tr><th>Resource</th><th>LOINC</th><th>Subject</th><th>Effective</th><th>Value</th><th>Store status</th></tr></thead><tbody>${cache.fh.entry.map(x=>{const r=x.resource;return`<tr data-json="${esc(r.id)}" tabindex="0" style="cursor:pointer"><td class="mono">${esc(r.id)}</td><td class="mono">${r.code.coding[0].code}</td><td class="mono">${esc(r.subject.reference)}</td><td class="mono">${r.effectiveDateTime}</td><td>${r.valueQuantity?r.valueQuantity.value+' '+r.valueQuantity.unit:'dataAbsentReason'}</td><td>${x.response.status}</td></tr>`}).join('')}</tbody></table></div>
+ ${cache.fhsel?`<pre class="json">${esc(JSON.stringify((cache.fh.entry.find(x=>x.resource.id==cache.fhsel)||{}).resource,null,1))}</pre>`:'<p>Select a row to see the full resource JSON.</p>'}`:'<p>Choose a patient and search.</p>'}</section></section>`,'#/fhir')}
+function settingsView(){return shell(`<section class="section"><h1>Settings</h1><div class="g2"><section class="panel"><h3>Account</h3><p><b>${esc(ME.name)}</b> · ${RN[ME.role]||ME.role} · <span class="mono">${ME.uid}</span></p>
+ ${ME.role!='operator'?`<label class="row" style="font-weight:600"><input type="checkbox" id="duty" style="width:22px;min-height:22px" ${ME.available!==false?'checked':''}> On duty (receives escalations)</label>`:''}</section>
+ <section class="panel"><h3>Display and sound</h3>${ME.role!='operator'?`<label class="row" style="font-weight:600"><input type="checkbox" id="snd" style="width:22px;min-height:22px" ${soundOn?'checked':''}> Alarm sound for urgent alerts</label>`:''}
+ <label class="row" style="font-weight:600"><input type="checkbox" id="rm" style="width:22px;min-height:22px" ${reduce?'checked':''}> Reduce motion (static images, no avatar or twin animation)</label>
+ <p>Browser notifications: ${'Notification'in window?Notification.permission:'not supported'}. ${'Notification'in window&&Notification.permission=='default'?'<button class="secondary" id="np">Allow notifications</button>':''}</p></section></div></section>`,'#/settings')}
+
+/* ---------- router ---------- */
+function render(soft){if(!ME){loginView();return}const m=route.match(/^#\/patient\/(P\d+)\/(\w+)/);
+ const keep=document.activeElement&&document.activeElement.id,sel=keep&&document.activeElement.selectionStart;
+ const html=m?patientView(m[1],m[2]):route.startsWith('#/patients')?patients():route.startsWith('#/notifications')?notifView():route.startsWith('#/alerts')?alerts():
+  route.startsWith('#/shift')?shiftView():route.startsWith('#/eval')?evalView():route.startsWith('#/fhir')?fhirView():route.startsWith('#/settings')?settingsView():ME.role=='operator'?evalView():overview();
+ const oldv=document.querySelector('#devmedia video'),olds=oldv&&oldv.dataset.state,ava=document.querySelector('.ava');
+ $('#root').innerHTML=html;wire();bind();
+ const nv=document.querySelector('#devmedia video');if(nv&&oldv&&olds==nv.dataset.state)nv.replaceWith(oldv);
+ const na=document.querySelector('.ava');if(na&&ava&&Ava.speaking)na.replaceWith(ava);
+ Ava.bind();if(keep){const e=document.getElementById(keep);if(e){e.focus();try{e.setSelectionRange(sel,sel)}catch(x){}}}}
+function bind(){document.querySelectorAll('[data-go]').forEach(r=>{r.onclick=()=>location.hash=r.dataset.go;r.onkeydown=e=>{if(e.key=='Enter')location.hash=r.dataset.go}});
+ const q=$('#q');if(q)q.oninput=()=>{cache.q=q.value;render(true)};['fp','fs','tk'].forEach(k=>{const s=$('#'+k);if(s)s.onchange=()=>{cache[k]=s.value;render(true)}});
+ document.querySelectorAll('[data-range]').forEach(b=>b.onclick=()=>{range=+b.dataset.range;render(true)});
+ document.querySelectorAll('[data-tv]').forEach(b=>b.onclick=()=>{tvital=b.dataset.tv;render(true)});
+ document.querySelectorAll('[data-ack]').forEach(b=>b.onclick=()=>{b.disabled=true;b.textContent='Sending…';api(`/api/alerts/${b.dataset.ack}/ack`,{}).then(()=>toast('Acknowledged. The alert stays open until a doctor resolves it.')).catch(e=>{toast(e.message);b.disabled=false;b.textContent='Acknowledge'})});
+ document.querySelectorAll('[data-resolve]').forEach(b=>b.onclick=()=>{const f=$('#rf-'+b.dataset.resolve);f.hidden=false;f.querySelector('textarea').focus()});
+ document.querySelectorAll('[data-cancel]').forEach(b=>b.onclick=()=>$('#rf-'+b.dataset.cancel).hidden=true);
+ document.querySelectorAll('form[id^="rf-"]').forEach(f=>f.onsubmit=e=>{e.preventDefault();api(`/api/alerts/${f.id.slice(3)}/resolve`,{reason:f.querySelector('textarea').value}).then(()=>{toast('Resolved by server.');render(true)}).catch(x=>f.querySelector('.err').textContent=x.message)});
+ document.querySelectorAll('[data-asel]').forEach(r=>{r.onclick=()=>{cache.asel=r.dataset.asel;render(true)};r.onkeydown=e=>{if(e.key=='Enter'){cache.asel=r.dataset.asel;render(true)}}});
+ document.querySelectorAll('[data-node]').forEach(n=>n.onclick=()=>{cache.tnode=n.dataset.node;render(true)});
+ document.querySelectorAll('[data-tmode]').forEach(n=>n.onclick=()=>{cache.tmode=n.dataset.tmode;render(true)});
+ document.querySelectorAll('[data-json]').forEach(r=>{r.onclick=()=>{cache.fhsel=r.dataset.json;render(true)};r.onkeydown=e=>{if(e.key=='Enter'){cache.fhsel=r.dataset.json;render(true)}}});
+ document.querySelectorAll('[data-read]').forEach(b=>b.addEventListener('click',()=>api(`/api/notifications/${b.dataset.read}/read`,{}).then(pollNT)));
+ const un=$('#unlock');if(un)un.onclick=()=>{(audio||(audio=new(window.AudioContext||window.webkitAudioContext)())).resume().then(()=>{tone([660],'sine',.12,.1);render(true)})};
+ const si=$('#silence');if(si)si.onclick=()=>{cache.silence=Date.now()+60000;toast('Alarm silenced for 60 seconds. Alerts stay open.')};
+ const d=$('#duty');if(d)d.onchange=()=>api('/api/staff/availability',{available:d.checked}).then(r=>{ME.available=r.available;toast(r.available?'On duty':'Off duty: escalations skip you')});
+ const sn=$('#snd');if(sn)sn.onchange=()=>soundOn=sn.checked;
+ const rm=$('#rm');if(rm)rm.onchange=()=>{reduce=rm.checked;try{localStorage.setItem('av_reduce',reduce?'1':'0')}catch(e){}document.documentElement.classList.toggle('reduce',reduce);render(true)};
+ const np=$('#np');if(np)np.onclick=()=>Notification.requestPermission().then(()=>render(true));
+ const pm=route.match(/patient\/(P\d+)/),pid=pm&&pm[1];
+ const cf=$('#cf');if(cf)cf.onclick=()=>{cf.disabled=true;cf.textContent='Running…';cache.busy=1;api(`/api/patients/${pid}/counterfactual`,{}).then(r=>{cache['cf_'+pid]=r;cache.busy=0;render(true)}).catch(e=>{toast(e.message);cache.busy=0;cf.disabled=false})};
+ document.querySelectorAll('[data-rev]').forEach(b=>b.onclick=()=>api(`/api/patients/${pid}/review/${b.dataset.rev}`,{decision:b.dataset.dec}).then(()=>{delete cache['care_'+pid];render()}));
+ const cpf=$('#cpf');if(cpf)cpf.onsubmit=e=>{e.preventDefault();const tasks=$('#cp_tasks').value.split('\n').filter(Boolean).map(l=>{const [title,time,instructions]=l.split('|').map(s=>(s||'').trim());return{title,time,instructions}});
+  const meds=$('#cp_meds').value.split('\n').filter(Boolean).map(l=>{const [label,schedule]=l.split('|').map(s=>(s||'').trim());return{label,schedule}});
+  api(`/api/patients/${pid}/careplan`,{phase:$('#cp_phase').value,duration_days:+$('#cp_days').value,tasks,medications:meds}).then(()=>{toast('Care plan approved');delete cache['care_'+pid];render()}).catch(x=>cpf.querySelector('.err').textContent=x.message)};
+ const mrf=$('#mrf');if(mrf)mrf.onsubmit=e=>{e.preventDefault();api(`/api/patients/${pid}/medreqs`,{label:$('#mr_l').value,schedule:$('#mr_s').value,reason:$('#mr_r').value}).then(()=>{toast('Submitted for doctor approval');delete cache['care_'+pid];render()}).catch(x=>mrf.querySelector('.err').textContent=x.message)};
+ document.querySelectorAll('form[data-mrd]').forEach(f=>f.onsubmit=e=>{e.preventDefault();const dec=(e.submitter||{}).dataset?e.submitter.dataset.dec:'approved';api(`/api/medreqs/${f.dataset.mrd}/decide`,{decision:dec,note:f.querySelector('input').value}).then(()=>{toast('Medication '+dec);delete cache['care_'+pid];cache.tsh=0;render()}).catch(x=>toast(x.message))});
+ const ss=$('#shstart');if(ss)ss.onclick=()=>api('/api/shift/start',{}).then(()=>{ME.available=true;cache.tsh=0;toast('Shift started. You are on duty.');render()});
+ const se=$('#shend');if(se)se.onclick=()=>api('/api/shift/end',{}).then(()=>{ME.available=false;cache.tsh=0;toast('Shift ended. You are off duty.');render()});
+ document.querySelectorAll('form[data-shr]').forEach(f=>f.onsubmit=e=>{e.preventDefault();api(`/api/shift/review/${f.dataset.shr}`,{note:f.querySelector('input').value}).then(()=>{cache.tsh=0;toast('Marked reviewed');render()}).catch(x=>toast(x.message))});
+ const rpf=$('#rpf');if(rpf)rpf.onsubmit=e=>{e.preventDefault();const b=rpf.querySelector('button');b.disabled=true;b.textContent='Running…';
+  api('/api/eval/replay',$('#rsrc').value=='bidmc'?{source:'bidmc',record:$('#rrec').value}:{source:'sim',patient:$('#rpat').value}).then(r=>{cache.rp=r;render(true)}).catch(x=>{rpf.querySelector('.err').textContent=x.message;b.disabled=false;b.textContent='Start isolated replay'})};
+ const sec=$('#sec');if(sec)sec.onclick=()=>{sec.disabled=true;api('/api/eval/security-tests',{}).then(r=>{cache.sec=r;render(true)})};
+ const fhf=$('#fhf');if(fhf)fhf.onsubmit=e=>{e.preventDefault();cache.fhp=$('#fp_').value;cache.fhsel=null;api(`/fhir/Observation?patient=${$('#fp_').value}&code=${$('#fc_').value}&_count=25`).then(r=>{cache.fh=r;render(true)}).catch(x=>toast(x.message))}}
+window.addEventListener('pagehide',()=>Ava.stop());
+api('/api/me').then(m=>{ME=m;start()}).catch(()=>render());
+</script>
+</body>
+</html>

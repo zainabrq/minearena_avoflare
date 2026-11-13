@@ -1,0 +1,437 @@
+{
+ "score": "72/72",
+ "tests": [
+  {
+   "area": "Clinical rules",
+   "test": "Spec fixtures 08_clinical_test_cases.json",
+   "result": "PASS",
+   "detail": "NOT_EXECUTED: ['CTX-01', 'CTX-03', 'CTX-05', 'CTX-06', 'ART-04', 'ART-05', 'ALERT-05', 'ALERT-06', 'INT-REPLAY-ISOLATION']"
+  },
+  {
+   "area": "BP + HRV",
+   "test": "Score boundary tests",
+   "result": "PASS",
+   "detail": "PASS 27  FAIL 0"
+  },
+  {
+   "area": "Platform: FHIR",
+   "test": "Observation valid with LOINC 2708-6 and UCUM %",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: FHIR",
+   "test": "Missing value uses dataAbsentReason",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: FHIR",
+   "test": "Wrong unit rejected",
+   "result": "PASS",
+   "detail": "['unit does not match canonical UCUM unit']"
+  },
+  {
+   "area": "Platform: FHIR",
+   "test": "hr coded 8867-4",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: FHIR",
+   "test": "rr coded 9279-1",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: FHIR",
+   "test": "spo2 coded 2708-6",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: FHIR",
+   "test": "temp coded 8310-5",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Gateway",
+   "test": "Signed bundle accepted (202)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Gateway",
+   "test": "Replay of same nonce rejected (401)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Gateway",
+   "test": "Identical retry returns stored receipt (200)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Gateway",
+   "test": "Tampered signature rejected (401)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Gateway",
+   "test": "Device cannot post another patient's data (403) - CTX-05",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Accounts",
+   "test": "Wrong password rejected",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Care",
+   "test": "'None' with a symptom rejected",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Care",
+   "test": "Severe breathlessness gives emergency guidance",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Care",
+   "test": "Expert 6 never outputs doses",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Twin",
+   "test": "Manifest semantic hash deterministic",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Twin",
+   "test": "Manifest references all four experts",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Twin",
+   "test": "Manifest carries no history/labels",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Twin",
+   "test": "Encoder produces 264 slots with masks",
+   "result": "PASS",
+   "detail": "filled 108"
+  },
+  {
+   "area": "Platform: Twin",
+   "test": "Abstains without baseline",
+   "result": "PASS",
+   "detail": "baseline not established"
+  },
+  {
+   "area": "Platform: Twin",
+   "test": "Abstains with fewer than 3 vitals",
+   "result": "PASS",
+   "detail": "fewer than three current vitals available"
+  },
+  {
+   "area": "Platform: Twin",
+   "test": "Forecast at 5/15/30 min with uncertainty",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Twin",
+   "test": "Out-of-distribution input abstains",
+   "result": "PASS",
+   "detail": "input outside training distribution (distance 140.6)"
+  },
+  {
+   "area": "Platform: Twin",
+   "test": "Counterfactual branches A-D produced",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Twin",
+   "test": "Held-out 15 min HR error <= persistence",
+   "result": "PASS",
+   "detail": "['P008', 'P009', 'P010']"
+  },
+  {
+   "area": "Platform: Security",
+   "test": "Clinician API requires sign-in (401)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Security",
+   "test": "Patient cannot read clinician overview (403)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Security",
+   "test": "Patient cannot read another patient (403)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Patient app",
+   "test": "Patient reads own recovery data",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Security",
+   "test": "Nurse cannot resolve alerts (403)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Security",
+   "test": "Nurse cannot approve care plan (403)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Care",
+   "test": "Doctor approves care plan (audited)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Patient app",
+   "test": "Patient marks approved task done",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Patient app",
+   "test": "Unknown task rejected (404)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Pipeline",
+   "test": "Live vitals reach the engine through the signed FHIR gateway",
+   "result": "PASS",
+   "detail": "10/10 patients with live HR"
+  },
+  {
+   "area": "Platform: Doctor Ava",
+   "test": "P001 summary bound to the selected patient and session",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Doctor Ava",
+   "test": "P001 summary states only a backend recommendation",
+   "result": "PASS",
+   "detail": "['Recommended action: continue monitoring.']"
+  },
+  {
+   "area": "Platform: Doctor Ava",
+   "test": "P001 summary carries no fabricated percentages or doses",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Doctor Ava",
+   "test": "P004 summary bound to the selected patient and session",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Doctor Ava",
+   "test": "P004 summary states only a backend recommendation",
+   "result": "PASS",
+   "detail": "['Recommended action: continue monitoring.']"
+  },
+  {
+   "area": "Platform: Doctor Ava",
+   "test": "P004 summary carries no fabricated percentages or doses",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Doctor Ava",
+   "test": "P008 summary bound to the selected patient and session",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Doctor Ava",
+   "test": "P008 summary states only a backend recommendation",
+   "result": "PASS",
+   "detail": "['Recommended action: continue monitoring.']"
+  },
+  {
+   "area": "Platform: Doctor Ava",
+   "test": "P008 summary carries no fabricated percentages or doses",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Timeline",
+   "test": "Events recorded from engine output, newest first",
+   "result": "PASS",
+   "detail": "13 events"
+  },
+  {
+   "area": "Platform: Wearable",
+   "test": "Device states come from the defined state machine",
+   "result": "PASS",
+   "detail": "{'attached_confirmed'}"
+  },
+  {
+   "area": "Platform: Notifications",
+   "test": "Stored notifications carry criticality only",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Twin",
+   "test": "Live twin forecast produced or abstains with a reason",
+   "result": "PASS",
+   "detail": "experimental"
+  },
+  {
+   "area": "Platform: Twin",
+   "test": "Live manifest published by server",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: FHIR",
+   "test": "Record interface returns FHIR searchset",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Replay",
+   "test": "BIDMC replay isolated, no live notification (INT-REPLAY-ISOLATION)",
+   "result": "PASS",
+   "detail": ""
+  },
+  {
+   "area": "Platform: Replay",
+   "test": "BIDMC record 13 RR zeros preserved",
+   "result": "PASS",
+   "detail": "220"
+  },
+  {
+   "area": "Platform: Security",
+   "test": "Predefined gateway attack cases all behave as expected",
+   "result": "PASS",
+   "detail": "11/11"
+  },
+  {
+   "area": "Platform: Records",
+   "test": "Outbox persists observations (cold path)",
+   "result": "PASS",
+   "detail": "{'target': 'local FHIR store (HAPI_URL not set)', 'circuit': 'closed', 'pending': 144, 'persisted': 1048818, 'oldest_pending_age_s': 4.7, 'persisted_this_run': 29720, 'failed_this_run': 0}"
+  },
+  {
+   "area": "Platform: Records",
+   "test": "Recent stored resources all FHIR-valid",
+   "result": "PASS",
+   "detail": "{'checked': 2000, 'valid': 2000}"
+  },
+  {
+   "area": "Digital twin",
+   "test": "P008 held-out 30 min HR/RR error below persistence",
+   "result": "PASS",
+   "detail": "HR 1.81 vs 2.381, RR 0.731 vs 0.958"
+  },
+  {
+   "area": "Digital twin",
+   "test": "P009 held-out 30 min HR/RR error below persistence",
+   "result": "PASS",
+   "detail": "HR 2.235 vs 2.724, RR 0.913 vs 1.229"
+  },
+  {
+   "area": "Digital twin",
+   "test": "P010 held-out 30 min HR/RR error below persistence",
+   "result": "PASS",
+   "detail": "HR 2.527 vs 3.51, RR 1.198 vs 1.646"
+  },
+  {
+   "area": "Digital twin",
+   "test": "RR +/-2 SD band covers >= 90% of outcomes",
+   "result": "PASS",
+   "detail": "held-out calibrated coverage [0.979, 0.982, 0.977]"
+  },
+  {
+   "area": "Detection",
+   "test": "All deteriorations detected",
+   "result": "PASS",
+   "detail": "9/9"
+  },
+  {
+   "area": "Detection",
+   "test": "Every event alerted before severe endpoint",
+   "result": "PASS",
+   "detail": "min lead 341.0 s, median 1699.0 s"
+  },
+  {
+   "area": "False alarms",
+   "test": "Fewer false alerts than fixed NEWS2",
+   "result": "PASS",
+   "detail": "9.127 vs 142.02 per patient-day"
+  },
+  {
+   "area": "False alarms",
+   "test": "Stable patient P008 near-silent",
+   "result": "PASS",
+   "detail": "3 false episodes in 15 days"
+  },
+  {
+   "area": "ML model",
+   "test": "Window AUROC >= 0.90 (leave-one-patient-out)",
+   "result": "PASS",
+   "detail": "0.9649"
+  },
+  {
+   "area": "ML model",
+   "test": "Risk score speeds up detection vs rules only",
+   "result": "PASS",
+   "detail": "359.0 s vs 769.0 s"
+  },
+  {
+   "area": "BP + HRV",
+   "test": "HRV drop flags events",
+   "result": "PASS",
+   "detail": "9/9, 0.19 false/pt-day"
+  },
+  {
+   "area": "BP + HRV",
+   "test": "Shock index has no false flags",
+   "result": "PASS",
+   "detail": "4/9 events, 0.0 false/pt-day"
+  },
+  {
+   "area": "BP + HRV",
+   "test": "SBP score false flags < 1/pt-day",
+   "result": "PASS",
+   "detail": "4/9 events, 0.18 false/pt-day"
+  },
+  {
+   "area": "Server",
+   "test": "Patients routed to different doctors",
+   "result": "PASS",
+   "detail": "4 different primary doctors"
+  }
+ ]
+}

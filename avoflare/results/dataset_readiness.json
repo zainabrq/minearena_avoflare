@@ -1,0 +1,324 @@
+{
+  "type": "dataset_readiness_inventory",
+  "created_for": "MineArena PS03 model-training readiness",
+  "clinical_performance_claim": false,
+  "patient_window_files": 10,
+  "total_windows": 1296000,
+  "window_source_span_seconds": 1296000,
+  "window_interval_seconds": 10,
+  "derived_windows": [
+    {
+      "patient_id": "P001",
+      "windows": 129600,
+      "feature_count": 36,
+      "first_source_second": 9,
+      "last_source_second": 1295999,
+      "strictly_increasing_time": true,
+      "finite_feature_fraction": 0.9987948,
+      "engine_priority_counts": {
+        "0": 120078,
+        "1": 3962,
+        "2": 1564,
+        "3": 3996
+      },
+      "verification_windows": 92,
+      "technical_windows": 257,
+      "fixed_comparator_priority_counts": {
+        "0": 114507,
+        "2": 13840,
+        "3": 1253
+      },
+      "contains_independent_ground_truth": false,
+      "fields": [
+        "X",
+        "t",
+        "pri",
+        "ver",
+        "tech",
+        "comp"
+      ]
+    },
+    {
+      "patient_id": "P002",
+      "windows": 129600,
+      "feature_count": 36,
+      "first_source_second": 9,
+      "last_source_second": 1295999,
+      "strictly_increasing_time": true,
+      "finite_feature_fraction": 0.77722565,
+      "engine_priority_counts": {
+        "0": 63112,
+        "1": 14650,
+        "2": 48983,
+        "3": 2855
+      },
+      "verification_windows": 73,
+      "technical_windows": 361,
+      "fixed_comparator_priority_counts": {
+        "0": 48377,
+        "2": 78372,
+        "3": 2851
+      },
+      "contains_independent_ground_truth": false,
+      "fields": [
+        "X",
+        "t",
+        "pri",
+        "ver",
+        "tech",
+        "comp"
+      ]
+    },
+    {
+      "patient_id": "P003",
+      "windows": 129600,
+      "feature_count": 36,
+      "first_source_second": 9,
+      "last_source_second": 1295999,
+      "strictly_increasing_time": true,
+      "finite_feature_fraction": 0.9095171,
+      "engine_priority_counts": {
+        "0": 90497,
+        "1": 25677,
+        "2": 9359,
+        "3": 4067
+      },
+      "verification_windows": 64,
+      "technical_windows": 307,
+      "fixed_comparator_priority_counts": {
+        "0": 85978,
+        "2": 41296,
+        "3": 2326
+      },
+      "contains_independent_ground_truth": false,
+      "fields": [
+        "X",
+        "t",
+        "pri",
+        "ver",
+        "tech",
+        "comp"
+      ]
+    },
+    {
+      "patient_id": "P004",
+      "windows": 129600,
+      "feature_count": 36,
+      "first_source_second": 9,
+      "last_source_second": 1295999,
+      "strictly_increasing_time": true,
+      "finite_feature_fraction": 0.99900527,
+      "engine_priority_counts": {
+        "0": 124496,
+        "1": 2629,
+        "2": 398,
+        "3": 2077
+      },
+      "verification_windows": 67,
+      "technical_windows": 270,
+      "fixed_comparator_priority_counts": {
+        "0": 126704,
+        "2": 2545,
+        "3": 351
+      },
+      "contains_independent_ground_truth": false,
+      "fields": [
+        "X",
+        "t",
+        "pri",
+        "ver",
+        "tech",
+        "comp"
+      ]
+    },
+    {
+      "patient_id": "P005",
+      "windows": 129600,
+      "feature_count": 36,
+      "first_source_second": 9,
+      "last_source_second": 1295999,
+      "strictly_increasing_time": true,
+      "finite_feature_fraction": 0.99903678,
+      "engine_priority_counts": {
+        "0": 124926,
+        "1": 1561,
+        "2": 577,
+        "3": 2536
+      },
+      "verification_windows": 82,
+      "technical_windows": 299,
+      "fixed_comparator_priority_counts": {
+        "0": 125335,
+        "2": 3474,
+        "3": 791
+      },
+      "contains_independent_ground_truth": false,
+      "fields": [
+        "X",
+        "t",
+        "pri",
+        "ver",
+        "tech",
+        "comp"
+      ]
+    },
+    {
+      "patient_id": "P006",
+      "windows": 129600,
+      "feature_count": 36,
+      "first_source_second": 9,
+      "last_source_second": 1295999,
+      "strictly_increasing_time": true,
+      "finite_feature_fraction": 0.77720872,
+      "engine_priority_counts": {
+        "0": 76968,
+        "1": 24174,
+        "2": 25358,
+        "3": 3100
+      },
+      "verification_windows": 85,
+      "technical_windows": 330,
+      "fixed_comparator_priority_counts": {
+        "0": 77684,
+        "2": 49760,
+        "3": 2156
+      },
+      "contains_independent_ground_truth": false,
+      "fields": [
+        "X",
+        "t",
+        "pri",
+        "ver",
+        "tech",
+        "comp"
+      ]
+    },
+    {
+      "patient_id": "P007",
+      "windows": 129600,
+      "feature_count": 36,
+      "first_source_second": 9,
+      "last_source_second": 1295999,
+      "strictly_increasing_time": true,
+      "finite_feature_fraction": 0.99920803,
+      "engine_priority_counts": {
+        "0": 122591,
+        "1": 2083,
+        "2": 935,
+        "3": 3991
+      },
+      "verification_windows": 65,
+      "technical_windows": 256,
+      "fixed_comparator_priority_counts": {
+        "0": 123425,
+        "2": 5037,
+        "3": 1138
+      },
+      "contains_independent_ground_truth": false,
+      "fields": [
+        "X",
+        "t",
+        "pri",
+        "ver",
+        "tech",
+        "comp"
+      ]
+    },
+    {
+      "patient_id": "P008",
+      "windows": 129600,
+      "feature_count": 36,
+      "first_source_second": 9,
+      "last_source_second": 1295999,
+      "strictly_increasing_time": true,
+      "finite_feature_fraction": 0.9992554,
+      "engine_priority_counts": {
+        "0": 124951,
+        "1": 2310,
+        "2": 512,
+        "3": 1827
+      },
+      "verification_windows": 69,
+      "technical_windows": 227,
+      "fixed_comparator_priority_counts": {
+        "0": 126861,
+        "2": 2585,
+        "3": 154
+      },
+      "contains_independent_ground_truth": false,
+      "fields": [
+        "X",
+        "t",
+        "pri",
+        "ver",
+        "tech",
+        "comp"
+      ]
+    },
+    {
+      "patient_id": "P009",
+      "windows": 129600,
+      "feature_count": 36,
+      "first_source_second": 9,
+      "last_source_second": 1295999,
+      "strictly_increasing_time": true,
+      "finite_feature_fraction": 0.99897569,
+      "engine_priority_counts": {
+        "0": 124511,
+        "1": 1945,
+        "2": 489,
+        "3": 2655
+      },
+      "verification_windows": 61,
+      "technical_windows": 309,
+      "fixed_comparator_priority_counts": {
+        "0": 124890,
+        "2": 3918,
+        "3": 792
+      },
+      "contains_independent_ground_truth": false,
+      "fields": [
+        "X",
+        "t",
+        "pri",
+        "ver",
+        "tech",
+        "comp"
+      ]
+    },
+    {
+      "patient_id": "P010",
+      "windows": 129600,
+      "feature_count": 36,
+      "first_source_second": 9,
+      "last_source_second": 1295999,
+      "strictly_increasing_time": true,
+      "finite_feature_fraction": 0.99738083,
+      "engine_priority_counts": {
+        "0": 102492,
+        "1": 18556,
+        "2": 4272,
+        "3": 4280
+      },
+      "verification_windows": 57,
+      "technical_windows": 333,
+      "fixed_comparator_priority_counts": {
+        "0": 106224,
+        "2": 21716,
+        "3": 1660
+      },
+      "contains_independent_ground_truth": false,
+      "fields": [
+        "X",
+        "t",
+        "pri",
+        "ver",
+        "tech",
+        "comp"
+      ]
+    }
+  ],
+  "training_blocker": "The separate labels.json file with independent event onset/end/severe endpoint labels is absent. The referenced D: archive is not mounted. Derived X/t/pri/ver/tech/comp files do not contain a y label.",
+  "training_pipeline": "avoflare/train.py uses labels.json for supervised targets; it can reuse the existing per-patient win_*.npz files if labels are supplied and the cache is compatible.",
+  "interpretation": "These are data readiness counts and feature completeness only. Priority counts are engine/comparator outputs, not ground truth and not deterioration labels."
+}

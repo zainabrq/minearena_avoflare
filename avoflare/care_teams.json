@@ -1,0 +1,25 @@
+{
+ "_note": "Demo roster. Replace names/topics with your hospital roster. 'push_topic' = ntfy topic subscribed on that person's phone (ntfy app forwards to the paired smartwatch).",
+ "staff": {
+  "DR1": {"name": "Dr. A. Rao", "role": "doctor", "specialty": "Pulmonology", "push_topic": "avoflare-dr1"},
+  "DR2": {"name": "Dr. S. Menon", "role": "doctor", "specialty": "Cardiology", "push_topic": "avoflare-dr2"},
+  "DR3": {"name": "Dr. P. Shetty", "role": "doctor", "specialty": "General surgery", "push_topic": "avoflare-dr3"},
+  "DR4": {"name": "Dr. K. Iyer", "role": "doctor", "specialty": "Internal medicine (on-call)", "push_topic": "avoflare-dr4"},
+  "NR1": {"name": "Nurse M. Fernandes", "role": "nurse", "push_topic": "avoflare-nr1"},
+  "NR2": {"name": "Nurse R. D'Souza", "role": "nurse", "push_topic": "avoflare-nr2"},
+  "NR3": {"name": "Nurse T. Pai", "role": "nurse", "push_topic": "avoflare-nr3"},
+  "MG1": {"name": "Management duty office", "role": "management", "push_topic": "avoflare-mgmt"}
+ },
+ "teams": {
+  "P001": {"doctor": "DR1", "nurse": "NR1", "substitute_doctor": "DR4", "management": "MG1"},
+  "P002": {"doctor": "DR3", "nurse": "NR2", "substitute_doctor": "DR1", "management": "MG1"},
+  "P003": {"doctor": "DR2", "nurse": "NR3", "substitute_doctor": "DR4", "management": "MG1"},
+  "P004": {"doctor": "DR2", "nurse": "NR1", "substitute_doctor": "DR4", "management": "MG1"},
+  "P005": {"doctor": "DR4", "nurse": "NR2", "substitute_doctor": "DR2", "management": "MG1"},
+  "P006": {"doctor": "DR1", "nurse": "NR3", "substitute_doctor": "DR4", "management": "MG1"},
+  "P007": {"doctor": "DR3", "nurse": "NR1", "substitute_doctor": "DR4", "management": "MG1"},
+  "P008": {"doctor": "DR3", "nurse": "NR2", "substitute_doctor": "DR1", "management": "MG1"},
+  "P009": {"doctor": "DR2", "nurse": "NR3", "substitute_doctor": "DR1", "management": "MG1"},
+  "P010": {"doctor": "DR1", "nurse": "NR2", "substitute_doctor": "DR4", "management": "MG1"}
+ }
+}

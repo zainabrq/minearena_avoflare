@@ -1,0 +1,13 @@
+# secrets and runtime state (never commit)
+avoflare/state/
+# large or intermediate outputs
+avoflare/results/win_*.npz
+avoflare/results/oof_scores.npz
+avoflare/results/*.log
+avoflare/results/screens/
+avoflare/artifacts/
+**/__pycache__/
+07_dashboard/node_modules/
+07_dashboard/dist/
+Avoflare_Dashboard_Round2.zip
+deploy_vercel/

@@ -1,0 +1,9 @@
+# Integration revision V4.1 / Backend V1.1
+## Install
+Back up local project or commit first. Extract ZIP into existing mineareana root, merge folders. Replace only paths in this archive; retain unlisted files, original PDFs, patient KB/registry/config/cohort, MATLAB sources/exports, dashboard assets, existing source code and actual contracts. Additive 04 handoff does not replace teammate streaming_interface.md. No original source data or assets modified. If any local file newer/custom, diff before overwrite. Place original 40-page PDF and teammate 53-page PDF in 01_architecture with existing filenames (already supplied; not duplicated here).
+
+## Changes
+01 add architecture integration addendum and logical shared-contract amendments. 02 add verified source identity mapping (10 IDs; HAPI/device pending). 03 replace 3 affected files (original clinical rules retained; max score and priority separation; 7 extra test fixtures). 04 add source-adapter/offline handoff. 05 replace ten specs and add priority/adapter specs. 06 new full specification package and 264-slot proposed registry, preserve AI teammate handoff; no model or equations invented. 07 replace five functional specs, preserve visual system/assets. 08 replace six specs and add security/resilience test plan; six engineering scenarios distinct from clinical metrics. Root master Claude instructions.
+
+## Decisions and blockers
+Native FHIR ingestion, correct SpO2 coding, no age-only escalation, clinical vs queue separation, P0 safety and continued timeline, interactive replay isolation, durable outbox, JWT/HMAC, separate delivery/ack/resolution. Proposed canonical signing and context/temporal encoder slots require owner confirmation; actual HAPI URLs/credentials/contract code and MATLAB/AI evidence absent. No executed tests or model training. Specs are based on supplied PDFs, team handoffs and previous local package files; no production or clinical validation claims.

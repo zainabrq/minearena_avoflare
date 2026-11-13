@@ -1,0 +1,2 @@
+# Original BIDMC data
+Place the original downloaded BIDMC PhysioNet archive here if available. Keep version 1.0.0, source attribution and original filenames. The included bidmc_analysis/replay_numerics.csv already provides all 53 numeric recordings, so no additional download is required for numeric replay. Do not synthesize temperature or attach Synthea clinical context. Raw waveform analysis is optional.

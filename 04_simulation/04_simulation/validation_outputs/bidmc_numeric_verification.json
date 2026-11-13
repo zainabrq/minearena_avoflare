@@ -1,0 +1,27 @@
+{
+  "status": "independently_verified_csv_structure",
+  "source": "existing project bidmc_analysis/replay_numerics.csv, not recovered from Abhi upload",
+  "rows": 25493,
+  "records": 53,
+  "rows_per_record": 481,
+  "missing": {
+    "hr_bpm": 4,
+    "rr_per_min": 153,
+    "spo2_pct": 128
+  },
+  "record_23_time_range_s": [
+    -1,
+    479
+  ],
+  "other_record_time_range_s": [
+    0,
+    480
+  ],
+  "zero_rr_count": 220,
+  "limitations": [
+    "No MATLAB execution",
+    "No HTTP/FHIR tests",
+    "No temperature",
+    "No post-discharge deterioration labels"
+  ]
+}

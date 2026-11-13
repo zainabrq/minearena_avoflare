@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0",
+  "status": "scenario_requests_not_generated_data",
+  "architecture": "V4.1",
+  "notes": [
+    "Durations are requested initial source-second budgets, not verified run outputs. BIDMC duration must be derived from original time bounds and sampling convention.",
+    "MATLAB must supply actual independent runs, explicit event annotations and seeds; never treat expected behavior as measured outcome.",
+    "Artifact-only P010 requires separate stable trajectory, not original deteriorating scenario.",
+    "Primary five-minute forecasting requires sufficient history and future targets.",
+    "E13–E18 engineering-only tests; do not mix with clinical event denominator or claim labelled outcomes."
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "E01",
+      "name": "stable_recovery",
+      "suggested_patient_or_subject": "P008",
+      "requested_duration_s": 21600,
+      "expected_label_category": "none",
+      "acceptance_intent": "Stable physiology; no unjustified clinical episode",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E02",
+      "name": "slow_deterioration",
+      "suggested_patient_or_subject": "P001",
+      "requested_duration_s": 5400,
+      "expected_label_category": "deterioration",
+      "acceptance_intent": "Predeclare onset and severe endpoint from underlying physiology; compare lead time",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E03",
+      "name": "artifact_only_probe",
+      "suggested_patient_or_subject": "P010",
+      "requested_duration_s": 3600,
+      "expected_label_category": "sensor_fault",
+      "acceptance_intent": "Stable underlying physiology; joint SpO2 dropout and HR flatline; no unjustified clinical escalation",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E04",
+      "name": "artifact_only_motion",
+      "suggested_patient_or_subject": "P001",
+      "requested_duration_s": 3600,
+      "expected_label_category": "sensor_fault",
+      "acceptance_intent": "Motion noise without underlying deterioration; technical verification",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E05",
+      "name": "combined_deterioration_probe",
+      "suggested_patient_or_subject": "P010",
+      "requested_duration_s": 5400,
+      "expected_label_category": "both",
+      "acceptance_intent": "Independent deterioration and fault labels; reliable remaining evidence can escalate",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E06",
+      "name": "intermittent_abnormality",
+      "suggested_patient_or_subject": "P006",
+      "requested_duration_s": 4200,
+      "expected_label_category": "deterioration",
+      "acceptance_intent": "Critical-normal-critical; retain unresolved episode, no alert flapping",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E07",
+      "name": "genuine_spike",
+      "suggested_patient_or_subject": "P004",
+      "requested_duration_s": 1800,
+      "expected_label_category": "deterioration",
+      "acceptance_intent": "True state spike, not sensor outlier; safety assessment",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E08",
+      "name": "cold_start_deterioration",
+      "suggested_patient_or_subject": "P003",
+      "requested_duration_s": 1800,
+      "expected_label_category": "deterioration",
+      "acceptance_intent": "Onset before calibration; safety not delayed",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E09",
+      "name": "oxygen_personalization",
+      "suggested_patient_or_subject": "P002-H",
+      "requested_duration_s": 1800,
+      "expected_label_category": "none",
+      "acceptance_intent": "Separate synthetic authorized context; compare same SpO2 91 with Scale1, test oxygen status variants",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E10",
+      "name": "connectivity_loss",
+      "suggested_patient_or_subject": "P008",
+      "requested_duration_s": 1800,
+      "expected_label_category": "sensor_fault",
+      "acceptance_intent": "Missing data separate from clinical deterioration; no recovery inferred",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E11",
+      "name": "bidmc_replay",
+      "suggested_patient_or_subject": "BIDMC-13",
+      "requested_duration_s": 481,
+      "expected_label_category": "unlabelled",
+      "acceptance_intent": "Real replay; preserve zero RR and missing; no clinical label or temperature",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E12",
+      "name": "concurrent_streams",
+      "suggested_patient_or_subject": "P001-P010",
+      "requested_duration_s": 1800,
+      "expected_label_category": "mixed",
+      "acceptance_intent": "Ten isolated sessions, latency and persistence checks",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E13",
+      "name": "p0_under_model_overload",
+      "suggested_patient_or_subject": "isolated synthetic sessions",
+      "requested_duration_s": null,
+      "expected_label_category": "engineering_only",
+      "acceptance_intent": "Urgent floor and latency under P2/P3 saturation",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E14",
+      "name": "hapi_outage_recovery",
+      "suggested_patient_or_subject": "isolated synthetic sessions",
+      "requested_duration_s": null,
+      "expected_label_category": "engineering_only",
+      "acceptance_intent": "Hot path continues; persist exactly once after recovery",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E15",
+      "name": "redis_worker_outage",
+      "suggested_patient_or_subject": "isolated synthetic sessions",
+      "requested_duration_s": null,
+      "expected_label_category": "engineering_only",
+      "acceptance_intent": "Durable outbox, recovery and no false acceptance",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E16",
+      "name": "security_invalid_requests",
+      "suggested_patient_or_subject": "isolated synthetic sessions",
+      "requested_duration_s": null,
+      "expected_label_category": "engineering_only",
+      "acceptance_intent": "JWT/HMAC/replay/assignment rejection; no clinical effects",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E17",
+      "name": "websocket_reconnect",
+      "suggested_patient_or_subject": "isolated synthetic sessions",
+      "requested_duration_s": null,
+      "expected_label_category": "engineering_only",
+      "acceptance_intent": "Receipt/ack distinction, scoped resync",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    },
+    {
+      "scenario_id": "E18",
+      "name": "interactive_bidmc_isolation",
+      "suggested_patient_or_subject": "isolated synthetic sessions",
+      "requested_duration_s": null,
+      "expected_label_category": "engineering_only",
+      "acceptance_intent": "Same clinical pipeline; no live recipients",
+      "actual_run_ids": [],
+      "actual_event_annotations": null
+    }
+  ]
+}

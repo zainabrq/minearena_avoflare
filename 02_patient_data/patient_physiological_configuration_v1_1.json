@@ -1,0 +1,787 @@
+{
+  "version": "1.1",
+  "status": "engineering_test_configuration_not_clinically_validated",
+  "sources": [
+    "verified_clinical_registry_v1.json",
+    "bidmc_analysis/summary.json"
+  ],
+  "units": {
+    "hr": "bpm",
+    "spo2": "percent",
+    "rr": "breaths/min",
+    "temp": "degC"
+  },
+  "sample_interval_s": 1,
+  "seed": 42,
+  "baseline_calibration_s": 900,
+  "defaults": {
+    "ar1_rho": {
+      "hr": 0.95,
+      "spo2": 0.98,
+      "rr": 0.95,
+      "temp": 0.999
+    },
+    "sensor_noise_sd": {
+      "hr": 0.5,
+      "spo2": 0.2,
+      "rr": 0.3,
+      "temp": 0.02
+    },
+    "missing_probability": 0,
+    "interpolation": "linear",
+    "after_last_knot": "hold",
+    "spo2_bounds": [
+      0,
+      100
+    ]
+  },
+  "notes": [
+    "All starting values, scenario trajectories, noise and AR coefficients are engineering assumptions; BIDMC informs observed variability only, not separate true physiology or sensor noise.",
+    "Use independent seeded random streams per patient and sensor; maintain continuity; clip SpO2 to physical bounds.",
+    "Calibration is not a safety gate; freeze baseline updates during concern or unreliable data.",
+    "Scenario labels, onset and true values are evaluation-only; do not expose to intelligence runtime.",
+    "No temperature in BIDMC replay; preserve missing values and original recording identity.",
+    "Medication adherence unconfirmed; muted HR is a test assumption.",
+    "900 s is a proposed stable-data calibration duration, not a learned baseline or safety gate; MATLAB supplies observations, backend learns baseline.",
+    "P007 fever trajectory is hypothetical; surgery was not verified. P008 stable recovery also does not imply verified surgery.",
+    "This file is simulator-only. Never send scenario metadata, target knots or latent physiological truth to runtime inference."
+  ],
+  "patients": [
+    {
+      "patient_id": "P001",
+      "fhir_patient_id": "7f344203-4195-1640-e6a6-138929498536",
+      "encounter_id": "7f344203-4195-1640-1ab0-284e1c12e370",
+      "clinical_cutoff": "2021-01-31T17:17:26+05:30",
+      "initial_vitals": {
+        "hr": 82,
+        "spo2": 97,
+        "rr": 18,
+        "temp": 36.9
+      },
+      "physiological_sd": {
+        "hr": 1.8,
+        "spo2": 0.5,
+        "rr": 1.1,
+        "temp": 0.05
+      },
+      "spo2_scale": 1,
+      "authorized_oxygen_target": null,
+      "scenario": {
+        "id": "gradual_respiratory",
+        "onset_s": 900,
+        "knots": [
+          {
+            "t_s": 0,
+            "target": {
+              "hr": 82,
+              "spo2": 97,
+              "rr": 18,
+              "temp": 36.9
+            }
+          },
+          {
+            "t_s": 900,
+            "target": {
+              "hr": 82,
+              "spo2": 97,
+              "rr": 18,
+              "temp": 36.9
+            }
+          },
+          {
+            "t_s": 1800,
+            "target": {
+              "hr": 86,
+              "spo2": 96,
+              "rr": 20,
+              "temp": 37
+            }
+          },
+          {
+            "t_s": 3600,
+            "target": {
+              "hr": 98,
+              "spo2": 92,
+              "rr": 26,
+              "temp": 37.3
+            }
+          },
+          {
+            "t_s": 5400,
+            "target": {
+              "hr": 112,
+              "spo2": 88,
+              "rr": 32,
+              "temp": 37.6
+            }
+          }
+        ],
+        "faults": []
+      },
+      "supplemental_oxygen": "unknown",
+      "oxygen_status_source": "not_documented"
+    },
+    {
+      "patient_id": "P002",
+      "fhir_patient_id": "11e0acc0-192c-5eff-ec24-5da02e77abac",
+      "encounter_id": "11e0acc0-192c-5eff-1113-eb954c95c949",
+      "clinical_cutoff": "2021-04-22T23:14:19+05:30",
+      "initial_vitals": {
+        "hr": 76,
+        "spo2": 96,
+        "rr": 20,
+        "temp": 36.7
+      },
+      "physiological_sd": {
+        "hr": 1.5,
+        "spo2": 0.6,
+        "rr": 1.3,
+        "temp": 0.04
+      },
+      "spo2_scale": 1,
+      "authorized_oxygen_target": null,
+      "scenario": {
+        "id": "transient_respiratory",
+        "onset_s": 900,
+        "knots": [
+          {
+            "t_s": 0,
+            "target": {
+              "hr": 76,
+              "spo2": 96,
+              "rr": 20,
+              "temp": 36.7
+            }
+          },
+          {
+            "t_s": 900,
+            "target": {
+              "hr": 76,
+              "spo2": 96,
+              "rr": 20,
+              "temp": 36.7
+            }
+          },
+          {
+            "t_s": 1500,
+            "target": {
+              "hr": 82,
+              "spo2": 94,
+              "rr": 23,
+              "temp": 36.7
+            }
+          },
+          {
+            "t_s": 2100,
+            "target": {
+              "hr": 76,
+              "spo2": 96,
+              "rr": 20,
+              "temp": 36.7
+            }
+          }
+        ],
+        "faults": []
+      },
+      "supplemental_oxygen": "unknown",
+      "oxygen_status_source": "not_documented"
+    },
+    {
+      "patient_id": "P003",
+      "fhir_patient_id": "731b97bd-e42a-ff26-fc9b-2b307c65aec2",
+      "encounter_id": "731b97bd-e42a-ff26-1cbc-aa85672ec0d1",
+      "clinical_cutoff": "2015-04-18T08:48:33+05:30",
+      "initial_vitals": {
+        "hr": 78,
+        "spo2": 96,
+        "rr": 19,
+        "temp": 36.8
+      },
+      "physiological_sd": {
+        "hr": 1.4,
+        "spo2": 0.5,
+        "rr": 1.2,
+        "temp": 0.04
+      },
+      "spo2_scale": 1,
+      "authorized_oxygen_target": null,
+      "scenario": {
+        "id": "heart_failure_pattern",
+        "onset_s": 900,
+        "knots": [
+          {
+            "t_s": 0,
+            "target": {
+              "hr": 78,
+              "spo2": 96,
+              "rr": 19,
+              "temp": 36.8
+            }
+          },
+          {
+            "t_s": 900,
+            "target": {
+              "hr": 78,
+              "spo2": 96,
+              "rr": 19,
+              "temp": 36.8
+            }
+          },
+          {
+            "t_s": 2700,
+            "target": {
+              "hr": 81,
+              "spo2": 93,
+              "rr": 24,
+              "temp": 36.8
+            }
+          },
+          {
+            "t_s": 5400,
+            "target": {
+              "hr": 85,
+              "spo2": 89,
+              "rr": 30,
+              "temp": 36.9
+            }
+          }
+        ],
+        "faults": []
+      },
+      "supplemental_oxygen": "unknown",
+      "oxygen_status_source": "not_documented"
+    },
+    {
+      "patient_id": "P004",
+      "fhir_patient_id": "4760e5e7-fa82-b084-95cb-bb4564d42496",
+      "encounter_id": "4760e5e7-fa82-b084-bb46-3762f40482a8",
+      "clinical_cutoff": "2022-09-20T08:54:34+05:30",
+      "initial_vitals": {
+        "hr": 68,
+        "spo2": 97,
+        "rr": 16,
+        "temp": 36.7
+      },
+      "physiological_sd": {
+        "hr": 1.2,
+        "spo2": 0.3,
+        "rr": 0.8,
+        "temp": 0.04
+      },
+      "spo2_scale": 1,
+      "authorized_oxygen_target": null,
+      "scenario": {
+        "id": "sudden_cardiovascular",
+        "onset_s": 900,
+        "knots": [
+          {
+            "t_s": 0,
+            "target": {
+              "hr": 68,
+              "spo2": 97,
+              "rr": 16,
+              "temp": 36.7
+            }
+          },
+          {
+            "t_s": 900,
+            "target": {
+              "hr": 68,
+              "spo2": 97,
+              "rr": 16,
+              "temp": 36.7
+            }
+          },
+          {
+            "t_s": 960,
+            "target": {
+              "hr": 125,
+              "spo2": 94,
+              "rr": 25,
+              "temp": 36.7
+            }
+          },
+          {
+            "t_s": 1800,
+            "target": {
+              "hr": 125,
+              "spo2": 94,
+              "rr": 25,
+              "temp": 36.7
+            }
+          }
+        ],
+        "faults": []
+      },
+      "supplemental_oxygen": "unknown",
+      "oxygen_status_source": "not_documented"
+    },
+    {
+      "patient_id": "P005",
+      "fhir_patient_id": "6da2a9c8-6e24-5a7c-852f-0c454d3a54d4",
+      "encounter_id": "6da2a9c8-6e24-5a7c-7e40-17d49f361cba",
+      "clinical_cutoff": "2026-07-27T17:36:53+05:30",
+      "initial_vitals": {
+        "hr": 72,
+        "spo2": 97,
+        "rr": 17,
+        "temp": 36.8
+      },
+      "physiological_sd": {
+        "hr": 1.3,
+        "spo2": 0.3,
+        "rr": 0.9,
+        "temp": 0.04
+      },
+      "spo2_scale": 1,
+      "authorized_oxygen_target": null,
+      "scenario": {
+        "id": "muted_hr_response",
+        "onset_s": 900,
+        "knots": [
+          {
+            "t_s": 0,
+            "target": {
+              "hr": 72,
+              "spo2": 97,
+              "rr": 17,
+              "temp": 36.8
+            }
+          },
+          {
+            "t_s": 900,
+            "target": {
+              "hr": 72,
+              "spo2": 97,
+              "rr": 17,
+              "temp": 36.8
+            }
+          },
+          {
+            "t_s": 2700,
+            "target": {
+              "hr": 75,
+              "spo2": 94,
+              "rr": 23,
+              "temp": 37.2
+            }
+          },
+          {
+            "t_s": 5400,
+            "target": {
+              "hr": 79,
+              "spo2": 90,
+              "rr": 29,
+              "temp": 37.8
+            }
+          }
+        ],
+        "faults": []
+      },
+      "supplemental_oxygen": "unknown",
+      "oxygen_status_source": "not_documented"
+    },
+    {
+      "patient_id": "P006",
+      "fhir_patient_id": "31df6e24-d14a-2fd1-38c0-6a79f9084dd8",
+      "encounter_id": "31df6e24-d14a-2fd1-7644-003468b17af9",
+      "clinical_cutoff": "2021-02-20T03:55:34+05:30",
+      "initial_vitals": {
+        "hr": 84,
+        "spo2": 96,
+        "rr": 19,
+        "temp": 36.9
+      },
+      "physiological_sd": {
+        "hr": 2,
+        "spo2": 0.7,
+        "rr": 1.5,
+        "temp": 0.05
+      },
+      "spo2_scale": 1,
+      "authorized_oxygen_target": null,
+      "scenario": {
+        "id": "episodic_respiratory",
+        "onset_s": 900,
+        "knots": [
+          {
+            "t_s": 0,
+            "target": {
+              "hr": 84,
+              "spo2": 96,
+              "rr": 19,
+              "temp": 36.9
+            }
+          },
+          {
+            "t_s": 900,
+            "target": {
+              "hr": 84,
+              "spo2": 96,
+              "rr": 19,
+              "temp": 36.9
+            }
+          },
+          {
+            "t_s": 1500,
+            "target": {
+              "hr": 100,
+              "spo2": 91,
+              "rr": 28,
+              "temp": 36.9
+            }
+          },
+          {
+            "t_s": 2400,
+            "target": {
+              "hr": 84,
+              "spo2": 96,
+              "rr": 19,
+              "temp": 36.9
+            }
+          },
+          {
+            "t_s": 3300,
+            "target": {
+              "hr": 110,
+              "spo2": 89,
+              "rr": 31,
+              "temp": 37
+            }
+          },
+          {
+            "t_s": 4200,
+            "target": {
+              "hr": 84,
+              "spo2": 96,
+              "rr": 19,
+              "temp": 36.9
+            }
+          }
+        ],
+        "faults": []
+      },
+      "supplemental_oxygen": "unknown",
+      "oxygen_status_source": "not_documented"
+    },
+    {
+      "patient_id": "P007",
+      "fhir_patient_id": "64ee34b3-6256-d78b-f218-a8ac46ee2c61",
+      "encounter_id": "64ee34b3-6256-d78b-357b-06378c9eb335",
+      "clinical_cutoff": "2003-02-17T18:55:47+05:30",
+      "initial_vitals": {
+        "hr": 80,
+        "spo2": 98,
+        "rr": 17,
+        "temp": 37
+      },
+      "physiological_sd": {
+        "hr": 1.6,
+        "spo2": 0.2,
+        "rr": 0.9,
+        "temp": 0.05
+      },
+      "spo2_scale": 1,
+      "authorized_oxygen_target": null,
+      "scenario": {
+        "id": "simulated_fever_deterioration",
+        "onset_s": 900,
+        "knots": [
+          {
+            "t_s": 0,
+            "target": {
+              "hr": 80,
+              "spo2": 98,
+              "rr": 17,
+              "temp": 37
+            }
+          },
+          {
+            "t_s": 900,
+            "target": {
+              "hr": 80,
+              "spo2": 98,
+              "rr": 17,
+              "temp": 37
+            }
+          },
+          {
+            "t_s": 7200,
+            "target": {
+              "hr": 90,
+              "spo2": 97,
+              "rr": 20,
+              "temp": 37.5
+            }
+          },
+          {
+            "t_s": 14400,
+            "target": {
+              "hr": 105,
+              "spo2": 96,
+              "rr": 24,
+              "temp": 38.3
+            }
+          },
+          {
+            "t_s": 21600,
+            "target": {
+              "hr": 118,
+              "spo2": 95,
+              "rr": 28,
+              "temp": 39.1
+            }
+          }
+        ],
+        "faults": []
+      },
+      "supplemental_oxygen": "unknown",
+      "oxygen_status_source": "not_documented"
+    },
+    {
+      "patient_id": "P008",
+      "fhir_patient_id": "139a4829-705a-9b84-028c-7b6391c3c416",
+      "encounter_id": "139a4829-705a-9b84-2e36-6cbbbebdc835",
+      "clinical_cutoff": "2009-04-14T17:02:09+05:30",
+      "initial_vitals": {
+        "hr": 74,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 36.7
+      },
+      "physiological_sd": {
+        "hr": 1,
+        "spo2": 0.2,
+        "rr": 0.7,
+        "temp": 0.03
+      },
+      "spo2_scale": 1,
+      "authorized_oxygen_target": null,
+      "scenario": {
+        "id": "stable_recovery",
+        "onset_s": null,
+        "knots": [
+          {
+            "t_s": 0,
+            "target": {
+              "hr": 74,
+              "spo2": 98,
+              "rr": 16,
+              "temp": 36.7
+            }
+          },
+          {
+            "t_s": 900,
+            "target": {
+              "hr": 74,
+              "spo2": 98,
+              "rr": 16,
+              "temp": 36.7
+            }
+          },
+          {
+            "t_s": 21600,
+            "target": {
+              "hr": 74,
+              "spo2": 98,
+              "rr": 16,
+              "temp": 36.7
+            }
+          }
+        ],
+        "faults": []
+      },
+      "supplemental_oxygen": "unknown",
+      "oxygen_status_source": "not_documented"
+    },
+    {
+      "patient_id": "P009",
+      "fhir_patient_id": "d19a69a1-7001-af7c-b1a2-0b7636b58463",
+      "encounter_id": "d19a69a1-7001-af7c-c631-9366da40566e",
+      "clinical_cutoff": "2025-12-22T13:51:33+05:30",
+      "initial_vitals": {
+        "hr": 70,
+        "spo2": 97,
+        "rr": 17,
+        "temp": 36.8
+      },
+      "physiological_sd": {
+        "hr": 1.4,
+        "spo2": 0.4,
+        "rr": 1,
+        "temp": 0.04
+      },
+      "spo2_scale": 1,
+      "authorized_oxygen_target": null,
+      "scenario": {
+        "id": "complex_cardiac",
+        "onset_s": 900,
+        "knots": [
+          {
+            "t_s": 0,
+            "target": {
+              "hr": 70,
+              "spo2": 97,
+              "rr": 17,
+              "temp": 36.8
+            }
+          },
+          {
+            "t_s": 900,
+            "target": {
+              "hr": 70,
+              "spo2": 97,
+              "rr": 17,
+              "temp": 36.8
+            }
+          },
+          {
+            "t_s": 2700,
+            "target": {
+              "hr": 88,
+              "spo2": 94,
+              "rr": 23,
+              "temp": 36.8
+            }
+          },
+          {
+            "t_s": 5400,
+            "target": {
+              "hr": 105,
+              "spo2": 90,
+              "rr": 29,
+              "temp": 37
+            }
+          }
+        ],
+        "faults": []
+      },
+      "supplemental_oxygen": "unknown",
+      "oxygen_status_source": "not_documented"
+    },
+    {
+      "patient_id": "P010",
+      "fhir_patient_id": "db5dc9ff-ea35-e955-fe83-7b089193980c",
+      "encounter_id": "db5dc9ff-ea35-e955-21f7-4b8743216f3e",
+      "clinical_cutoff": "2020-05-24T18:48:29+05:30",
+      "initial_vitals": {
+        "hr": 86,
+        "spo2": 97,
+        "rr": 18,
+        "temp": 36.9
+      },
+      "physiological_sd": {
+        "hr": 2.2,
+        "spo2": 0.6,
+        "rr": 1.4,
+        "temp": 0.05
+      },
+      "spo2_scale": 1,
+      "authorized_oxygen_target": null,
+      "scenario": {
+        "id": "respiratory_with_fault",
+        "onset_s": 900,
+        "knots": [
+          {
+            "t_s": 0,
+            "target": {
+              "hr": 86,
+              "spo2": 97,
+              "rr": 18,
+              "temp": 36.9
+            }
+          },
+          {
+            "t_s": 900,
+            "target": {
+              "hr": 86,
+              "spo2": 97,
+              "rr": 18,
+              "temp": 36.9
+            }
+          },
+          {
+            "t_s": 2700,
+            "target": {
+              "hr": 98,
+              "spo2": 94,
+              "rr": 23,
+              "temp": 37.2
+            }
+          },
+          {
+            "t_s": 5400,
+            "target": {
+              "hr": 115,
+              "spo2": 88,
+              "rr": 32,
+              "temp": 38
+            }
+          }
+        ],
+        "faults": [
+          {
+            "type": "probe_removal",
+            "channel": "spo2",
+            "start_s": 3000,
+            "duration_s": 30,
+            "observed_value": null
+          }
+        ]
+      },
+      "supplemental_oxygen": "unknown",
+      "oxygen_status_source": "not_documented"
+    }
+  ],
+  "test_variants": [
+    {
+      "id": "P002-H",
+      "base_patient_id": "P002",
+      "synthetic_context": true,
+      "hypercapnic_respiratory_failure": true,
+      "simulated_clinician_authorization": true,
+      "spo2_scale": 2,
+      "authorized_oxygen_target": [
+        88,
+        92
+      ],
+      "initial_vitals": {
+        "hr": 76,
+        "spo2": 91,
+        "rr": 20,
+        "temp": 36.7
+      },
+      "scenario": {
+        "id": "authorized_oxygen_test",
+        "onset_s": null,
+        "knots": [
+          {
+            "t_s": 0,
+            "target": {
+              "hr": 76,
+              "spo2": 91,
+              "rr": 20,
+              "temp": 36.7
+            }
+          },
+          {
+            "t_s": 1800,
+            "target": {
+              "hr": 76,
+              "spo2": 91,
+              "rr": 20,
+              "temp": 36.7
+            }
+          }
+        ],
+        "faults": []
+      },
+      "note": "Separate test run; do not alter original FHIR record or count as an additional Synthea patient. Authorization is hypothetical and scoped to the isolated test session; backend must assign explicit validity interval and evidence reference before Scale 2 use.",
+      "supplemental_oxygen": "off",
+      "oxygen_status_source": "synthetic_test_context",
+      "authorization_type": "simulated_clinician_authorization"
+    }
+  ],
+  "architecture_version": "4.1",
+  "supersedes": "patient_physiological_configuration_v1.json"
+}

@@ -1,0 +1,125 @@
+[
+ {
+  "patient_id": "P001",
+  "scenario": "gradual_respiratory",
+  "events": [
+   {
+    "onset_t": 516351,
+    "end_t": 522651,
+    "recovered_t": 526251,
+    "severe_t": 519138
+   }
+  ],
+  "artifact_seconds": 947
+ },
+ {
+  "patient_id": "P002",
+  "scenario": "transient_respiratory",
+  "events": [
+   {
+    "onset_t": 306571,
+    "end_t": 309571,
+    "recovered_t": 313171,
+    "severe_t": 307177
+   }
+  ],
+  "artifact_seconds": 1700
+ },
+ {
+  "patient_id": "P003",
+  "scenario": "heart_failure_pattern",
+  "events": [
+   {
+    "onset_t": 1071024,
+    "end_t": 1077324,
+    "recovered_t": 1080924,
+    "severe_t": 1072929
+   }
+  ],
+  "artifact_seconds": 1470
+ },
+ {
+  "patient_id": "P004",
+  "scenario": "sudden_cardiovascular",
+  "events": [
+   {
+    "onset_t": 687461,
+    "end_t": 690161,
+    "recovered_t": 693761,
+    "severe_t": 688353
+   }
+  ],
+  "artifact_seconds": 452
+ },
+ {
+  "patient_id": "P005",
+  "scenario": "muted_hr_response",
+  "events": [
+   {
+    "onset_t": 479900,
+    "end_t": 486200,
+    "recovered_t": 489800,
+    "severe_t": 482495
+   }
+  ],
+  "artifact_seconds": 1070
+ },
+ {
+  "patient_id": "P006",
+  "scenario": "episodic_respiratory",
+  "events": [
+   {
+    "onset_t": 947156,
+    "end_t": 952256,
+    "recovered_t": 955856,
+    "severe_t": 947720
+   }
+  ],
+  "artifact_seconds": 1154
+ },
+ {
+  "patient_id": "P007",
+  "scenario": "simulated_fever_deterioration",
+  "events": [
+   {
+    "onset_t": 790268,
+    "end_t": 812768,
+    "recovered_t": 816368,
+    "severe_t": 806800
+   }
+  ],
+  "artifact_seconds": 1061
+ },
+ {
+  "patient_id": "P008",
+  "scenario": "stable_recovery",
+  "events": [],
+  "artifact_seconds": 1106
+ },
+ {
+  "patient_id": "P009",
+  "scenario": "complex_cardiac",
+  "events": [
+   {
+    "onset_t": 1105675,
+    "end_t": 1111975,
+    "recovered_t": 1115575,
+    "severe_t": 1108528
+   }
+  ],
+  "artifact_seconds": 610
+ },
+ {
+  "patient_id": "P010",
+  "scenario": "respiratory_with_fault",
+  "events": [
+   {
+    "onset_t": 528235,
+    "end_t": 534535,
+    "recovered_t": 538135,
+    "severe_t": 531151
+   }
+  ],
+  "artifact_seconds": 1123
+ }
+]

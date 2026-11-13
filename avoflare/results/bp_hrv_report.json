@@ -1,0 +1,229 @@
+{
+ "note": "Simulated BP/HRV, monitoring-only scores; engineering test, not clinical validation.",
+ "summary": {
+  "sbp": {
+   "events_flagged": "4/9",
+   "false_flags_per_patient_day": 0.18
+  },
+  "shock": {
+   "events_flagged": "4/9",
+   "false_flags_per_patient_day": 0.0
+  },
+  "hrv": {
+   "events_flagged": "9/9",
+   "false_flags_per_patient_day": 0.19
+  }
+ },
+ "per_patient": {
+  "P001": {
+   "baseline": {
+    "sbp": 134.0,
+    "rmssd": 26.9
+   },
+   "sbp": {
+    "event_flagged": false,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 0
+   },
+   "shock": {
+    "event_flagged": false,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 0
+   },
+   "hrv": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.27,
+    "max_score_in_event": 2
+   }
+  },
+  "P002": {
+   "baseline": {
+    "sbp": 112.0,
+    "rmssd": 38.2
+   },
+   "sbp": {
+    "event_flagged": false,
+    "false_flags_per_day": 0.67,
+    "max_score_in_event": 0
+   },
+   "shock": {
+    "event_flagged": false,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 0
+   },
+   "hrv": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.13,
+    "max_score_in_event": 2
+   }
+  },
+  "P003": {
+   "baseline": {
+    "sbp": 136.0,
+    "rmssd": 22.6
+   },
+   "sbp": {
+    "event_flagged": false,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 0
+   },
+   "shock": {
+    "event_flagged": false,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 0
+   },
+   "hrv": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.07,
+    "max_score_in_event": 2
+   }
+  },
+  "P004": {
+   "baseline": {
+    "sbp": 135.0,
+    "rmssd": 24.1
+   },
+   "sbp": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 1
+   },
+   "shock": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 2
+   },
+   "hrv": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.4,
+    "max_score_in_event": 2
+   }
+  },
+  "P005": {
+   "baseline": {
+    "sbp": 133.0,
+    "rmssd": 30.9
+   },
+   "sbp": {
+    "event_flagged": false,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 0
+   },
+   "shock": {
+    "event_flagged": false,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 0
+   },
+   "hrv": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 2
+   }
+  },
+  "P006": {
+   "baseline": {
+    "sbp": 133.0,
+    "rmssd": 29.8
+   },
+   "sbp": {
+    "event_flagged": false,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 0
+   },
+   "shock": {
+    "event_flagged": false,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 0
+   },
+   "hrv": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.2,
+    "max_score_in_event": 2
+   }
+  },
+  "P007": {
+   "baseline": {
+    "sbp": 112.0,
+    "rmssd": 37.1
+   },
+   "sbp": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.33,
+    "max_score_in_event": 1
+   },
+   "shock": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 2
+   },
+   "hrv": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.2,
+    "max_score_in_event": 2
+   }
+  },
+  "P008": {
+   "baseline": {
+    "sbp": 107.0,
+    "rmssd": 50.4
+   },
+   "sbp": {
+    "event_flagged": null,
+    "false_flags_per_day": 0.47,
+    "max_score_in_event": null
+   },
+   "shock": {
+    "event_flagged": null,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": null
+   },
+   "hrv": {
+    "event_flagged": null,
+    "false_flags_per_day": 0.07,
+    "max_score_in_event": null
+   }
+  },
+  "P009": {
+   "baseline": {
+    "sbp": 134.0,
+    "rmssd": 27.3
+   },
+   "sbp": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 1
+   },
+   "shock": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 2
+   },
+   "hrv": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.13,
+    "max_score_in_event": 2
+   }
+  },
+  "P010": {
+   "baseline": {
+    "sbp": 108.0,
+    "rmssd": 46.8
+   },
+   "sbp": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.33,
+    "max_score_in_event": 1
+   },
+   "shock": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.0,
+    "max_score_in_event": 2
+   },
+   "hrv": {
+    "event_flagged": true,
+    "false_flags_per_day": 0.4,
+    "max_score_in_event": 2
+   }
+  }
+ }
+}

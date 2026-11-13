@@ -1,0 +1,2 @@
+# Training batch placement
+Do not copy the same large dataset twice. Retain Abhi's actual files under matlab_source/Abhi_MATLAB_Virtual_Wearable_Simulator/output/batch_training/batch_v1/ and point the AI loader to that directory, OR move a verified copy here as batch_v1 with provenance and hashes. Choose one canonical location and record it. Use 05_training_dataset_contract.md. No synthetic or empty placeholder datasets are provided. Validation report and split registry must refer to actual run IDs. If existing batch is intact, audit before requesting additional runs.

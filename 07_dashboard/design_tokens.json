@@ -1,0 +1,88 @@
+{
+  "version": "1.0",
+  "brand": "Avoflare",
+  "theme": "light_only",
+  "colors": {
+    "canvas": "#FFFFFF",
+    "surface": "#FFFFFF",
+    "secondary": "#F4F5F3",
+    "selected": "#E7EFE9",
+    "heading": "#174B38",
+    "primary": "#174B38",
+    "text": "#000000",
+    "separator": "#DDE3DD",
+    "review": "#9A5800",
+    "urgent": "#B42318",
+    "onPrimary": "#FFFFFF"
+  },
+  "typography": {
+    "primary": "Manrope",
+    "fallback": "system-ui, Arial, sans-serif",
+    "technical": "IBM Plex Mono",
+    "bodyDesktopPx": 17,
+    "bodyMobilePx": 16,
+    "supportingMinPx": 14,
+    "pageHeadingPx": 40,
+    "sectionHeadingPx": 26,
+    "panelHeadingPx": 20,
+    "vitalValuePx": 48,
+    "lineHeight": 1.55,
+    "weights": [
+      400,
+      500,
+      600,
+      700
+    ]
+  },
+  "spacingPx": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    40,
+    48,
+    64
+  ],
+  "layout": {
+    "sidebarPx": 224,
+    "contentMaxPx": 1600,
+    "desktopPaddingPx": 32,
+    "mobilePaddingPx": 16,
+    "gridGapPx": 24,
+    "columns": 12
+  },
+  "radiusPx": {
+    "panel": 18,
+    "control": 12
+  },
+  "controlMinHeightPx": 44,
+  "motion": {
+    "durationMs": 180,
+    "reducedMotion": true,
+    "scrollFade": false,
+    "buttonOpacityHover": false
+  },
+  "visualRestrictions": [
+    "no decorative gradients",
+    "no gradient text",
+    "no emojis",
+    "no Inter",
+    "no Space Grotesk",
+    "no colored card borders",
+    "no glassmorphism",
+    "no dark mode",
+    "no three generic icon boxes in a row",
+    "no badges above headlines",
+    "no Lucide icons",
+    "no grain overlays",
+    "no serif italic accents",
+    "no generic buzzwords",
+    "no em dashes in UI copy",
+    "no inconsistent spacing",
+    "no button fade on hover",
+    "no cursor-following beam",
+    "no fade-in-on-scroll"
+  ]
+}

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My recovery · Avoflare</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/static/ui.css">
+<style>
+body{font-size:17px}
+.wrap{max-width:720px;margin:0 auto;padding:20px 16px 96px;display:grid;gap:20px}
+header{display:flex;align-items:center;gap:12px;justify-content:space-between}header img.logo{width:120px;height:auto}
+.avatar{width:56px;height:56px;border-radius:50%;object-fit:cover}
+.progress{height:14px;background:var(--quiet);border-radius:7px;overflow:hidden}.progress i{display:block;height:100%;background:var(--green)}
+.task{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;border-top:1px solid var(--rule);padding:14px 0}
+nav.bottom{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--rule);display:grid;grid-template-columns:repeat(4,1fr);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.bottom a{min-height:56px;display:grid;place-items:center;text-decoration:none;color:var(--text);font-weight:600}nav.bottom a.on{color:var(--green);background:var(--selected)}
+fieldset{border:1px solid var(--rule);border-radius:var(--r-panel);padding:16px;display:grid;gap:10px}
+.check{display:flex;gap:10px;align-items:center;font-weight:500}.check input{width:22px;min-height:22px}
+.media{aspect-ratio:4/3;max-width:320px}
+</style>
+</head>
+<body>
+<div id="root" class="wrap"></div>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let ME=null,D=null,tab=location.hash.slice(1)||'home';
+async function api(u,b){const r=await fetch(u,{method:b?'POST':'GET',headers:b?{'Content-Type':'application/json'}:{},body:b?JSON.stringify(b):undefined});
+ const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.detail||'Something went wrong. Please try again.');return j}
+window.onhashchange=()=>{tab=location.hash.slice(1)||'home';draw()};
+async function login(){const cfg=await api('/api/config').catch(()=>({}));
+ $('#root').innerHTML=`<header><img class="logo" src="/assets/images/logo.png" alt="Avoflare"></header><h1>My recovery</h1>
+ <form id="lf" class="stack panel"><label for="uid">User ID<input id="uid" autocomplete="username" required></label><label for="pw">Password<input id="pw" type="password" autocomplete="current-password" required></label>
+ <p class="err" role="alert" id="le"></p><button>Sign in</button></form>
+ ${cfg.demo_login?`<div class="quiet stack"><b>Demo patient accounts (enabled)</b><div class="row">${cfg.demo_accounts.filter(a=>a.role=='patient').map(a=>`<button class="secondary" data-demo="${a.uid}">${esc(a.name)}</button>`).join('')}</div></div>`:''}
+ <p class="muted">This app is not an emergency service. In an emergency call your local emergency number.</p>`;
+ $('#lf').onsubmit=async e=>{e.preventDefault();try{ME=await api('/api/login',{uid:$('#uid').value.trim(),password:$('#pw').value});load()}catch(x){$('#le').textContent=x.message}};
+ document.querySelectorAll('[data-demo]').forEach(b=>b.onclick=async()=>{ME=await api('/api/login',{uid:b.dataset.demo,demo:true});load()})}
+async function load(){if(ME.role!='patient'){$('#root').innerHTML='<p>This application is for patients. Clinicians use the <a href="/">clinician dashboard</a>.</p>';return}
+ try{D=await api('/api/me/recovery');draw()}catch(e){$('#root').innerHTML=`<p class="err">${esc(e.message)}</p>`}}
+function draw(){if(!D)return;const p=D.plan,done=p?p.tasks.filter(t=>D.done_today[t.id]).length:0,tot=p?p.tasks.length:0;
+ const av=D.gender=='female'?'patient_avatar_female':D.gender=='male'?'patient_avatar_male':null;
+ const head=`<header><img class="logo" src="/assets/images/logo.png" alt="Avoflare">${av?`<img class="avatar" src="/assets/images/${av}.png" alt="">`:''}</header>`;
+ const nav=`<nav class="bottom" aria-label="Main">${[['home','Home'],['tasks','Tasks'],['symptoms','Symptoms'],['care','Care plan']].map(t=>`<a href="#${t[0]}" class="${tab==t[0]?'on':''}">${t[1]}</a>`).join('')}</nav>`;
+ const taskList=()=>p?p.tasks.map(t=>`<div class="task"><div><b>${esc(t.title)}</b><br>${esc(t.time)}<br><span class="muted">${esc(t.instructions)}</span></div>
+  ${D.done_today[t.id]?'<b>Done</b>':`<button data-task="${t.id}">Mark done</button>`}</div>`).join(''):'';
+ const pages={
+ home:`<h1>My recovery</h1><p>Day ${D.day} since monitoring started.</p>
+  <section class="panel stack"><h2>Today's recovery plan</h2>${p?`<p><b>${done} of ${tot}</b> approved tasks done today</p><div class="progress" role="progressbar" aria-valuenow="${done}" aria-valuemax="${tot}"><i style="width:${tot?done/tot*100:0}%"></i></div>
+  <p>Next: ${esc((p.tasks.find(t=>!D.done_today[t.id])||{title:'All tasks done for today'}).title)}</p>`:'<p>Your care plan is not available yet. Please contact your care team.</p>'}</section>
+  <section class="panel stack"><h2>Monitoring</h2><div class="media"><img src="/assets/images/${D.device.state=='removed_confirmed'?'watch_removed':'watch_attached'}.png" alt=""></div>
+  <p>${D.device.state=='removed_confirmed'?'Your watch reports it is not being worn. Please put it back on.':D.device.state=='attached_confirmed'?'Your watch is sending readings.':'No recent readings from your watch.'}</p>
+  <p class="muted">Your care team reviews your readings. If you feel unwell, use Symptoms or call your care team.</p></section>`,
+ tasks:`<h1>Daily tasks</h1><section class="panel">${p?taskList():'<p>Your care plan is not available yet. Please contact your care team.</p>'}</section>`,
+ symptoms:`<h1>How are you feeling today?</h1><form id="sf" class="stack"><fieldset><legend>Choose all that apply</legend>
+  ${['breathlessness','fever','dizziness','fatigue'].map(s=>`<label class="check"><input type="checkbox" name="s" value="${s}"> ${s[0].toUpperCase()+s.slice(1)}</label>`).join('')}
+  <label class="check"><input type="checkbox" name="s" value="none" id="none"> None of these</label></fieldset>
+  <label for="sev">How bad is it?<select id="sev"><option value="">Choose</option><option>mild</option><option>moderate</option><option>severe</option></select></label>
+  <label for="note">Anything else (optional)<textarea id="note" rows="2" maxlength="300"></textarea></label>
+  <button>Send to my care team</button><p id="sr" role="status"></p></form>
+  <section class="panel stack"><h2>Earlier reports</h2>${D.symptoms.slice().reverse().map(s=>`<p>${new Date(s.at*1000).toLocaleString()}: ${s.symptoms.join(', ')}${s.severity?' ('+s.severity+')':''} · received</p>`).join('')||'<p>No reports yet.</p>'}</section>`,
+ care:`<h1>Care plan</h1><section class="panel stack"><h2>Plan</h2>${p?`<p>Recovery phase: ${esc(p.phase)} · planned ${p.duration_days} days</p><p>Care team contact: ${esc(p.contact)}</p>`:'<p>Your care plan is not available yet. Please contact your care team.</p>'}</section>
+  <section class="panel stack"><h2>Current medicines</h2>${(p?p.medications:[]).concat(D.approved_medications||[]).map(m=>`<p><b>${esc(m.label)}</b> ${esc(m.schedule)}${m.approved_by?' · approved by '+esc(m.approved_by):''}</p>`).join('')||'<p>No current medicines have been confirmed by your care team.</p>'}
+  <p class="muted">Ask your care team before starting, stopping or changing any medicine.</p></section>
+  <section class="panel stack"><h2>Older prescriptions on record</h2><p class="muted">These are from your history and may not be current.</p>${D.medication_history.map(m=>`<p>${esc(m.label)}</p>`).join('')||'<p>None.</p>'}</section>
+  <button class="secondary" id="out">Sign out</button>`};
+ $('#root').innerHTML=head+(pages[tab]||pages.home)+nav;
+ document.querySelectorAll('[data-task]').forEach(b=>b.onclick=async()=>{b.disabled=true;b.textContent='Saving…';try{await api('/api/me/tasks/'+b.dataset.task,{});D=await api('/api/me/recovery');draw()}catch(e){b.disabled=false;b.textContent='Retry';alert(e.message)}});
+ const sf=$('#sf');if(sf){const boxes=[...sf.querySelectorAll('[name=s]')];boxes.forEach(b=>b.onchange=()=>{if(b.value=='none'&&b.checked)boxes.forEach(x=>{if(x!=b)x.checked=false});else if(b.checked)$('#none').checked=false});
+  sf.onsubmit=async e=>{e.preventDefault();const btn=sf.querySelector('button');btn.disabled=true;try{const r=await api('/api/me/symptoms',{symptoms:boxes.filter(b=>b.checked).map(b=>b.value),severity:$('#sev').value,note:$('#note').value});
+   $('#sr').innerHTML=`<b>Received at ${new Date(r.at*1000).toLocaleTimeString()}.</b> ${esc(r.guidance)}`;D=await api('/api/me/recovery')}catch(x){$('#sr').innerHTML=`<span class="err">${esc(x.message)}</span>`}btn.disabled=false}}
+ const o=$('#out');if(o)o.onclick=async()=>{await api('/api/logout',{});ME=null;login()}}
+api('/api/me').then(m=>{ME=m;load()}).catch(login);
+</script>
+</body>
+</html>

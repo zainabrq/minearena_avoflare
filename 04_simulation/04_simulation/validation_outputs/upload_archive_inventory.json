@@ -1,0 +1,990 @@
+{
+  "archive": "Abhi_MATLAB_Virtual_Wearable_Simulator (2).zip",
+  "archive_bytes": 193868425,
+  "entry_count": 140,
+  "readable_crc_verified": 26,
+  "unreadable": 114,
+  "note": "Central-directory names and sizes do not prove content or execution. Source inspection only; MATLAB not executed. Unreadable local headers in this uploaded copy; verify original local archive before concluding original is corrupt.",
+  "entries": [
+    {
+      "path": "apply_sensor_faults.m",
+      "uncompressed_bytes": 3043,
+      "crc32": "d01b0ac8",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "batch/generate_training_batch.m",
+      "uncompressed_bytes": 15533,
+      "crc32": "e2814fd9",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "bidmc_analysis/README.txt",
+      "uncompressed_bytes": 658,
+      "crc32": "624d62cf",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "bidmc_analysis/record_statistics.csv",
+      "uncompressed_bytes": 8775,
+      "crc32": "645e7873",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "bidmc_analysis/replay_numerics.csv",
+      "uncompressed_bytes": 695302,
+      "crc32": "af32ac05",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "bidmc_analysis/summary.json",
+      "uncompressed_bytes": 1049,
+      "crc32": "2229193b",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "clinical_data/verified_clinical_registry_v1.json",
+      "uncompressed_bytes": 279779,
+      "crc32": "f6b35b3b",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "config/patient_physiological_configuration_v1.json",
+      "uncompressed_bytes": 17311,
+      "crc32": "959944df",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "data/monitoring_profiles/P001.json",
+      "uncompressed_bytes": 3374,
+      "crc32": "7cd67a3e",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "data/monitoring_profiles/P002.json",
+      "uncompressed_bytes": 3014,
+      "crc32": "4812177d",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "data/monitoring_profiles/P003.json",
+      "uncompressed_bytes": 4462,
+      "crc32": "e0ea92c1",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "data/monitoring_profiles/P004.json",
+      "uncompressed_bytes": 4185,
+      "crc32": "2d0b3557",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "data/monitoring_profiles/P005.json",
+      "uncompressed_bytes": 4646,
+      "crc32": "85b27a3d",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "data/monitoring_profiles/P006.json",
+      "uncompressed_bytes": 3920,
+      "crc32": "950ce097",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "data/monitoring_profiles/P007.json",
+      "uncompressed_bytes": 1569,
+      "crc32": "cc999739",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "data/monitoring_profiles/P008.json",
+      "uncompressed_bytes": 1441,
+      "crc32": "dcfee607",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "data/monitoring_profiles/P009.json",
+      "uncompressed_bytes": 4025,
+      "crc32": "f6e26ead",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "data/monitoring_profiles/P010.json",
+      "uncompressed_bytes": 2766,
+      "crc32": "4ac4a86f",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "evaluation/analyze_integrated_validation.m",
+      "uncompressed_bytes": 4390,
+      "crc32": "ad8f6fb0",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "evaluation/run_integrated_sensor_validation.asv",
+      "uncompressed_bytes": 10438,
+      "crc32": "44b1c1d5",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "evaluation/run_integrated_sensor_validation.m",
+      "uncompressed_bytes": 10547,
+      "crc32": "3f69dc86",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "gateway/adaptive_window_controller.m",
+      "uncompressed_bytes": 8478,
+      "crc32": "78b2d450",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "gateway/create_observation_windows.m",
+      "uncompressed_bytes": 6532,
+      "crc32": "53b145f8",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "gateway/evaluate_windowing_comparison.m",
+      "uncompressed_bytes": 4340,
+      "crc32": "1b83c08f",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "gateway/gateway_data_quality_monitor.m",
+      "uncompressed_bytes": 9180,
+      "crc32": "ab727d6e",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "gateway/gateway_fault_event_logger.m",
+      "uncompressed_bytes": 7553,
+      "crc32": "2ae4cf27",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "gateway/integrate_sensor_fault_events.m",
+      "uncompressed_bytes": 9207,
+      "crc32": "9ac11441",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "gateway/simulate_packet_loss.m",
+      "uncompressed_bytes": 2060,
+      "crc32": "55d16a8d",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "generate_physiology.m",
+      "uncompressed_bytes": 2928,
+      "crc32": "1c82f081",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "initialize_patients.m",
+      "uncompressed_bytes": 4857,
+      "crc32": "160a5be5",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "load_patient_profiles.m",
+      "uncompressed_bytes": 755,
+      "crc32": "0863d6e6",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "MineArena_15Day_Extension/clinical_data/verified_clinical_registry_v1.json",
+      "uncompressed_bytes": 279779,
+      "crc32": "f6b35b3b",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "MineArena_15Day_Extension/config/patient_physiological_configuration_v1_1.json",
+      "uncompressed_bytes": 19033,
+      "crc32": "518f0bfa",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "MineArena_15Day_Extension/docs/IMPLEMENTATION_CHECKLIST.txt",
+      "uncompressed_bytes": 1074,
+      "crc32": "f974a796",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "MineArena_15Day_Extension/docs/PATCH_generate_correlated_physiology.txt",
+      "uncompressed_bytes": 899,
+      "crc32": "3b5ecc7e",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "MineArena_15Day_Extension/longitudinal/generate_15day_patient_data.m",
+      "uncompressed_bytes": 11851,
+      "crc32": "7122952a",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "MineArena_15Day_Extension/longitudinal/generate_post_discharge_targets.m",
+      "uncompressed_bytes": 3925,
+      "crc32": "61c942ab",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "MineArena_15Day_Extension/longitudinal/post_discharge_model_v1.json",
+      "uncompressed_bytes": 5105,
+      "crc32": "56b46df0",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "MineArena_15Day_Extension/README_FIRST.txt",
+      "uncompressed_bytes": 5487,
+      "crc32": "e9aa198a",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "MineArena_15Day_Extension/training/build_15day_training_dataset.m",
+      "uncompressed_bytes": 6813,
+      "crc32": "156c99f9",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "MineArena_15Day_Extension/validation/validate_15day_dataset.m",
+      "uncompressed_bytes": 5582,
+      "crc32": "ec600e13",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/batch_training/batch_v1/clinical_context.json",
+      "uncompressed_bytes": 279481,
+      "crc32": "1c3055a6",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/batch_training/batch_v1/ground_truth.csv",
+      "uncompressed_bytes": 162141181,
+      "crc32": "821d0842",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/batch_training/batch_v1/observations.csv",
+      "uncompressed_bytes": 142156947,
+      "crc32": "043a65c4",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/batch_training/batch_v1/run_manifest.json",
+      "uncompressed_bytes": 18586,
+      "crc32": "0328ab78",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/batch_training/trajectory_validation/trajectory_validation_report.csv",
+      "uncompressed_bytes": 5453,
+      "crc32": "4722a0d2",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/batch_training/trajectory_validation/trajectory_validation_results.mat",
+      "uncompressed_bytes": 2632,
+      "crc32": "34cf71b0",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/gateway_events/gateway_fault_event_log.csv",
+      "uncompressed_bytes": 407,
+      "crc32": "ff0f4e26",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/gateway_events/gateway_fault_event_log.mat",
+      "uncompressed_bytes": 1464,
+      "crc32": "1078bf1f",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/gateway_events/sensor_fault_events.csv",
+      "uncompressed_bytes": 509,
+      "crc32": "581971d8",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/gateway_events/sensor_fault_events.mat",
+      "uncompressed_bytes": 1490,
+      "crc32": "4f4d39b6",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/gateway_quality/gateway_quality_report.csv",
+      "uncompressed_bytes": 2154,
+      "crc32": "95069f1d",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/gateway_quality/gateway_quality_results.mat",
+      "uncompressed_bytes": 2243,
+      "crc32": "2a045e8a",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/gateway_quality/timestamp_gap_report.csv",
+      "uncompressed_bytes": 101,
+      "crc32": "7d20082a",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/ground_truth_20261112_153246.csv",
+      "uncompressed_bytes": 468560,
+      "crc32": "cc70e8d1",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/ground_truth_20261112_153651.csv",
+      "uncompressed_bytes": 468560,
+      "crc32": "2b5c59cb",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/ground_truth_20261112_155245.csv",
+      "uncompressed_bytes": 457480,
+      "crc32": "ef8d78a7",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/ground_truth_20261112_155630.csv",
+      "uncompressed_bytes": 457480,
+      "crc32": "bb7c37ea",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/ground_truth_20261112_160110.csv",
+      "uncompressed_bytes": 439683,
+      "crc32": "ae297762",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_fault_metadata_20261112_161126.csv",
+      "uncompressed_bytes": 1535126,
+      "crc32": "4067aed2",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_fault_metadata_20261112_161202.csv",
+      "uncompressed_bytes": 1535126,
+      "crc32": "4067aed2",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_fault_metadata_20261112_193804.csv",
+      "uncompressed_bytes": 1535126,
+      "crc32": "4067aed2",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_fault_metadata_20261112_194522.csv",
+      "uncompressed_bytes": 1535126,
+      "crc32": "4067aed2",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_fault_metadata_20261112_195133.csv",
+      "uncompressed_bytes": 1535126,
+      "crc32": "4067aed2",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_fault_metadata_20261112_200229.csv",
+      "uncompressed_bytes": 1535126,
+      "crc32": "4067aed2",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_ground_truth_20261112_161126.csv",
+      "uncompressed_bytes": 5314668,
+      "crc32": "f7721d05",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_ground_truth_20261112_161202.csv",
+      "uncompressed_bytes": 5314668,
+      "crc32": "f7721d05",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_ground_truth_20261112_193804.csv",
+      "uncompressed_bytes": 5314668,
+      "crc32": "f7721d05",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_ground_truth_20261112_194522.csv",
+      "uncompressed_bytes": 5314668,
+      "crc32": "f7721d05",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_ground_truth_20261112_195133.csv",
+      "uncompressed_bytes": 5314668,
+      "crc32": "f7721d05",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_ground_truth_20261112_200229.csv",
+      "uncompressed_bytes": 5314668,
+      "crc32": "f7721d05",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_observed_20261112_161126.csv",
+      "uncompressed_bytes": 4218418,
+      "crc32": "3064fa7f",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_observed_20261112_161202.csv",
+      "uncompressed_bytes": 4218418,
+      "crc32": "3064fa7f",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_observed_20261112_193804.csv",
+      "uncompressed_bytes": 4218418,
+      "crc32": "3064fa7f",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_observed_20261112_194522.csv",
+      "uncompressed_bytes": 4218418,
+      "crc32": "3064fa7f",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_observed_20261112_195133.csv",
+      "uncompressed_bytes": 4218418,
+      "crc32": "3064fa7f",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_observed_20261112_200229.csv",
+      "uncompressed_bytes": 4218420,
+      "crc32": "7c5b8a62",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_quality_summary_20261112_161237.csv",
+      "uncompressed_bytes": 3580,
+      "crc32": "c1a8a9da",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_validation_20261112_161126.mat",
+      "uncompressed_bytes": 2415886,
+      "crc32": "0f4d6b2c",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_validation_20261112_161202.mat",
+      "uncompressed_bytes": 2415886,
+      "crc32": "7ae197ed",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_validation_20261112_193804.mat",
+      "uncompressed_bytes": 2415886,
+      "crc32": "1025eaea",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_validation_20261112_194522.mat",
+      "uncompressed_bytes": 2415886,
+      "crc32": "e2313bc9",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_validation_20261112_195133.mat",
+      "uncompressed_bytes": 2415886,
+      "crc32": "c8e230d1",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/integrated_validation_20261112_200229.mat",
+      "uncompressed_bytes": 2415851,
+      "crc32": "66964abb",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/master_validation/master_test_report.csv",
+      "uncompressed_bytes": 643,
+      "crc32": "a919ecbe",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/master_validation/master_test_results.mat",
+      "uncompressed_bytes": 1530,
+      "crc32": "2326d7d5",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/master_validation/trajectory/trajectory_validation_report.csv",
+      "uncompressed_bytes": 5453,
+      "crc32": "4722a0d2",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/master_validation/trajectory/trajectory_validation_results.mat",
+      "uncompressed_bytes": 2632,
+      "crc32": "d7e38412",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/master_validation_v2/master_test_report_v2.csv",
+      "uncompressed_bytes": 476,
+      "crc32": "a50c980d",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/master_validation_v2/master_test_results_v2.mat",
+      "uncompressed_bytes": 1985,
+      "crc32": "408e7290",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/master_validation_v2/trajectory/trajectory_validation_report.csv",
+      "uncompressed_bytes": 5453,
+      "crc32": "4722a0d2",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/master_validation_v2/trajectory/trajectory_validation_results.mat",
+      "uncompressed_bytes": 2632,
+      "crc32": "08eaa7ac",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/observed_20261112_153246.csv",
+      "uncompressed_bytes": 645963,
+      "crc32": "a894b6d4",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/observed_20261112_153651.csv",
+      "uncompressed_bytes": 645963,
+      "crc32": "ae0ba0c5",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/observed_20261112_155245.csv",
+      "uncompressed_bytes": 627530,
+      "crc32": "a792fe0a",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/observed_20261112_155630.csv",
+      "uncompressed_bytes": 576233,
+      "crc32": "845e565b",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/observed_20261112_160110.csv",
+      "uncompressed_bytes": 576297,
+      "crc32": "57e16a43",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/P010_probe_removal_validation.png",
+      "uncompressed_bytes": 77245,
+      "crc32": "90c94aab",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/packet_loss/detected_packet_gaps.csv",
+      "uncompressed_bytes": 115,
+      "crc32": "ac5b24a7",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/packet_loss/packet_loss_quality_report.csv",
+      "uncompressed_bytes": 302,
+      "crc32": "086fcc7c",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/packet_loss/packet_loss_test.mat",
+      "uncompressed_bytes": 6974,
+      "crc32": "b758bc51",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/sensor_fault_validation/sensor_fault_metadata.csv",
+      "uncompressed_bytes": 1635,
+      "crc32": "af855500",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/sensor_fault_validation/sensor_fault_observations.csv",
+      "uncompressed_bytes": 1551,
+      "crc32": "cf49f29c",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/sensor_fault_validation/sensor_fault_test.mat",
+      "uncompressed_bytes": 2766,
+      "crc32": "d832f6dc",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/simulation_20261112_153246.mat",
+      "uncompressed_bytes": 318302,
+      "crc32": "21a9a17a",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/simulation_20261112_153651.mat",
+      "uncompressed_bytes": 317965,
+      "crc32": "cf6ac96e",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/simulation_20261112_155245.mat",
+      "uncompressed_bytes": 410158,
+      "crc32": "c78d8fa5",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/simulation_20261112_155630.mat",
+      "uncompressed_bytes": 406852,
+      "crc32": "1bd098cc",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/simulation_20261112_160110.mat",
+      "uncompressed_bytes": 401083,
+      "crc32": "4d5aa910",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/windowing_comparison/adaptive_window_details.csv",
+      "uncompressed_bytes": 2464,
+      "crc32": "213e91f3",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/windowing_comparison/fixed_window_details.csv",
+      "uncompressed_bytes": 2367,
+      "crc32": "ef81617e",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/windowing_comparison/windowing_comparison.csv",
+      "uncompressed_bytes": 216,
+      "crc32": "51f5dc5b",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output/windowing_comparison/windowing_comparison.mat",
+      "uncompressed_bytes": 4200,
+      "crc32": "90a585f2",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "output.zip",
+      "uncompressed_bytes": 94600779,
+      "crc32": "26c72096",
+      "status": "unreadable",
+      "error": "Bad magic number for file header"
+    },
+    {
+      "path": "physiology/generate_correlated_physiology.asv",
+      "uncompressed_bytes": 3888,
+      "crc32": "aeb3007c",
+      "status": "readable_crc_verified",
+      "sha256": "b1bd9483b89eeef49ec0ed6b01b52145c26a03d77f4207591d88adb080722031"
+    },
+    {
+      "path": "physiology/generate_correlated_physiology.m",
+      "uncompressed_bytes": 3745,
+      "crc32": "cb1e2e8b",
+      "status": "readable_crc_verified",
+      "sha256": "011966502fa2faa233602d9cd1655b723fa42e8fd6c1f4e9cffaac6527626b1f"
+    },
+    {
+      "path": "physiology/initialize_physiological_state.m",
+      "uncompressed_bytes": 4119,
+      "crc32": "488b17aa",
+      "status": "readable_crc_verified",
+      "sha256": "490ab6f0dafcca82be255c17c6c7be68831d0065486782483df334a64ac72f21"
+    },
+    {
+      "path": "physiology/interpolate_scenario_targets.m",
+      "uncompressed_bytes": 1982,
+      "crc32": "fcd681c6",
+      "status": "readable_crc_verified",
+      "sha256": "aca3369c8168cea68dab99b20a61906b91e12d53aab05441ace06dc2c7d71165"
+    },
+    {
+      "path": "profiles/load_physiological_config.m",
+      "uncompressed_bytes": 6575,
+      "crc32": "6bd7cb2a",
+      "status": "readable_crc_verified",
+      "sha256": "cc1a39165f0588ba7ac66071be437486424194d2978fffff54d423c23f05bc0d"
+    },
+    {
+      "path": "profiles/load_verified_registry.m",
+      "uncompressed_bytes": 1067,
+      "crc32": "549f567b",
+      "status": "readable_crc_verified",
+      "sha256": "be6190eb3f2e4a1ee90a37ef92bfdd3e33f9bf933cab4f4a3bab694aebd4ebba"
+    },
+    {
+      "path": "README.md",
+      "uncompressed_bytes": 4002,
+      "crc32": "0b83abad",
+      "status": "readable_crc_verified",
+      "sha256": "a534e27baff552a9f039e91e4c415b19c938130d6c873a1e8ad01c0b0d37f35b"
+    },
+    {
+      "path": "replay/load_bidmc_recordings.m",
+      "uncompressed_bytes": 3201,
+      "crc32": "519b6120",
+      "status": "readable_crc_verified",
+      "sha256": "404930af869a7ed9f026c78406b12e49b5b0f83975404d3476997fcb617d32b0"
+    },
+    {
+      "path": "replay/replay_bidmc_record.m",
+      "uncompressed_bytes": 1456,
+      "crc32": "7a3843ae",
+      "status": "readable_crc_verified",
+      "sha256": "30e00b19a42d6771e834737162dc1cee535dc5e8c3b346acaff84835be305a7d"
+    },
+    {
+      "path": "replay/stream_bidmc_record.m",
+      "uncompressed_bytes": 2144,
+      "crc32": "d2f8249e",
+      "status": "readable_crc_verified",
+      "sha256": "ba4d320120d8e881de5d40fcf0fe7317426694adf5c9f7590d32bb8a0217bb7d"
+    },
+    {
+      "path": "replay/stream_bidmc_to_gateway.m",
+      "uncompressed_bytes": 5810,
+      "crc32": "6585b873",
+      "status": "readable_crc_verified",
+      "sha256": "4a7b877cb723b8dfba0e8994c45019a6528a85dcc6acd42f96038c12bfa7c4f6"
+    },
+    {
+      "path": "replay_bidmc_recording.m",
+      "uncompressed_bytes": 1070,
+      "crc32": "53762567",
+      "status": "readable_crc_verified",
+      "sha256": "70339285f099651692f76bfa4cb564fbb38e6dd8d2b10414d93a114827a73dd2"
+    },
+    {
+      "path": "run_minearena_realtime_replay.m",
+      "uncompressed_bytes": 8087,
+      "crc32": "402dd9ca",
+      "status": "readable_crc_verified",
+      "sha256": "e0711b7c7aa76da20a31e4d9f1fa51afa9829142227fa4d60dda5925de143f33"
+    },
+    {
+      "path": "run_virtual_wearable_simulator.m",
+      "uncompressed_bytes": 7443,
+      "crc32": "3ebd7bb3",
+      "status": "readable_crc_verified",
+      "sha256": "1fbea589b31a5a1aae45a9022f6f8fbd6c1a56afedaa2234efdaa1833ccc5c64"
+    },
+    {
+      "path": "send_observation_to_gateway.m",
+      "uncompressed_bytes": 901,
+      "crc32": "d3abc4ed",
+      "status": "readable_crc_verified",
+      "sha256": "599f7402785fce1effbd327a7c7d0e4d4fef67333b72acb8ed88f4a685b6a793"
+    },
+    {
+      "path": "sensor/apply_configured_sensor_effects.asv",
+      "uncompressed_bytes": 7867,
+      "crc32": "37b2ddae",
+      "status": "readable_crc_verified",
+      "sha256": "e499d2db4e79d89980c28cf8aa4df1a41a140d2c449f860f5c4c28decfff3b51"
+    },
+    {
+      "path": "sensor/apply_configured_sensor_effects.m",
+      "uncompressed_bytes": 6750,
+      "crc32": "500e919a",
+      "status": "readable_crc_verified",
+      "sha256": "ec62634b88c81e1b6ff86c6cacda9b4a7ef452a4a7cabeb88ca9fcfe90d4026c"
+    },
+    {
+      "path": "sensor/apply_sensor_fault_scenarios.m",
+      "uncompressed_bytes": 6773,
+      "crc32": "6038b563",
+      "status": "readable_crc_verified",
+      "sha256": "1000803a29eeedc7c52b447508553daa1a6d983181badcd8af6fedaeb0ef7508"
+    },
+    {
+      "path": "simulator_config.m",
+      "uncompressed_bytes": 3630,
+      "crc32": "92c01454",
+      "status": "readable_crc_verified",
+      "sha256": "125dab84872999cd633a328f53e1e9034e61c7c0516ef7aa1193004ae998f5e3"
+    },
+    {
+      "path": "tests/run_minearena_master_tests.m",
+      "uncompressed_bytes": 8544,
+      "crc32": "8e263887",
+      "status": "readable_crc_verified",
+      "sha256": "c606cfa3babc78408e8c18dd41a23664e71a00fe8f8a97e0d906a30ce4acd6f4"
+    },
+    {
+      "path": "tests/run_minearena_master_tests_v2.asv",
+      "uncompressed_bytes": 9353,
+      "crc32": "d0a8a3d1",
+      "status": "readable_crc_verified",
+      "sha256": "1868287d42b3d8daf11566159942c290b6ad19656b757c9fc657e70b476ee4db"
+    },
+    {
+      "path": "tests/run_minearena_master_tests_v2.m",
+      "uncompressed_bytes": 9697,
+      "crc32": "0403f8b2",
+      "status": "readable_crc_verified",
+      "sha256": "b065722dbf3db24489746d0deb6090896632a5ceb79fb532f850ab9414f86b47"
+    },
+    {
+      "path": "test_sensor_fault_scenarios.m",
+      "uncompressed_bytes": 4687,
+      "crc32": "6539fc64",
+      "status": "readable_crc_verified",
+      "sha256": "3d767a48bf7b8690f3ada1c0beb82e4ccc1cb3881fafd26ea4a4bc3c5a6c5707"
+    },
+    {
+      "path": "test_simulator.m",
+      "uncompressed_bytes": 1720,
+      "crc32": "7d10331f",
+      "status": "readable_crc_verified",
+      "sha256": "b3517f45196e3be66cdca5eff627e4c874ea1ea8b9f8d314f14896559254fb49"
+    },
+    {
+      "path": "untitled.fig",
+      "uncompressed_bytes": 27894,
+      "crc32": "2d7ce41f",
+      "status": "readable_crc_verified",
+      "sha256": "12d1373da30fc9e9e8a0fd151c86c7847b39c3440114d8d389925ddf21f1b587"
+    },
+    {
+      "path": "validation/validate_batch_trajectories.m",
+      "uncompressed_bytes": 6561,
+      "crc32": "53da029b",
+      "status": "readable_crc_verified",
+      "sha256": "6f17b3393a615f02154f9c5eb5455e2c610eb39daac4bd3b8359ebe1942cbb8e"
+    }
+  ]
+}

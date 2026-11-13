@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "fixture": "tiny synthetic CSV only; no MATLAB batch audited",
+  "cases": [
+    "valid 601-row join",
+    "duplicate key rejected",
+    "scenario label flagged",
+    "patient identity mismatch rejected",
+    "target is not true field"
+  ]
+}

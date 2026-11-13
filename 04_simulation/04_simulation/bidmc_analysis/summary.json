@@ -1,0 +1,39 @@
+{
+  "record_count": 53,
+  "rows": 25493,
+  "sampling_interval_seconds": 1,
+  "temperature_available": false,
+  "statistics": {
+    "HR": {
+      "missing": 4,
+      "median": 89.0,
+      "p05": 67.0,
+      "p95": 115.0,
+      "median_record_sd": 1.477616347225349,
+      "median_record_p95_absolute_step": 1.0
+    },
+    "SpO2": {
+      "missing": 128,
+      "median": 98.0,
+      "p05": 92.0,
+      "p95": 100.0,
+      "median_record_sd": 0.5204581115485144,
+      "median_record_p95_absolute_step": 0.0
+    },
+    "RESP": {
+      "missing": 153,
+      "median": 18.0,
+      "p05": 12.0,
+      "p95": 22.0,
+      "median_record_sd": 1.0403376830637707,
+      "median_record_p95_absolute_step": 1.0
+    }
+  },
+  "limitations": [
+    "ICU recordings, not post-discharge baselines",
+    "Recorded variability combines physiology and measurement effects; not sensor noise estimates",
+    "No deterioration labels or temperature",
+    "RESP zero requires quality review; preserve raw values",
+    "Do not link BIDMC identities to Synthea patients"
+  ]
+}

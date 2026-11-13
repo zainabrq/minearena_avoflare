@@ -1,0 +1,555 @@
+{
+ "equation_set": "avoflare-twin-eq-0.1-provisional",
+ "params": {
+  "tau_s": {
+   "hr": 643.0,
+   "rr": 597.9000244140625,
+   "spo2": 612.2000122070312,
+   "temp": 632.7999877929688
+  },
+  "alpha_hr_temp": -0.0084,
+  "alpha_hr_activity": -0.0729,
+  "status": "learned_provisional"
+ },
+ "train_patients": [
+  "P001",
+  "P002",
+  "P003",
+  "P004",
+  "P005",
+  "P006",
+  "P007"
+ ],
+ "test_patients": [
+  "P008",
+  "P009",
+  "P010"
+ ],
+ "ensemble": 4,
+ "training_windows": 43333,
+ "ood_threshold": 12.16,
+ "results": {
+  "P008": {
+   "all": {
+    "5min": {
+     "n": 4296,
+     "mae_twin": {
+      "hr": 1.488,
+      "rr": 0.69,
+      "spo2": 0.079,
+      "temp": 0.022
+     },
+     "mae_persistence": {
+      "hr": 1.649,
+      "rr": 0.828,
+      "spo2": 0.026,
+      "temp": 0.021
+     },
+     "mae_mechanistic_only": {
+      "hr": 1.686,
+      "rr": 0.745,
+      "spo2": 0.021,
+      "temp": 0.048
+     },
+     "coverage_2sd": {
+      "hr": 0.935,
+      "rr": 0.655,
+      "spo2": 0.987,
+      "temp": 0.995
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.973,
+      "rr": 0.991,
+      "spo2": 1.0,
+      "temp": 0.973
+     }
+    },
+    "15min": {
+     "n": 4296,
+     "mae_twin": {
+      "hr": 1.738,
+      "rr": 0.732,
+      "spo2": 0.096,
+      "temp": 0.036
+     },
+     "mae_persistence": {
+      "hr": 2.326,
+      "rr": 0.938,
+      "spo2": 0.026,
+      "temp": 0.034
+     },
+     "mae_mechanistic_only": {
+      "hr": 2.285,
+      "rr": 0.754,
+      "spo2": 0.016,
+      "temp": 0.092
+     },
+     "coverage_2sd": {
+      "hr": 0.952,
+      "rr": 0.68,
+      "spo2": 0.987,
+      "temp": 0.997
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.964,
+      "rr": 0.979,
+      "spo2": 1.0,
+      "temp": 0.985
+     }
+    },
+    "30min": {
+     "n": 4296,
+     "mae_twin": {
+      "hr": 1.81,
+      "rr": 0.731,
+      "spo2": 0.097,
+      "temp": 0.053
+     },
+     "mae_persistence": {
+      "hr": 2.381,
+      "rr": 0.958,
+      "spo2": 0.026,
+      "temp": 0.04
+     },
+     "mae_mechanistic_only": {
+      "hr": 2.526,
+      "rr": 0.754,
+      "spo2": 0.014,
+      "temp": 0.113
+     },
+     "coverage_2sd": {
+      "hr": 0.954,
+      "rr": 0.735,
+      "spo2": 0.987,
+      "temp": 0.999
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.966,
+      "rr": 0.984,
+      "spo2": 1.0,
+      "temp": 0.992
+     }
+    }
+   },
+   "deterioration": null
+  },
+  "P009": {
+   "all": {
+    "5min": {
+     "n": 4300,
+     "mae_twin": {
+      "hr": 1.756,
+      "rr": 0.856,
+      "spo2": 0.248,
+      "temp": 0.026
+     },
+     "mae_persistence": {
+      "hr": 1.997,
+      "rr": 1.108,
+      "spo2": 0.359,
+      "temp": 0.026
+     },
+     "mae_mechanistic_only": {
+      "hr": 1.95,
+      "rr": 0.967,
+      "spo2": 0.306,
+      "temp": 0.05
+     },
+     "coverage_2sd": {
+      "hr": 0.862,
+      "rr": 0.531,
+      "spo2": 0.772,
+      "temp": 0.997
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.971,
+      "rr": 0.981,
+      "spo2": 0.98,
+      "temp": 0.968
+     }
+    },
+    "15min": {
+     "n": 4300,
+     "mae_twin": {
+      "hr": 2.049,
+      "rr": 0.89,
+      "spo2": 0.237,
+      "temp": 0.041
+     },
+     "mae_persistence": {
+      "hr": 2.564,
+      "rr": 1.188,
+      "spo2": 0.366,
+      "temp": 0.04
+     },
+     "mae_mechanistic_only": {
+      "hr": 2.438,
+      "rr": 0.948,
+      "spo2": 0.261,
+      "temp": 0.094
+     },
+     "coverage_2sd": {
+      "hr": 0.878,
+      "rr": 0.56,
+      "spo2": 0.768,
+      "temp": 0.997
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.968,
+      "rr": 0.982,
+      "spo2": 0.986,
+      "temp": 0.978
+     }
+    },
+    "30min": {
+     "n": 4300,
+     "mae_twin": {
+      "hr": 2.235,
+      "rr": 0.913,
+      "spo2": 0.244,
+      "temp": 0.061
+     },
+     "mae_persistence": {
+      "hr": 2.724,
+      "rr": 1.229,
+      "spo2": 0.379,
+      "temp": 0.048
+     },
+     "mae_mechanistic_only": {
+      "hr": 2.691,
+      "rr": 0.952,
+      "spo2": 0.241,
+      "temp": 0.115
+     },
+     "coverage_2sd": {
+      "hr": 0.913,
+      "rr": 0.648,
+      "spo2": 0.768,
+      "temp": 0.995
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.969,
+      "rr": 0.994,
+      "spo2": 0.983,
+      "temp": 0.988
+     }
+    }
+   },
+   "deterioration": {
+    "5min": {
+     "n": 330,
+     "mae_twin": {
+      "hr": 2.494,
+      "rr": 1.102,
+      "spo2": 0.712,
+      "temp": 0.032
+     },
+     "mae_persistence": {
+      "hr": 2.517,
+      "rr": 1.305,
+      "spo2": 0.617,
+      "temp": 0.025
+     },
+     "mae_mechanistic_only": {
+      "hr": 7.365,
+      "rr": 2.813,
+      "spo2": 1.71,
+      "temp": 0.041
+     },
+     "coverage_2sd": {
+      "hr": 0.803,
+      "rr": 0.521,
+      "spo2": 0.633,
+      "temp": 1.0
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.967,
+      "rr": 1.0,
+      "spo2": 0.961,
+      "temp": 0.973
+     }
+    },
+    "15min": {
+     "n": 330,
+     "mae_twin": {
+      "hr": 5.555,
+      "rr": 1.925,
+      "spo2": 1.261,
+      "temp": 0.07
+     },
+     "mae_persistence": {
+      "hr": 6.306,
+      "rr": 2.33,
+      "spo2": 1.328,
+      "temp": 0.048
+     },
+     "mae_mechanistic_only": {
+      "hr": 14.744,
+      "rr": 5.354,
+      "spo2": 3.285,
+      "temp": 0.082
+     },
+     "coverage_2sd": {
+      "hr": 0.724,
+      "rr": 0.506,
+      "spo2": 0.624,
+      "temp": 0.982
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.87,
+      "rr": 0.918,
+      "spo2": 0.876,
+      "temp": 0.909
+     }
+    },
+    "30min": {
+     "n": 330,
+     "mae_twin": {
+      "hr": 9.768,
+      "rr": 3.119,
+      "spo2": 1.851,
+      "temp": 0.116
+     },
+     "mae_persistence": {
+      "hr": 11.477,
+      "rr": 4.138,
+      "spo2": 2.423,
+      "temp": 0.078
+     },
+     "mae_mechanistic_only": {
+      "hr": 17.68,
+      "rr": 6.304,
+      "spo2": 3.878,
+      "temp": 0.11
+     },
+     "coverage_2sd": {
+      "hr": 0.673,
+      "rr": 0.491,
+      "spo2": 0.576,
+      "temp": 0.967
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.861,
+      "rr": 0.87,
+      "spo2": 0.824,
+      "temp": 0.93
+     }
+    }
+   }
+  },
+  "P010": {
+   "all": {
+    "5min": {
+     "n": 4291,
+     "mae_twin": {
+      "hr": 2.327,
+      "rr": 1.139,
+      "spo2": 0.462,
+      "temp": 0.033
+     },
+     "mae_persistence": {
+      "hr": 2.8,
+      "rr": 1.503,
+      "spo2": 0.638,
+      "temp": 0.031
+     },
+     "mae_mechanistic_only": {
+      "hr": 2.561,
+      "rr": 1.291,
+      "spo2": 0.551,
+      "temp": 0.053
+     },
+     "coverage_2sd": {
+      "hr": 0.732,
+      "rr": 0.444,
+      "spo2": 0.599,
+      "temp": 0.991
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.942,
+      "rr": 0.968,
+      "spo2": 0.986,
+      "temp": 0.906
+     }
+    },
+    "15min": {
+     "n": 4291,
+     "mae_twin": {
+      "hr": 2.481,
+      "rr": 1.18,
+      "spo2": 0.465,
+      "temp": 0.049
+     },
+     "mae_persistence": {
+      "hr": 3.436,
+      "rr": 1.613,
+      "spo2": 0.655,
+      "temp": 0.048
+     },
+     "mae_mechanistic_only": {
+      "hr": 2.9,
+      "rr": 1.256,
+      "spo2": 0.486,
+      "temp": 0.098
+     },
+     "coverage_2sd": {
+      "hr": 0.8,
+      "rr": 0.481,
+      "spo2": 0.604,
+      "temp": 0.978
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.953,
+      "rr": 0.977,
+      "spo2": 0.987,
+      "temp": 0.912
+     }
+    },
+    "30min": {
+     "n": 4291,
+     "mae_twin": {
+      "hr": 2.527,
+      "rr": 1.198,
+      "spo2": 0.473,
+      "temp": 0.066
+     },
+     "mae_persistence": {
+      "hr": 3.51,
+      "rr": 1.646,
+      "spo2": 0.67,
+      "temp": 0.058
+     },
+     "mae_mechanistic_only": {
+      "hr": 3.08,
+      "rr": 1.25,
+      "spo2": 0.455,
+      "temp": 0.12
+     },
+     "coverage_2sd": {
+      "hr": 0.849,
+      "rr": 0.538,
+      "spo2": 0.604,
+      "temp": 0.974
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.961,
+      "rr": 0.99,
+      "spo2": 0.986,
+      "temp": 0.924
+     }
+    }
+   },
+   "deterioration": {
+    "5min": {
+     "n": 330,
+     "mae_twin": {
+      "hr": 2.641,
+      "rr": 1.407,
+      "spo2": 0.815,
+      "temp": 0.067
+     },
+     "mae_persistence": {
+      "hr": 2.823,
+      "rr": 1.765,
+      "spo2": 0.779,
+      "temp": 0.066
+     },
+     "mae_mechanistic_only": {
+      "hr": 5.917,
+      "rr": 3.36,
+      "spo2": 2.103,
+      "temp": 0.194
+     },
+     "coverage_2sd": {
+      "hr": 0.767,
+      "rr": 0.464,
+      "spo2": 0.561,
+      "temp": 0.912
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.939,
+      "rr": 0.964,
+      "spo2": 0.945,
+      "temp": 0.667
+     }
+    },
+    "15min": {
+     "n": 330,
+     "mae_twin": {
+      "hr": 4.722,
+      "rr": 2.16,
+      "spo2": 1.487,
+      "temp": 0.17
+     },
+     "mae_persistence": {
+      "hr": 5.253,
+      "rr": 2.918,
+      "spo2": 1.756,
+      "temp": 0.182
+     },
+     "mae_mechanistic_only": {
+      "hr": 11.487,
+      "rr": 6.128,
+      "spo2": 4.015,
+      "temp": 0.387
+     },
+     "coverage_2sd": {
+      "hr": 0.642,
+      "rr": 0.497,
+      "spo2": 0.515,
+      "temp": 0.612
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.894,
+      "rr": 0.915,
+      "spo2": 0.845,
+      "temp": 0.452
+     }
+    },
+    "30min": {
+     "n": 330,
+     "mae_twin": {
+      "hr": 7.56,
+      "rr": 3.484,
+      "spo2": 2.256,
+      "temp": 0.287
+     },
+     "mae_persistence": {
+      "hr": 9.412,
+      "rr": 4.935,
+      "spo2": 3.183,
+      "temp": 0.346
+     },
+     "mae_mechanistic_only": {
+      "hr": 13.888,
+      "rr": 7.243,
+      "spo2": 4.774,
+      "temp": 0.476
+     },
+     "coverage_2sd": {
+      "hr": 0.545,
+      "rr": 0.442,
+      "spo2": 0.488,
+      "temp": 0.448
+     },
+     "coverage_95_calibrated": {
+      "hr": 0.864,
+      "rr": 0.879,
+      "spo2": 0.839,
+      "temp": 0.382
+     }
+    }
+   }
+  },
+  "BIDMC_real": {
+   "status": "not_evaluated",
+   "reason": "BIDMC records are ~8 min; a 5 min history plus 5 min horizon does not fit. BIDMC is replayed through the clinical pipeline instead."
+  }
+ },
+ "train_seconds": 241,
+ "calibration": {
+  "method": "per-vital, per-step 95% quantile of |error|/(ensemble sd + floor) on training patients",
+  "patients": "P001-P007",
+  "floor": 0.05
+ }
+}

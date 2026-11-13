@@ -1,0 +1,492 @@
+{
+ "note": "Synthetic simulated cohort (10 patients x 15 days). Engineering evaluation, NOT clinical validation.",
+ "model": {
+  "window_auroc_oof": 0.9649,
+  "window_auprc_oof": 0.7549,
+  "positives": 6480,
+  "windows": 1296000
+ },
+ "ml_threshold": 0.9,
+ "threshold_sweep": [
+  {
+   "thr": 0.5,
+   "sens": 1.0,
+   "fp_day": 13.953,
+   "delay": 339.0
+  },
+  {
+   "thr": 0.54,
+   "sens": 1.0,
+   "fp_day": 12.973,
+   "delay": 339.0
+  },
+  {
+   "thr": 0.58,
+   "sens": 1.0,
+   "fp_day": 12.18,
+   "delay": 339.0
+  },
+  {
+   "thr": 0.62,
+   "sens": 1.0,
+   "fp_day": 11.513,
+   "delay": 339.0
+  },
+  {
+   "thr": 0.66,
+   "sens": 1.0,
+   "fp_day": 10.847,
+   "delay": 349.0
+  },
+  {
+   "thr": 0.7,
+   "sens": 1.0,
+   "fp_day": 10.453,
+   "delay": 349.0
+  },
+  {
+   "thr": 0.74,
+   "sens": 1.0,
+   "fp_day": 10.113,
+   "delay": 349.0
+  },
+  {
+   "thr": 0.78,
+   "sens": 1.0,
+   "fp_day": 9.853,
+   "delay": 354.0
+  },
+  {
+   "thr": 0.82,
+   "sens": 1.0,
+   "fp_day": 9.607,
+   "delay": 359.0
+  },
+  {
+   "thr": 0.86,
+   "sens": 1.0,
+   "fp_day": 9.4,
+   "delay": 359.0
+  },
+  {
+   "thr": 0.9,
+   "sens": 1.0,
+   "fp_day": 9.127,
+   "delay": 359.0
+  },
+  {
+   "thr": 0.94,
+   "sens": 1.0,
+   "fp_day": 8.86,
+   "delay": 745.0
+  },
+  {
+   "thr": 0.98,
+   "sens": 1.0,
+   "fp_day": 8.76,
+   "delay": 769.0
+  }
+ ],
+ "fixed_news2_comparator": {
+  "events": 9,
+  "detected": 9,
+  "false_clinical": 21303,
+  "verification": 0,
+  "sensitivity": 1.0,
+  "false_clinical_per_patient_day": 142.02,
+  "verification_per_patient_day": 0.0,
+  "median_detection_delay_s": 205.0,
+  "median_lead_before_severe_s": 2036.0,
+  "min_lead_before_severe_s": 561.0,
+  "per_patient": {
+   "P001": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     748
+    ],
+    "lead_s": [
+     2039
+    ],
+    "false_clinical": 3266,
+    "verification": 0
+   },
+   "P002": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     38
+    ],
+    "lead_s": [
+     568
+    ],
+    "false_clinical": 2525,
+    "verification": 0
+   },
+   "P003": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     205
+    ],
+    "lead_s": [
+     1700
+    ],
+    "false_clinical": 4678,
+    "verification": 0
+   },
+   "P004": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     38
+    ],
+    "lead_s": [
+     854
+    ],
+    "false_clinical": 192,
+    "verification": 0
+   },
+   "P005": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     559
+    ],
+    "lead_s": [
+     2036
+    ],
+    "false_clinical": 372,
+    "verification": 0
+   },
+   "P006": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     3
+    ],
+    "lead_s": [
+     561
+    ],
+    "false_clinical": 4601,
+    "verification": 0
+   },
+   "P007": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     2351
+    ],
+    "lead_s": [
+     14181
+    ],
+    "false_clinical": 365,
+    "verification": 0
+   },
+   "P008": {
+    "events": 0,
+    "detected": 0,
+    "delay_s": [],
+    "lead_s": [],
+    "false_clinical": 167,
+    "verification": 0
+   },
+   "P009": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     404
+    ],
+    "lead_s": [
+     2449
+    ],
+    "false_clinical": 629,
+    "verification": 0
+   },
+   "P010": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     54
+    ],
+    "lead_s": [
+     2862
+    ],
+    "false_clinical": 4508,
+    "verification": 0
+   }
+  }
+ },
+ "proposed_rules_only": {
+  "events": 9,
+  "detected": 9,
+  "false_clinical": 1314,
+  "verification": 536,
+  "sensitivity": 1.0,
+  "false_clinical_per_patient_day": 8.76,
+  "verification_per_patient_day": 3.573,
+  "median_detection_delay_s": 769.0,
+  "median_lead_before_severe_s": 1669.0,
+  "min_lead_before_severe_s": 341.0,
+  "per_patient": {
+   "P001": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     1118
+    ],
+    "lead_s": [
+     1669
+    ],
+    "false_clinical": 36,
+    "verification": 70
+   },
+   "P002": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     218
+    ],
+    "lead_s": [
+     388
+    ],
+    "false_clinical": 472,
+    "verification": 46
+   },
+   "P003": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     745
+    ],
+    "lead_s": [
+     1160
+    ],
+    "false_clinical": 226,
+    "verification": 54
+   },
+   "P004": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     48
+    ],
+    "lead_s": [
+     844
+    ],
+    "false_clinical": 0,
+    "verification": 52
+   },
+   "P005": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     769
+    ],
+    "lead_s": [
+     1826
+    ],
+    "false_clinical": 2,
+    "verification": 63
+   },
+   "P006": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     223
+    ],
+    "lead_s": [
+     341
+    ],
+    "false_clinical": 441,
+    "verification": 54
+   },
+   "P007": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     5411
+    ],
+    "lead_s": [
+     11121
+    ],
+    "false_clinical": 1,
+    "verification": 52
+   },
+   "P008": {
+    "events": 0,
+    "detected": 0,
+    "delay_s": [],
+    "lead_s": [],
+    "false_clinical": 3,
+    "verification": 52
+   },
+   "P009": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     774
+    ],
+    "lead_s": [
+     2079
+    ],
+    "false_clinical": 4,
+    "verification": 49
+   },
+   "P010": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     1134
+    ],
+    "lead_s": [
+     1782
+    ],
+    "false_clinical": 129,
+    "verification": 44
+   }
+  }
+ },
+ "proposed_rules_plus_ml": {
+  "events": 9,
+  "detected": 9,
+  "false_clinical": 1369,
+  "verification": 536,
+  "sensitivity": 1.0,
+  "false_clinical_per_patient_day": 9.127,
+  "verification_per_patient_day": 3.573,
+  "median_detection_delay_s": 359.0,
+  "median_lead_before_severe_s": 1699.0,
+  "min_lead_before_severe_s": 341.0,
+  "per_patient": {
+   "P001": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     1088
+    ],
+    "lead_s": [
+     1699
+    ],
+    "false_clinical": 38,
+    "verification": 70
+   },
+   "P002": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     218
+    ],
+    "lead_s": [
+     388
+    ],
+    "false_clinical": 476,
+    "verification": 46
+   },
+   "P003": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     715
+    ],
+    "lead_s": [
+     1190
+    ],
+    "false_clinical": 228,
+    "verification": 54
+   },
+   "P004": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     48
+    ],
+    "lead_s": [
+     844
+    ],
+    "false_clinical": 0,
+    "verification": 52
+   },
+   "P005": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     359
+    ],
+    "lead_s": [
+     2236
+    ],
+    "false_clinical": 2,
+    "verification": 63
+   },
+   "P006": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     223
+    ],
+    "lead_s": [
+     341
+    ],
+    "false_clinical": 459,
+    "verification": 54
+   },
+   "P007": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     5411
+    ],
+    "lead_s": [
+     11121
+    ],
+    "false_clinical": 1,
+    "verification": 52
+   },
+   "P008": {
+    "events": 0,
+    "detected": 0,
+    "delay_s": [],
+    "lead_s": [],
+    "false_clinical": 3,
+    "verification": 52
+   },
+   "P009": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     354
+    ],
+    "lead_s": [
+     2499
+    ],
+    "false_clinical": 5,
+    "verification": 49
+   },
+   "P010": {
+    "events": 1,
+    "detected": 1,
+    "delay_s": [
+     824
+    ],
+    "lead_s": [
+     2092
+    ],
+    "false_clinical": 157,
+    "verification": 44
+   }
+  }
+ },
+ "model_artifact": {
+  "path": "C:\\Users\\pc\\Desktop\\mineareana\\avoflare\\model\\risk_model.pkl",
+  "status": "experimental_synthetic_only_not_clinically_validated",
+  "clinical_deployment_allowed": false,
+  "threshold_metrics_are_independent_test": false
+ },
+ "dataset_provenance": {
+  "directory": "C:\\Users\\pc\\Desktop\\mineareana\\avoflare\\data",
+  "labels_source": "offline labels.json written by the supplied engineering simulator",
+  "synthetic_only": true,
+  "clinical_validation": false
+ }
+}

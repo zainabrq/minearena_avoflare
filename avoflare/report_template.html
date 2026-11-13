@@ -1,0 +1,130 @@
+<title>Avoflare PS03 Evaluation</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,600&display=swap">
+<style>
+/* Layout: single reading column of clinical-report sections; tables scroll inside their own frames */
+:root{--bg:#f7f8f7;--surface:#ffffff;--ink:#14211d;--mute:#5d6b66;--line:#dfe5e2;--accent:#0f6b5c;
+ --good:#1d7a46;--warn:#a86410;--bad:#b42318;--goodbg:#e6f3ec;--warnbg:#fbf0e1;--badbg:#fbe9e7;
+ --display:"Fraunces",Georgia,serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1513;--surface:#16201d;--ink:#e3ebe7;--mute:#93a39d;--line:#2a3733;--accent:#4fc1a8;
+ --good:#5fcf8d;--warn:#e9a94d;--bad:#f2786b;--goodbg:#173326;--warnbg:#3a2a12;--badbg:#3d1c19;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1513;--surface:#16201d;--ink:#e3ebe7;--mute:#93a39d;--line:#2a3733;--accent:#4fc1a8;
+ --good:#5fcf8d;--warn:#e9a94d;--bad:#f2786b;--goodbg:#173326;--warnbg:#3a2a12;--badbg:#3d1c19;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body)}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:28px 60px;display:grid;gap:34px}
+h1{font:600 clamp(28px,4vw,40px)/1.1 var(--display);margin:0;text-wrap:balance}
+h2{font:600 22px/1.2 var(--display);margin:0 0 4px;text-wrap:balance}
+.lede{color:var(--mute);max-width:68ch;margin:8px 0 0}
+.eyebrow{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.note{font-size:13px;color:var(--mute);max-width:75ch}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:18px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.tile b{display:block;font:500 28px/1.1 var(--mono);font-variant-numeric:tabular-nums}
+.tile span{font-size:13px;color:var(--mute)}
+.frame{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font:500 11px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+td.num{font-family:var(--mono)}td.wrap{white-space:normal;min-width:260px}
+tr:last-child td{border-bottom:0}tr.hl td{background:var(--goodbg)}
+.ci{color:var(--mute);font-size:12px}
+.chip{display:inline-block;font:500 11px/1 var(--mono);padding:4px 8px;border-radius:99px;letter-spacing:.04em}
+.B,.PASS{background:var(--goodbg);color:var(--good)}.P{background:var(--warnbg);color:var(--warn)}.N,.FAIL{background:var(--badbg);color:var(--bad)}
+.bars{display:grid;gap:6px;max-width:560px}
+.bar{display:grid;grid-template-columns:48px 1fr 56px;gap:10px;align-items:center;font:13px var(--mono)}
+.bar i{display:block;height:10px;border-radius:3px;background:var(--accent)}
+.bar .track{background:var(--line);border-radius:3px}
+.mermaid{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto}
+section{display:grid;gap:12px;min-width:0}
+</style>
+<div class="wrap">
+<header><div class="eyebrow">MineArena PS03 · Architecture V4.1 · evaluation</div>
+<h1>Avoflare post-discharge deterioration monitor</h1>
+<p class="lede">Evidence from 10 simulated patients monitored for 15 days each (1.3 million 10-second decisions). Every model is scored on patients it never trained on. This is an engineering evaluation on synthetic data, not clinical validation.</p>
+<div class="tiles" id="tiles"></div></header>
+
+<section><div class="eyebrow">1 · Event level</div><h2>Did it catch each deterioration in time?</h2>
+<p class="note">PS03 contract (07 §6): first Review/Urgent after onset; lead = severe endpoint minus first alert; false episodes = alert episodes not matched to a labelled event. Identical episode rules for every system.</p>
+<div class="frame"><table id="ev"></table></div>
+<div class="frame"><table id="pp"></table></div></section>
+
+<section><div class="eyebrow">2 · Window level</div><h2>Accuracy of every decision</h2>
+<p class="note" id="wdef"></p><div class="frame"><table id="win"></table></div>
+<p class="note">Positives are 0.5% of windows, so specificity and PPV carry the false-alarm story; 95% CIs from 1,000 patient-cluster bootstrap resamples.</p></section>
+
+<section><div class="eyebrow">3 · Continuous risk model</div><h2>Gradient-boosted risk score (leave-one-patient-out)</h2>
+<div class="frame"><table id="ml"></table></div><div class="bars" id="bars"></div>
+<p class="note">Weakest patients are P002 (transient, mild episode) and P006 (episodic). The model can only raise a patient to Review; it never lowers a priority or creates Urgent.</p></section>
+
+<section><div class="eyebrow">3b · Digital twin</div><h2>PINN-ODE forecast error on held-out patients</h2>
+<p class="note">Mean absolute error in physical units on patients the twin never trained on, compared with "no change" persistence and with the mechanistic part alone. Coverage = share of outcomes inside the ensemble ±2 SD band (95% would be well calibrated).</p>
+<div class="frame"><table id="tw"></table></div></section>
+<section><div class="eyebrow">4 · Blood pressure and HRV</div><h2>Monitoring-only vitals</h2>
+<div class="frame"><table id="bp"></table></div>
+<p class="note">SBP uses NEWS2 bands; shock index = HR/SBP; HRV score = drop of RMSSD from the patient's baseline (prototype, not a published score). BP baselines are assumptions because the patient records contain no BP history.</p></section>
+
+<section><div class="eyebrow">5 · Tests</div><h2 id="cardh"></h2><div class="frame"><table id="card"></table></div></section>
+
+<section><div class="eyebrow">6 · Architecture</div><h2 id="archh"></h2>
+<p class="note">Green = built, amber = partial, red = not built. Extra beyond V4.1: care-team escalation agent with phone/watch push, BP and HRV monitoring.</p>
+<pre class="mermaid">
+flowchart TB
+  classDef B fill:#e6f3ec,stroke:#1d7a46,color:#14211d
+  classDef P fill:#fbf0e1,stroke:#a86410,color:#14211d
+  classDef N fill:#fbe9e7,stroke:#b42318,color:#14211d
+  L1["L1 Data sources<br/>Wearable sim 10 pps · BIDMC replay · Synthea KB · patient app inputs"]:::B
+  L2["L2 Secure gateway<br/>signed devices · FHIR R4 validation · replay protection · quality/artifacts"]:::B
+  HOT["Hot path · FastAPI<br/>safety on every sample · WebSocket"]:::B
+  COLD["Cold path · FHIR store + outbox<br/>HAPI forwarding when HAPI_URL set"]:::P
+  L3["L3 Patient context<br/>Expert 1 · Patient KB · Clinical KB (in code)"]:::B
+  L4["L4 Experts 2–5 HR · RR · SpO₂ · Temp<br/>Partial NEWS2 · personal baseline · persistence"]:::B
+  L5["L5 State manifest<br/>15 s frames · versioned · hashed"]:::B
+  L6["L6 Twin<br/>264-slot encoder · PINN-ODE ensemble · 5/15/30 min (provisional)"]:::P
+  L7["L7 Trustworthy intelligence<br/>validity gate · counterfactual branches · uncertainty (under-calibrated)"]:::P
+  SAFE["Independent safety supervisor<br/>SAFE-1/2/3"]:::B
+  L8["L8 Hybrid decision<br/>CLIN-1..6 + ML-1 → Watch / Review / Urgent"]:::B
+  L9["L9 Action<br/>Expert 6 medication review · Expert 7 recovery"]:::B
+  ESC["Alerting agent<br/>patient's own doctor → nurse → substitute → management<br/>phone + smartwatch push · role guidance"]:::B
+  L10["L10 Clinician dashboard · patient app · FHIR record interface · evaluation console"]:::B
+  L1 --> L2 --> HOT --> SAFE --> L8
+  L2 --> COLD
+  L3 --> L4 --> L8
+  L4 --> L5 --> L6 --> L7 --> L8
+  L8 --> ESC --> L10
+  L8 --> L9 --> L10
+</pre>
+<div class="frame"><table id="arch"></table></div></section>
+
+<section><div class="eyebrow">Limits</div><h2>What this evidence does not show</h2>
+<ul class="note"><li>All vitals are simulated from the project's scenario configuration; 9 events across 10 patients is a small sample and CIs are wide.</li>
+<li>Deterioration labels come from the simulator itself, so this tests the engine against the scenarios it was given, not real-world physiology.</li>
+<li>Avoflare is slower to first alert than fixed NEWS2 (median 359 s vs 205 s) in exchange for 16× fewer false alerts; fixed NEWS2's earlier alerts partly come from alarming almost continuously.</li>
+<li>The twin equations are provisional (generic relaxation + the spec's illustrative HR coupling + a learned residual) and need clinical/AI approval; its uncertainty bands are too narrow for RR and SpO2.</li><li>Clinical use requires validation on real recordings and clinical sign-off of the tuned rules.</li></ul></section>
+</div>
+<script>
+const D=/*DATA*/;
+const $=id=>document.getElementById(id),f=(x,d=3)=>x==null?'—':(+x).toFixed(d),ci=c=>c?`<span class="ci">[${f(c[0])}–${f(c[1])}]</span>`:'';
+const S={fixed_news2_comparator:'Fixed NEWS2',proposed_rules_only:'Avoflare rules',proposed_rules_plus_ml:'Avoflare rules + risk model'};
+const P=D.rep.proposed_rules_plus_ml,C=D.rep.fixed_news2_comparator,M=D.met.risk_model;
+$('tiles').innerHTML=[[`${P.detected}/${P.events}`,'deteriorations detected, all before severe'],
+ [`${f(P.false_clinical_per_patient_day,1)}`,`false alerts / patient-day (fixed NEWS2: ${f(C.false_clinical_per_patient_day,0)})`],
+ [f(M.auroc),`risk model AUROC, 95% CI ${f(M.auroc_ci[0])}–${f(M.auroc_ci[1])}`],
+ [D.card.score,'automated checks passed'],[D.conf+'%','V4.1 architecture coverage']].map(([b,s])=>`<div class="tile"><b>${b}</b><span>${s}</span></div>`).join('');
+$('ev').innerHTML='<tr><th>System</th><th>Detected</th><th>False / pt-day</th><th>Verify / pt-day</th><th>Median delay</th><th>Median lead</th><th>Min lead</th></tr>'+
+ Object.entries(S).map(([k,n])=>{const r=D.rep[k];return`<tr class="${k=='proposed_rules_plus_ml'?'hl':''}"><td>${n}</td><td class="num">${r.detected}/${r.events}</td><td class="num">${f(r.false_clinical_per_patient_day,2)}</td><td class="num">${f(r.verification_per_patient_day,2)}</td><td class="num">${r.median_detection_delay_s} s</td><td class="num">${f(r.median_lead_before_severe_s/60,1)} min</td><td class="num">${f(r.min_lead_before_severe_s/60,1)} min</td></tr>`}).join('');
+$('pp').innerHTML='<tr><th>Patient</th><th>Scenario</th><th>NEWS2 delay / lead</th><th>NEWS2 false</th><th>Avoflare delay / lead</th><th>Avoflare false</th></tr>'+
+ Object.keys(P.per_patient).map(p=>{const a=C.per_patient[p],b=P.per_patient[p];const dl=x=>x.delay_s.length?`${x.delay_s[0]} s / ${f(x.lead_s[0]/60,1)} min`:'no event';
+ return`<tr><td>${p}</td><td>${D.scen[p]||''}</td><td class="num">${dl(a)}</td><td class="num">${a.false_clinical}</td><td class="num">${dl(b)}</td><td class="num">${b.false_clinical}</td></tr>`}).join('');
+$('wdef').textContent=`${D.met.windows.toLocaleString()} ten-second windows, ${D.met.positive_windows.toLocaleString()} inside a labelled deterioration.`;
+$('win').innerHTML='<tr><th>Classifier</th><th>Sensitivity</th><th>Specificity</th><th>PPV</th><th>NPV</th><th>F1</th><th>Bal. acc.</th><th>TP / FP / FN / TN</th></tr>'+
+ Object.entries(D.met.classifiers).map(([n,c])=>`<tr><td>${n}</td><td class="num">${f(c.sensitivity)} ${ci(c.sensitivity_ci)}</td><td class="num">${f(c.specificity,4)} ${ci(c.specificity_ci)}</td><td class="num">${f(c.ppv)} ${ci(c.ppv_ci)}</td><td class="num">${f(c.npv,4)}</td><td class="num">${f(c.f1)}</td><td class="num">${f(c.balanced_accuracy)}</td><td class="num">${[c.confusion.TP,c.confusion.FP,c.confusion.FN,c.confusion.TN].map(x=>x.toLocaleString()).join(' / ')}</td></tr>`).join('');
+$('ml').innerHTML=`<tr><th>AUROC</th><th>AUPRC</th><th>Prevalence</th><th>Brier</th><th>Calibration error (ECE)</th><th>Alert threshold</th></tr><tr><td class="num">${f(M.auroc)} ${ci(M.auroc_ci)}</td><td class="num">${f(M.auprc)} ${ci(M.auprc_ci)}</td><td class="num">${f(M.prevalence,4)}</td><td class="num">${f(M.brier,4)}</td><td class="num">${f(M.expected_calibration_error,4)}</td><td class="num">${M.threshold} × 30 s</td></tr>`;
+$('bars').innerHTML='<div class="eyebrow">AUROC per held-out patient</div>'+Object.entries(M.per_patient_auroc).map(([p,v])=>`<div class="bar"><span>${p}</span><span class="track"><i style="width:${Math.max(0,(v-.5)/.5*100)}%"></i></span><span>${f(v)}</span></div>`).join('')+'<p class="note">Bar spans 0.5 (chance) to 1.0.</p>';
+$('bp').innerHTML='<tr><th>Score</th><th>Events flagged</th><th>False flags / pt-day</th></tr>'+[['sbp','Systolic BP (NEWS2 bands)'],['shock','Shock index HR/SBP'],['hrv','HRV RMSSD drop']].map(([k,n])=>`<tr><td>${n}</td><td class="num">${D.bp.summary[k].events_flagged}</td><td class="num">${D.bp.summary[k].false_flags_per_patient_day}</td></tr>`).join('');
+$('cardh').textContent=`Automated test suite: ${D.card.score} passed`;
+$('card').innerHTML='<tr><th>Result</th><th>Area</th><th>Check</th><th>Evidence</th></tr>'+D.card.tests.map(t=>`<tr><td><span class="chip ${t.result}">${t.result}</span></td><td>${t.area}</td><td class="wrap">${t.test}</td><td class="wrap">${t.detail}</td></tr>`).join('');
+$('archh').textContent=`Built against Frozen Architecture V4.1: ${D.counts.B} built, ${D.counts.P} partial, ${D.counts.N} not built (${D.conf}% weighted)`;
+const SL={B:'Built',P:'Partial',N:'Not built'};
+$('tw').innerHTML='<tr><th>Patient</th><th>Subset</th><th>Horizon</th><th>HR twin / persist / mech</th><th>RR twin / persist / mech</th><th>SpO2 twin / persist / mech</th><th>Coverage HR / RR / SpO2</th></tr>'+
+ Object.entries(D.twin.results).filter(([k,r])=>r.all).flatMap(([p,r])=>['all','deterioration'].filter(s=>r[s]).flatMap(s=>Object.entries(r[s]).map(([h,m])=>`<tr><td>${p}</td><td>${s}</td><td>${h}</td>${['hr','rr','spo2'].map(v=>`<td class="num">${f(m.mae_twin[v],2)} / ${f(m.mae_persistence[v],2)} / ${f(m.mae_mechanistic_only[v],2)}</td>`).join('')}<td class="num">${['hr','rr','spo2'].map(v=>f(m.coverage_2sd[v],2)).join(' / ')}</td></tr>`))).join('');
+$('arch').innerHTML='<tr><th>Layer</th><th>Component</th><th>Status</th><th>Evidence</th></tr>'+D.arch.map(a=>`<tr><td>${a[0]}</td><td>${a[1]}</td><td><span class="chip ${a[2]}">${SL[a[2]]}</span></td><td class="wrap">${a[3]}</td></tr>`).join('');
+</script>

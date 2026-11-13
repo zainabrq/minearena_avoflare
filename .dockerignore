@@ -1,0 +1,9 @@
+**/__pycache__
+avoflare/state
+avoflare/artifacts
+avoflare/results/screens
+avoflare/results/win_*.npz
+07_dashboard/node_modules
+07_dashboard/dist
+Avoflare_Dashboard_Round2.zip
+*.pdf

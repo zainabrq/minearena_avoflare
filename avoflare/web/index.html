@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Avoflare Monitor</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--ink:#0f172a;--mute:#64748b;--line:#e2e8f0;--urgent:#dc2626;--review:#d97706;--watch:#2563eb;--ok:#16a34a}
+*{box-sizing:border-box}body{margin:0;font:14px/1.4 system-ui,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
+header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px 16px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+header img{height:30px}h1{font-size:17px;margin:0 12px 0 0}
+select,button,input{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+button{cursor:pointer}button.primary{background:var(--ink);color:#fff;border-color:var(--ink)}button.danger{background:var(--urgent);color:#fff;border:0}
+main{display:grid;grid-template-columns:1fr 410px;gap:14px;padding:14px 16px}
+@media(max-width:1000px){main{grid-template-columns:1fr}aside{order:-1}}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;border-left:6px solid var(--ok)}
+.card.p3{border-left-color:var(--urgent);animation:pulse 1s infinite}.card.p2{border-left-color:var(--review)}.card.p1{border-left-color:var(--watch)}
+.card.mineP{outline:2px solid #c7d2fe}
+@keyframes pulse{50%{box-shadow:0 0 0 4px #fecaca}}
+.row{display:flex;justify-content:space-between;align-items:center;gap:6px}.pill{font-size:12px;padding:2px 8px;border-radius:99px;color:#fff;background:var(--ok);white-space:nowrap}
+.pill.p3{background:var(--urgent)}.pill.p2{background:var(--review)}.pill.p1{background:var(--watch)}
+.vit{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin:8px 0;text-align:center}.vit b{display:block;font-size:18px}.vit span{font-size:11px;color:var(--mute)}
+.s3{color:var(--urgent)}.s2{color:var(--review)}.s1{color:var(--watch)}
+canvas{width:100%;height:46px}.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px}
+.panel h2{font-size:15px;margin:0 0 8px}.alert{border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:10px}
+.alert.mine{border:2px solid var(--urgent);background:#fef2f2}.log{font-size:12px;color:var(--mute);max-height:130px;overflow:auto;margin-top:6px}
+.msg{background:#f1f5f9;border-radius:8px;padding:8px;margin:6px 0;font-size:13px}.msg ol{margin:4px 0 0 18px;padding:0}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:4px;border-bottom:1px solid var(--line);text-align:left}
+#gate{position:fixed;inset:0;background:rgba(15,23,42,.6);display:flex;align-items:center;justify-content:center;z-index:9}
+#gate>div{background:#fff;padding:24px;border-radius:14px;max-width:440px;margin:16px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:700px){.cols{grid-template-columns:1fr}}
+footer{padding:8px 16px;color:var(--mute);font-size:12px}
+</style>
+</head>
+<body>
+<div id="gate"><div><img src="/assets/images/logo.png" style="height:40px"><h2>Sign in</h2>
+<p>Alerts are routed to each patient's own care team. Signing in enables the alarm sound and phone notifications on this device.</p>
+<select id="who"><option>loading…</option></select> <button class="primary" onclick="enter()">Sign in</button></div></div>
+<header><img src="/assets/images/logo.png" alt=""><h1>Avoflare · Post-discharge monitor</h1>
+<b id="me"></b><label><input type="checkbox" id="avail" onchange="post('/api/staff/'+me,{available:this.checked})"> on duty</label>
+<button onclick="mute=!mute;this.textContent=mute?'🔇 Alarm muted':'🔔 Alarm on'">🔔 Alarm on</button>
+<label><input type="checkbox" id="onlyMine" onchange="render()"> my patients only</label>
+<span id="conn" style="color:var(--mute)"></span></header>
+<main><section><div class="grid" id="grid"></div><div class="panel" id="detail" style="margin-top:14px"></div><div class="panel" id="report"></div></section>
+<aside><div class="panel"><h2>My alerts</h2><div id="mine"></div></div>
+<div class="panel"><h2>All open alerts</h2><div id="all"></div></div>
+<div class="panel"><h2>Staff on duty</h2><div id="staff" style="font-size:13px"></div></div></aside></main>
+<footer id="disc"></footer>
+<script>
+let S=null,me=null,sel='P001',mute=false,ctx=null,beepT=0,seen=new Set();
+const V=['hr','rr','spo2','temp'],N={hr:'HR',rr:'RR',spo2:'SpO₂',temp:'Temp'},PL=['Stable','Watch','Review','Urgent'];
+const RN={doctor:'Doctor',nurse:'Nurse',substitute_doctor:'Substitute doctor',management:'Management'};
+function enter(){me=document.getElementById('who').value;ctx=new(window.AudioContext||window.webkitAudioContext)();
+ if('Notification'in window&&Notification.permission=='default')Notification.requestPermission();document.getElementById('gate').remove();render()}
+function beep(urgent){if(!ctx||mute)return;const g=ctx.createGain();g.gain.value=.15;g.connect(ctx.destination);
+ [[0,urgent?880:520],[.3,urgent?660:0]].forEach(([d,f])=>{if(!f)return;const o=ctx.createOscillator();o.type=urgent?'square':'sine';o.frequency.value=f;o.connect(g);o.start(ctx.currentTime+d);o.stop(ctx.currentTime+d+.25)})}
+function notify(a,l){if(seen.has(a.pid+a.id+l.at))return;seen.add(a.pid+a.id+l.at);if(navigator.vibrate)navigator.vibrate([400,150,400,150,400]);
+ if('Notification'in window&&Notification.permission=='granted')new Notification(`${PL[a.highest]} ${a.pid}`,{body:l.message+'\n'+(l.steps||[]).join('\n'),requireInteraction:a.highest==3,tag:a.pid})}
+function connect(){const ws=new WebSocket((location.protocol=='https:'?'wss://':'ws://')+location.host+'/ws');
+ ws.onmessage=e=>{const first=!S;S=JSON.parse(e.data);if(first)fillGate();render()};ws.onopen=()=>conn.textContent='● live';ws.onclose=()=>{conn.textContent='○ reconnecting';setTimeout(connect,1500)}}
+function fillGate(){const w=document.getElementById('who');if(w)w.innerHTML=Object.entries(S.staff).map(([k,s])=>`<option value="${k}">${s.name} — ${RN[s.role]}${s.specialty?' ('+s.specialty+')':''}</option>`).join('')}
+const fmt=(v,x)=>x==null?'--':v=='temp'?x.toFixed(1):Math.round(x);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+async function post(u,b){const r=await fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});if(!r.ok)alert((await r.json()).detail)}
+function spark(c,data,col){if(!c)return;const x=c.getContext('2d'),w=c.width=c.clientWidth*2,h=c.height=92;const d=data.filter(v=>v!=null);if(!d.length)return;
+ const lo=Math.min(...d),hi=Math.max(...d)+1e-6;x.strokeStyle=col;x.lineWidth=2;x.beginPath();let m=false;
+ data.forEach((v,i)=>{if(v==null){m=false;return}const px=i/(data.length-1)*w,py=h-4-(v-lo)/(hi-lo)*(h-8);m?x.lineTo(px,py):x.moveTo(px,py);m=true});x.stroke()}
+const bpCells=b=>b?`<div><b class="s${b.sbp_score||0}">${b.sbp==null?'--':Math.round(b.sbp)}</b><span>SBP</span></div><div><b class="s${b.hrv_score||0}">${b.rmssd==null?'--':Math.round(b.rmssd)}</b><span>HRV ms</span></div>`:'';
+const isMine=p=>Object.values(p.team).includes(me);
+function render(){if(!S||!me)return;const I=S.staff[me];document.getElementById('me').textContent=`${I.name} · ${RN[I.role]}`;avail.checked=I.available;disc.textContent=S.disclaimer;
+ staff.innerHTML=Object.values(S.staff).map(s=>`<div class="row"><span>${s.name}</span><span style="color:${s.available?'var(--ok)':'var(--mute)'}">${s.available?'on duty':'unavailable'}</span></div>`).join('');
+ const pts=S.patients.filter(p=>!onlyMine.checked||isMine(p)||I.role=='management');
+ grid.innerHTML=pts.map(p=>`<div class="card p${p.priority} ${isMine(p)?'mineP':''}" onclick="sel='${p.pid}';render()"><div class="row"><b>${p.pid} · ${p.age}${p.gender[0].toUpperCase()}</b><span class="pill p${p.priority}">${PL[p.priority]}</span></div>
+ <div style="font-size:12px;color:var(--mute)">Dr: ${S.staff[p.team.doctor].name}</div>
+ <div class="vit">${V.map(v=>{const e=p.experts&&p.experts[v];return`<div><b class="s${e&&e.score||0}">${fmt(v,e&&e.value)}</b><span>${N[v]}</span></div>`}).join('')}${bpCells(p.bp_hrv)}</div>
+ <canvas id="c_${p.pid}"></canvas><div class="row" style="font-size:12px;color:var(--mute)"><span>NEWS2 partial ${p.score?p.score.observed_subtotal??'--':'--'}/${p.score?p.score.maximum_available_subtotal:''}</span><span>risk ${p.risk==null?'--':(p.risk*100).toFixed(0)+'%'}</span>${p.technical?'<span>⚠ signal</span>':''}</div></div>`).join('');
+ pts.forEach(p=>spark(document.getElementById('c_'+p.pid),p.spark.spo2.slice(-180),p.priority==3?'#dc2626':'#2563eb'));
+ const p=S.patients.find(q=>q.pid==sel);
+ if(p&&p.experts&&!detail.contains(document.activeElement))detail.innerHTML=`<h2>${p.pid} — evidence (day ${(p.t/86400).toFixed(2)})</h2>
+ <div class="msg"><b>${PL[p.priority]}</b>: ${(p.rules||[]).map(esc).join(' · ')}</div>
+ <table><tr><th>Vital</th><th>Value</th><th>Score</th><th>Baseline</th><th>Δ</th><th>z</th><th>slope/min</th><th>Quality</th></tr>
+ ${V.map(v=>{const e=p.experts[v];return`<tr><td>${N[v]}</td><td>${fmt(v,e.value)}</td><td class="s${e.score}">${e.score??'—'}</td><td>${e.baseline==null?e.baseline_status:e.baseline.toFixed(1)}</td><td>${e.delta==null?'—':e.delta.toFixed(1)}</td><td>${e.z==null?'—':e.z.toFixed(1)}${e.persistent?' ⏱':''}</td><td>${e.slope60==null?'—':e.slope60.toFixed(2)}</td><td>${e.quality}</td></tr>`}).join('')}</table>
+ ${p.bp_hrv?`<table style="margin-top:8px"><tr><th>Blood pressure</th><td>${p.bp_hrv.sbp??'--'}/${p.bp_hrv.dbp??'--'} mmHg</td><th>SBP score</th><td class="s${p.bp_hrv.sbp_score}">${p.bp_hrv.sbp_score??'—'}</td><th>Δ baseline</th><td>${p.bp_hrv.sbp_delta??'—'}</td></tr>
+ <tr><th>HRV (RMSSD)</th><td>${p.bp_hrv.rmssd??'--'} ms (base ${p.bp_hrv.rmssd_baseline==null?'—':p.bp_hrv.rmssd_baseline.toFixed(0)})</td><th>HRV score</th><td class="s${p.bp_hrv.hrv_score}">${p.bp_hrv.hrv_score??'—'}</td><th>Shock index</th><td class="s${p.bp_hrv.shock_score}">${p.bp_hrv.shock_index??'—'}</td></tr></table>
+ <p style="font-size:11px;color:var(--mute)">BP/HRV from watch every 5 min (reading ${Math.round(p.bp_hrv.age_s/60)} min old) — monitoring only, not used for alerts.</p>`:''}
+ <div class="cols" style="margin-top:10px"><div><h2>Care team</h2>${Object.entries(p.team).map(([r,k])=>`<div class="row"><span>${RN[r]}</span><span>${S.staff[k].name}</span></div>`).join('')}
+ <p style="font-size:13px">History: ${Object.entries(p.history).filter(x=>x[1]).map(x=>x[0]).join(', ')||'none'}</p></div>
+ <div><h2>Medication</h2><div style="max-height:150px;overflow:auto;font-size:12px">${p.meds.map(m=>`<div>• ${esc(m.label)} <span style="color:var(--mute)">(${esc(m.status)}, ${esc(m.authored||'')})</span></div>`).join('')||'None recorded'}</div>
+ ${I.role=='doctor'?`<div class="row" style="margin-top:6px"><input id="medIn" placeholder="Record medication order" style="flex:1"><button onclick="if(medIn.value)post('/api/patients/${p.pid}/medication',{person:me,label:medIn.value})">Add</button></div>`:''}
+ <p style="font-size:11px;color:var(--mute)">Orders are recorded by a doctor; the system never prescribes.</p></div></div>`;
+ const card=a=>{const mineNow=a.current_person==me&&!a.acknowledged;const l=[...a.log].reverse().find(x=>x.person==me&&x.message);
+  return`<div class="alert ${mineNow?'mine':''}"><div class="row"><b>${a.pid} · ${a.category} · ${PL[a.highest]}</b><span class="pill p${a.highest}">${a.state}</span></div>
+  <div style="font-size:12px;color:var(--mute)">With: ${a.current_person?S.staff[a.current_person].name:'-'} · waiting ${a.waiting_s}s ${a.acknowledged?'· ack by '+esc(a.acknowledged):''}</div>
+  ${l?`<div class="msg">${esc(l.message)}<b style="display:block;margin-top:6px">AI guidance</b><ol>${(l.steps||[]).map(s=>`<li>${esc(s)}</li>`).join('')}</ol></div>`:''}
+  <button class="danger" onclick="post('/api/alerts/${a.pid}/ack',{person:me})">Acknowledge</button>
+  ${I.role=='doctor'?`<button onclick="const r=prompt('Resolution reason (required)');if(r)post('/api/alerts/${a.pid}/resolve',{person:me,reason:r})">Resolve</button>`:''}
+  <button onclick="sel='${a.pid}';render()">View</button>
+  <div class="log">${a.log.map(x=>`${new Date(x.at*1000).toLocaleTimeString()} — ${esc(x.event)}${x.to?' → '+esc(x.to):''}`).join('<br>')}</div></div>`};
+ const mineA=S.alerts.filter(a=>a.log.some(l=>l.person==me));
+ mine.innerHTML=mineA.map(card).join('')||'<p style="color:var(--mute)">No alerts routed to you.</p>';
+ all.innerHTML=S.alerts.map(a=>`<div class="row"><span>${a.pid} ${a.category}</span><span class="pill p${a.highest}">${PL[a.highest]} → ${a.current_person?S.staff[a.current_person].name:''}</span></div>`).join('')||'None';
+ const pend=S.alerts.filter(a=>a.current_person==me&&!a.acknowledged);
+ pend.forEach(a=>{const l=[...a.log].reverse().find(x=>x.person==me&&x.message);if(l)notify(a,l)});
+ if(pend.length&&Date.now()-beepT>900){beepT=Date.now();beep(pend.some(a=>a.highest==3))}}
+fetch('/api/report').then(r=>r.json()).then(R=>{if(!R.model)return;const row=(k,n)=>{const r=R[k];return`<tr><td>${n}</td><td>${r.detected}/${r.events}</td><td>${r.false_clinical_per_patient_day}</td><td>${r.verification_per_patient_day}</td><td>${r.median_detection_delay_s}</td><td>${r.median_lead_before_severe_s}</td></tr>`};
+ report.innerHTML=`<h2>Evaluation (synthetic 10 patients × 15 days, leave-one-patient-out)</h2><table><tr><th>System</th><th>Detected</th><th>False/pt-day</th><th>Verify/pt-day</th><th>Median delay s</th><th>Median lead s</th></tr>
+ ${row('fixed_news2_comparator','Fixed NEWS2')}${row('proposed_rules_only','Avoflare rules')}${row('proposed_rules_plus_ml','Avoflare rules + ML')}</table>
+ <p style="font-size:12px;color:var(--mute)">Window AUROC ${R.model.window_auroc_oof}, AUPRC ${R.model.window_auprc_oof}. Not clinical validation.</p>`});
+connect();
+</script>
+</body>
+</html>

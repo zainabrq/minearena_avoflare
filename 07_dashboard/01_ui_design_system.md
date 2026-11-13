@@ -1,0 +1,31 @@
+# 01 | White spatial design system
+
+## Intent
+Avoflare should feel like a precise, calm medical product, not a generic admin template or futuristic AI dashboard. White canvas, large black typography, forest-green headings, generous whitespace, spatial objects with physically plausible light/shadow. Information first. Use the supplied logo, not a new brand. No slogans that imply diagnosis or proven clinical outcomes.
+
+## Non-negotiable prohibitions
+No purple-to-blue gradients, gradient hero text, emojis, Inter, Space Grotesk, colored card borders, glassmorphism, dark mode, three generic icon boxes in a row, badges above headlines, Lucide icons, grain overlays, serif italic accents, generic buzzwords, em dashes in UI copy, inconsistent spacing, opacity fade on button hover, cursor-following beams, fade-in-on-scroll. No gratuitous 3D tilt, neon, fake ECG, floating particles, decorative anatomy, fake numerical confidence. Do not use other icon libraries to recreate icon-heavy navigation. Use text labels; simple accessible chevrons or SVG controls only where needed. Realistic lighting on 3D objects is allowed, not CSS decorative gradients.
+
+## Tokens
+Use `design_tokens.json` as source; expose CSS custom properties. White #FFFFFF canvas and cards, #F4F5F3 quiet surface, #E7EFE9 selected navigation, #174B38 headings and primary button fill, #000000 body/labels/values/units/timestamps, #DDE3DD neutral rules. Priority text amber #9A5800 or red #B42318 only where clinical status needs distinction; prefer black numbers and a labeled status instead of coloring all data. Button text white on dark green; no pale gray text. Never rely on color alone. Chart series use distinguishable line styles and labels. Maintain WCAG AA contrast (4.5:1 normal text, 3:1 large text and essential nontext boundaries); verify actual combinations.
+
+## Type
+Manrope regular/medium/semibold (400/500/600/700); system sans fallback. IBM Plex Mono only for FHIR IDs, timestamps where alignment matters, JSON and numerical model parameters. Bundle licensed font assets only if already available or use suitable fallback; do not block rendering. Body 17px desktop, 16px mobile, line height 1.55; supporting labels 14–16px minimum; main heading 36–40px, section 24–28px, panel 20px, vital numbers 42–56px, table values 16px. Use tabular numerals. Avoid excessive letter spacing, all caps, long paragraphs. Headings forest green; body pitch black. Use semantic heading levels, no visual hierarchy based solely on size.
+
+## Grid and spacing
+Desktop reference 1440x900; shell nav 224px, content max 1600px, content padding 32px (48px on wide screens), main 12-column grid gap 24px. Use 4/8/12/16/24/32/40/48/64 px scale. Tablet collapse sidebar to text menu; mobile single-column padding 16–20px, sticky compact navigation only if it does not obscure content. At 1280px use 24px content margin; at 1024px collapse sidebar and two-column detail as needed. No horizontal viewport overflow; wide data tables may scroll inside labeled regions. Patient body 16px minimum; touch target 44px. Maintain usable at 200% zoom.
+
+## Component recipes
+- Shell: white sidebar, text nav, selected pale sage surface and green text. Logo at top (preserve proportions), workspace switcher and sign-out bottom. Thin neutral separator. Page header title and actionable controls aligned; no badge above title.
+- Measurement group: use one white surface divided with neutral rules or a 2x2 group, not four identical marketing cards. Label, large black value/unit, observed timestamp, baseline/delta, small real trend and quality label. Missing displays “Unavailable”, never zero. Suspect values labeled and excluded from derived assessment according to backend.
+- Information panel: white, 16–20px radius, generous 24px padding, no colored outline; soft neutral shadow only when spatially distinct. Flat sections separated by rules for record tables.
+- Spatial panel: 16–20px radius, white, media area 4:3 or 16:9 according to asset, subtle natural shadow within scene, no overlay over clinical text. Reserve aspect ratio before media loads.
+- Clinical priority: plain text “Watch”, “Review”, “Urgent” with optional small solid dot plus text, not decorative pill; insufficient assessment explicitly labeled. Separate connection and reliability labels. No green “healthy” label for Watch.
+- Buttons: primary forest green/white text, secondary white/black text with neutral border; 44px height, 10–12px radius; hover subtle solid fill or border change, no opacity fade; clear keyboard focus 2px outline, disabled distinguishable with reason. Destructive actions require confirmation and explicit action label.
+- Tables: readable 16px, 52–60px rows, neutral row rules, sortable headings with accessible labels, sticky header when needed, row keyboard action and visible selection; do not put all content in cards.
+- Inputs: visible labels, 44px height, neutral border, black input text; error text linked to field, no placeholder-only labels. Native controls acceptable.
+- Drawer: solid white side panel with title, close button, focus management, 400–480px desktop, full-screen small screens; restrained positional transition 150–220ms, no fading. No automatic drawer opens that steal focus during urgent alert.
+- Charts: white plotting area, neutral gridlines, black axes and units, real numeric time series, gaps for missing, baseline dashed neutral line, forecast dashed green with uncertainty envelope, estimated line distinct. Do not smooth away spikes. Hover/focus tooltip accessible; offer table/summary alternative. Prefer 2D over decorative 3D charts.
+
+## Motion and copy
+Only functional transitions: selected spatial object advances a few pixels, drawer opens, watch video switches when confirmed state changes. Reduced motion uses static images and no animation. No animation for data update beyond optional quick number replacement; no blinking. One persistent disclaimer: “Clinical decision support only. Not a medical diagnosis system.” Use plain words, e.g. “No recent measurements”, “Baseline is being established”, “Forecast unavailable”, “Review original readings”. Avoid “AI-powered revolution”, “smart”, “seamless”, and unsubstantiated reassurance. Every pending state must explain what is missing and what is possible next.

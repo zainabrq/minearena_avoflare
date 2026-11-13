@@ -1,0 +1,125 @@
+[
+ {
+  "patient_id": "P001",
+  "scenario": "gradual_respiratory",
+  "events": [
+   {
+    "onset_t": 1107028,
+    "end_t": 1113328,
+    "recovered_t": 1116928,
+    "severe_t": 1109628
+   }
+  ],
+  "artifact_seconds": 903
+ },
+ {
+  "patient_id": "P002",
+  "scenario": "transient_respiratory",
+  "events": [
+   {
+    "onset_t": 1048318,
+    "end_t": 1051318,
+    "recovered_t": 1054918,
+    "severe_t": null
+   }
+  ],
+  "artifact_seconds": 1532
+ },
+ {
+  "patient_id": "P003",
+  "scenario": "heart_failure_pattern",
+  "events": [
+   {
+    "onset_t": 232134,
+    "end_t": 238434,
+    "recovered_t": 242034,
+    "severe_t": 234381
+   }
+  ],
+  "artifact_seconds": 1763
+ },
+ {
+  "patient_id": "P004",
+  "scenario": "sudden_cardiovascular",
+  "events": [
+   {
+    "onset_t": 1064040,
+    "end_t": 1066740,
+    "recovered_t": 1070340,
+    "severe_t": null
+   }
+  ],
+  "artifact_seconds": 1378
+ },
+ {
+  "patient_id": "P005",
+  "scenario": "muted_hr_response",
+  "events": [
+   {
+    "onset_t": 872247,
+    "end_t": 878547,
+    "recovered_t": 882147,
+    "severe_t": 875406
+   }
+  ],
+  "artifact_seconds": 1457
+ },
+ {
+  "patient_id": "P006",
+  "scenario": "episodic_respiratory",
+  "events": [
+   {
+    "onset_t": 295907,
+    "end_t": 301007,
+    "recovered_t": 304607,
+    "severe_t": 296411
+   }
+  ],
+  "artifact_seconds": 1367
+ },
+ {
+  "patient_id": "P007",
+  "scenario": "simulated_fever_deterioration",
+  "events": [
+   {
+    "onset_t": 1078724,
+    "end_t": 1101224,
+    "recovered_t": 1104824,
+    "severe_t": 1086270
+   }
+  ],
+  "artifact_seconds": 1111
+ },
+ {
+  "patient_id": "P008",
+  "scenario": "stable_recovery",
+  "events": [],
+  "artifact_seconds": 1560
+ },
+ {
+  "patient_id": "P009",
+  "scenario": "complex_cardiac",
+  "events": [
+   {
+    "onset_t": 985820,
+    "end_t": 992120,
+    "recovered_t": 995720,
+    "severe_t": 987439
+   }
+  ],
+  "artifact_seconds": 1616
+ },
+ {
+  "patient_id": "P010",
+  "scenario": "respiratory_with_fault",
+  "events": [
+   {
+    "onset_t": 721963,
+    "end_t": 728263,
+    "recovered_t": 731863,
+    "severe_t": 724372
+   }
+  ],
+  "artifact_seconds": 440
+ }
+]
